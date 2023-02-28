@@ -66,7 +66,7 @@ class BoundOperationsProxyFactoryUnitTests {
 
 	private DynamicContainer containerFor(Class<?> boundInterface, Class<?> operationsTarget) {
 		Stream<Method> methods = Arrays.stream(boundInterface.getMethods())
-				.filter(it -> !it.getName().equals("getType") && !it.getName().equals("getOperations"))
+				.filter(it -> !"getType".equals(it.getName()) && !"getOperations".equals(it.getName()))
 				.filter(Predicate.not(Method::isDefault));
 
 		BoundOperationsProxyFactory factory = new BoundOperationsProxyFactory();

@@ -192,10 +192,9 @@ class RedisQueryCreatorUnitTests {
 	private RedisQueryCreator createQueryCreatorForMethodWithArgs(Method method, Object[] args) {
 
 		PartTree partTree = new PartTree(method.getName(), method.getReturnType());
-		RedisQueryCreator creator = new RedisQueryCreator(partTree,
-				new ParametersParameterAccessor(new DefaultParameters(method), args));
 
-		return creator;
+		return new RedisQueryCreator(partTree,
+				new ParametersParameterAccessor(new DefaultParameters(method), args));
 	}
 
 	private interface SampleRepository extends Repository<Person, String> {

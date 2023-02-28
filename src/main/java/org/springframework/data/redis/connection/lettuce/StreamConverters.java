@@ -73,11 +73,11 @@ class StreamConverters {
 	}
 
 	static Converter<StreamMessage<byte[], byte[]>, ByteRecord> byteRecordConverter() {
-		return (it) -> StreamRecords.newRecord().in(it.getStream()).withId(it.getId()).ofBytes(it.getBody());
+		return it -> StreamRecords.newRecord().in(it.getStream()).withId(it.getId()).ofBytes(it.getBody());
 	}
 
 	static Converter<StreamMessage<byte[], byte[]>, RecordId> messageToIdConverter() {
-		return (it) -> RecordId.of(it.getId());
+		return it -> RecordId.of(it.getId());
 	}
 
 	/**

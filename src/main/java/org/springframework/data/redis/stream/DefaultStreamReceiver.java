@@ -234,8 +234,9 @@ class DefaultStreamReceiver<K, V extends Record<K, ?>> implements StreamReceiver
 
 				if (pollState.isSubscriptionActive()) {
 
-					long r, u;
-					for (;;) {
+					long r;
+					long u;
+					while () {
 						r = pollState.getRequested();
 						if (r == Long.MAX_VALUE) {
 							scheduleIfRequired();
@@ -474,7 +475,7 @@ class DefaultStreamReceiver<K, V extends Record<K, ?>> implements StreamReceiver
 	/**
 	 * Object representing the current polling state for a particular stream subscription.
 	 */
-	static class PollState {
+	static final class PollState {
 
 		private final AtomicLong requestsPending = new AtomicLong();
 		private final AtomicBoolean active = new AtomicBoolean(true);

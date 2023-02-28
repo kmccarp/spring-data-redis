@@ -329,6 +329,8 @@ public class GenericJackson2JsonRedisSerializer implements RedisSerializer<Objec
 	 */
 	private static class TypeResolverBuilder extends ObjectMapper.DefaultTypeResolverBuilder {
 
+		private static final long serialVersionUID = 1;
+
 		public TypeResolverBuilder(DefaultTyping t, PolymorphicTypeValidator ptv) {
 			super(t, ptv);
 		}

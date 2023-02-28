@@ -74,7 +74,7 @@ public class RedisCollectionFactoryBean implements InitializingBean, BeanNameAwa
 	}
 
 	private @Nullable RedisStore store;
-	private @Nullable CollectionType type = null;
+	private @Nullable CollectionType type;
 	private @Nullable RedisTemplate<String, ?> template;
 	private @Nullable String key;
 	private @Nullable String beanName;
@@ -128,7 +128,7 @@ public class RedisCollectionFactoryBean implements InitializingBean, BeanNameAwa
 	}
 
 	public Class<?> getObjectType() {
-		return (store != null ? store.getClass() : RedisStore.class);
+		return store != null ? store.getClass() : RedisStore.class;
 	}
 
 	public boolean isSingleton() {

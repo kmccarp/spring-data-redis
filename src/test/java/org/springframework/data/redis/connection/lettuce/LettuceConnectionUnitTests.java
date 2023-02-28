@@ -137,7 +137,7 @@ public class LettuceConnectionUnitTests {
 		@Test // DATAREDIS-348
 		void shouldThrowExceptionWhenAccessingRedisSentinelsCommandsWhenNoSentinelsConfigured() {
 			assertThatExceptionOfType(InvalidDataAccessResourceUsageException.class)
-					.isThrownBy(() -> connection.getSentinelConnection());
+					.isThrownBy(connection::getSentinelConnection);
 		}
 
 		@Test // DATAREDIS-431

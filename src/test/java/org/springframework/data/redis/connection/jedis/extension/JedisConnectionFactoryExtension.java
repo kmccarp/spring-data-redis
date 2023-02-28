@@ -153,7 +153,7 @@ public class JedisConnectionFactoryExtension implements ParameterResolver {
 		return RedisStanalone.class;
 	}
 
-	static class NewableLazy<T> {
+	static final class NewableLazy<T> {
 
 		private final Lazy<? extends T> lazy;
 

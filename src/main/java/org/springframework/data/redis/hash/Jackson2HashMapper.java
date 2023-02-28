@@ -154,7 +154,7 @@ public class Jackson2HashMapper implements HashMapper<Object, String, Object> {
 
 	private static final boolean SOURCE_VERSION_PRESENT = ClassUtils.isPresent("javax.lang.model.SourceVersion", Jackson2HashMapper.class.getClassLoader());
 
-	private final HashMapperModule HASH_MAPPER_MODULE = new HashMapperModule();
+	private final HashMapperModule hashMapperModule = new HashMapperModule();
 
 	private final ObjectMapper typingMapper;
 	private final ObjectMapper untypedMapper;
@@ -197,7 +197,7 @@ public class Jackson2HashMapper implements HashMapper<Object, String, Object> {
 		typingMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 		typingMapper.setSerializationInclusion(Include.NON_NULL);
 		typingMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		typingMapper.registerModule(HASH_MAPPER_MODULE);
+		typingMapper.registerModule(hashMapperModule);
 	}
 
 	/**
@@ -348,7 +348,7 @@ public class Jackson2HashMapper implements HashMapper<Object, String, Object> {
 							this.flattenCollection(propertyPrefix, next.elements(), resultMap);
 						}
 
-						if (cur.asText().equals("java.util.Date")) {
+						if ("java.util.Date".equals(cur.asText())) {
 							resultMap.put(propertyPrefix, next.asText());
 							break;
 						}
@@ -422,7 +422,7 @@ public class Jackson2HashMapper implements HashMapper<Object, String, Object> {
 	private void appendValueToTypedList(String key, Object value, List<Object> destination) {
 
 		int index = Integer.parseInt(key.substring(key.indexOf('[') + 1, key.length() - 1));
-		List<Object> resultList = ((List<Object>) destination.get(1));
+		List<Object> resultList = (List<Object>) destination.get(1);
 		if (resultList.size() < index) {
 			resultList.add(value);
 		} else {
@@ -441,6 +441,8 @@ public class Jackson2HashMapper implements HashMapper<Object, String, Object> {
 	}
 
 	private static class HashMapperModule extends SimpleModule {
+
+		private static final long serialVersionUID = 1;
 
 		HashMapperModule() {
 
@@ -541,6 +543,8 @@ public class Jackson2HashMapper implements HashMapper<Object, String, Object> {
 
 	private static class DateToTimestampSerializer extends DateSerializer {
 
+		private static final long serialVersionUID = 1;
+
 		// Prevent splitting to array.
 		@Override
 		protected boolean _asTimestamp(SerializerProvider serializers) {
@@ -549,6 +553,8 @@ public class Jackson2HashMapper implements HashMapper<Object, String, Object> {
 	}
 
 	private static class CalendarToTimestampSerializer extends CalendarSerializer {
+
+		private static final long serialVersionUID = 1;
 
 		// Prevent splitting to array.
 		@Override

@@ -71,7 +71,7 @@ import org.springframework.util.Assert;
  */
 public class ObjectHashMapper implements HashMapper<Object, byte[], byte[]> {
 
-	@Nullable private volatile static ObjectHashMapper sharedInstance;
+	@Nullable private static volatile ObjectHashMapper sharedInstance;
 
 	private final RedisConverter converter;
 

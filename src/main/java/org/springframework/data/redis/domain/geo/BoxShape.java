@@ -27,6 +27,8 @@ import org.springframework.util.Assert;
  */
 public class BoxShape implements GeoShape {
 
+	private static final long serialVersionUID = 1;
+
 	private final BoundingBox boundingBox;
 
 	public BoxShape(BoundingBox boundingBox) {

@@ -87,23 +87,30 @@ public class Address implements Serializable {
 	}
 
 	public boolean equals(@Nullable Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (!(obj instanceof Address))
+		}
+		if (!(obj instanceof Address)) {
 			return false;
+		}
 		Address other = (Address) obj;
 		if (number == null) {
-			if (other.number != null)
+			if (other.number != null) {
 				return false;
-		} else if (!number.equals(other.number))
+			}
+		} else if (!number.equals(other.number)) {
 			return false;
+		}
 		if (street == null) {
-			if (other.street != null)
+			if (other.street != null) {
 				return false;
-		} else if (!street.equals(other.street))
+			}
+		} else if (!street.equals(other.street)) {
 			return false;
+		}
 		return true;
 	}
 }

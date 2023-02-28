@@ -60,8 +60,8 @@ public interface ReactiveStringCommands {
 	class SetCommand extends KeyCommand {
 
 		private @Nullable ByteBuffer value;
-		private Expiration expiration;
-		private SetOption option;
+		private final Expiration expiration;
+		private final SetOption option;
 
 		private SetCommand(ByteBuffer key, @Nullable ByteBuffer value, @Nullable Expiration expiration,
 				@Nullable SetOption option) {
@@ -462,7 +462,7 @@ public interface ReactiveStringCommands {
 	 */
 	class MSetCommand implements Command {
 
-		private Map<ByteBuffer, ByteBuffer> keyValuePairs;
+		private final Map<ByteBuffer, ByteBuffer> keyValuePairs;
 
 		private MSetCommand(Map<ByteBuffer, ByteBuffer> keyValuePairs) {
 			this.keyValuePairs = keyValuePairs;
@@ -828,7 +828,7 @@ public interface ReactiveStringCommands {
 	class SetBitCommand extends KeyCommand {
 
 		private @Nullable Long offset;
-		private boolean value;
+		private final boolean value;
 
 		private SetBitCommand(ByteBuffer key, Long offset, boolean value) {
 
@@ -919,7 +919,7 @@ public interface ReactiveStringCommands {
 	 */
 	class BitCountCommand extends KeyCommand {
 
-		private Range<Long> range;
+		private final Range<Long> range;
 
 		private BitCountCommand(ByteBuffer key, Range<Long> range) {
 
@@ -1093,8 +1093,8 @@ public interface ReactiveStringCommands {
 	 */
 	class BitOpCommand {
 
-		private List<ByteBuffer> keys;
-		private BitOperation bitOp;
+		private final List<ByteBuffer> keys;
+		private final BitOperation bitOp;
 		private @Nullable ByteBuffer destinationKey;
 
 		private BitOpCommand(List<ByteBuffer> keys, BitOperation bitOp, @Nullable ByteBuffer destinationKey) {
@@ -1203,8 +1203,8 @@ public interface ReactiveStringCommands {
 	 */
 	class BitPosCommand extends KeyCommand {
 
-		private boolean bit;
-		private Range<Long> range;
+		private final boolean bit;
+		private final Range<Long> range;
 
 		private BitPosCommand(@Nullable ByteBuffer key, boolean bit, Range<Long> range) {
 			super(key);

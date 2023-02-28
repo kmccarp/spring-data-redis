@@ -1458,7 +1458,7 @@ public interface ReactiveStreamCommands {
 	class TrimCommand extends KeyCommand {
 
 		private @Nullable Long count;
-		private boolean approximateTrimming;
+		private final boolean approximateTrimming;
 
 		private TrimCommand(ByteBuffer key, @Nullable Long count, boolean approximateTrimming) {
 			super(key);

@@ -92,33 +92,44 @@ public class Person implements Serializable {
 	}
 
 	public boolean equals(@Nullable Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (!(obj instanceof Person))
+		}
+		if (!(obj instanceof Person)) {
 			return false;
+		}
 		Person other = (Person) obj;
 		if (address == null) {
-			if (other.address != null)
+			if (other.address != null) {
 				return false;
-		} else if (!address.equals(other.address))
+			}
+		} else if (!address.equals(other.address)) {
 			return false;
+		}
 		if (age == null) {
-			if (other.age != null)
+			if (other.age != null) {
 				return false;
-		} else if (!age.equals(other.age))
+			}
+		} else if (!age.equals(other.age)) {
 			return false;
+		}
 		if (firstName == null) {
-			if (other.firstName != null)
+			if (other.firstName != null) {
 				return false;
-		} else if (!firstName.equals(other.firstName))
+			}
+		} else if (!firstName.equals(other.firstName)) {
 			return false;
+		}
 		if (lastName == null) {
-			if (other.lastName != null)
+			if (other.lastName != null) {
 				return false;
-		} else if (!lastName.equals(other.lastName))
+			}
+		} else if (!lastName.equals(other.lastName)) {
 			return false;
+		}
 		return true;
 	}
 }

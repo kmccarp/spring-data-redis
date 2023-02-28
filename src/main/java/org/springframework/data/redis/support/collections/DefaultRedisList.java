@@ -44,8 +44,8 @@ public class DefaultRedisList<E> extends AbstractRedisCollection<E> implements R
 
 	private final BoundListOperations<String, E> listOps;
 
-	private volatile int maxSize = 0;
-	private volatile boolean capped = false;
+	private volatile int maxSize;
+	private volatile boolean capped;
 
 	private class DefaultRedisListIterator extends RedisIterator<E> {
 
@@ -112,7 +112,7 @@ public class DefaultRedisList<E> extends AbstractRedisCollection<E> implements R
 	public void setMaxSize(int maxSize) {
 
 		this.maxSize = maxSize;
-		capped = (maxSize > 0);
+		capped = maxSize > 0;
 	}
 
 	@Override
@@ -217,7 +217,7 @@ public class DefaultRedisList<E> extends AbstractRedisCollection<E> implements R
 	@Override
 	public boolean remove(Object o) {
 		Long result = listOps.remove(1, o);
-		return (result != null && result.longValue() > 0);
+		return result != null && result.longValue() > 0;
 	}
 
 	@Override
@@ -476,7 +476,7 @@ public class DefaultRedisList<E> extends AbstractRedisCollection<E> implements R
 	@Override
 	public boolean removeLastOccurrence(Object o) {
 		Long result = listOps.remove(-1, o);
-		return (result != null && result.longValue() > 0);
+		return result != null && result.longValue() > 0;
 	}
 
 	//
@@ -489,7 +489,7 @@ public class DefaultRedisList<E> extends AbstractRedisCollection<E> implements R
 		}
 
 		int size = size();
-		int loop = (size >= maxElements ? maxElements : size);
+		int loop = size >= maxElements ? maxElements : size;
 
 		for (int index = 0; index < loop; index++) {
 			c.add(poll());

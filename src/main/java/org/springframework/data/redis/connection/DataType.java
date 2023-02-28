@@ -64,8 +64,9 @@ public enum DataType {
 	 */
 	public static DataType fromCode(String code) {
 		DataType data = codeLookup.get(code);
-		if (data == null)
+		if (data == null) {
 			throw new IllegalArgumentException("unknown data type code");
+		}
 		return data;
 	}
 }

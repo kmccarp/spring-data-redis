@@ -184,9 +184,7 @@ public class JedisClusterConnection implements RedisClusterConnection {
 
 		RedisClusterNode keyMaster = topologyProvider.getTopology().getKeyServingMasterNode(key);
 
-		return clusterCommandExecutor.executeCommandOnSingleNode((JedisClusterCommandCallback<T>) client -> {
-			return (T) client.sendCommand(JedisClientUtils.getCommand(command), commandArgs);
-		}, keyMaster).getValue();
+		return clusterCommandExecutor.executeCommandOnSingleNode((JedisClusterCommandCallback<T>) client -> (T) client.sendCommand(JedisClientUtils.getCommand(command), commandArgs), keyMaster).getValue();
 	}
 
 	private static byte[][] getCommandArguments(byte[] key, Collection<byte[]> args) {
@@ -231,9 +229,7 @@ public class JedisClusterConnection implements RedisClusterConnection {
 		Assert.notNull(keys, "Key must not be null");
 		Assert.notNull(args, "Args must not be null");
 
-		return clusterCommandExecutor.executeMultiKeyCommand((JedisMultiKeyClusterCommandCallback<T>) (client, key) -> {
-			return (T) client.sendCommand(JedisClientUtils.getCommand(command), getCommandArguments(key, args));
-		}, keys).resultsAsList();
+		return clusterCommandExecutor.executeMultiKeyCommand((JedisMultiKeyClusterCommandCallback<T>) (client, key) -> (T) client.sendCommand(JedisClientUtils.getCommand(command), getCommandArguments(key, args)), keys).resultsAsList();
 
 	}
 
@@ -344,7 +340,7 @@ public class JedisClusterConnection implements RedisClusterConnection {
 
 	@Override
 	public boolean isSubscribed() {
-		return (subscription != null && subscription.isAlive());
+		return subscription != null && subscription.isAlive();
 	}
 
 	@Override
@@ -788,7 +784,7 @@ public class JedisClusterConnection implements RedisClusterConnection {
 		private final Object lock = new Object();
 		private final JedisCluster cluster;
 		private final long cacheTimeMs;
-		private long time = 0;
+		private long time;
 		private @Nullable ClusterTopology cached;
 
 		/**
@@ -848,7 +844,7 @@ public class JedisClusterConnection implements RedisClusterConnection {
 			StringBuilder sb = new StringBuilder();
 
 			for (Entry<String, Exception> entry : errors.entrySet()) {
-				sb.append(String.format("\r\n\t- %s failed: %s", entry.getKey(), entry.getValue().getMessage()));
+				sb.append(String.format("\r%n\t- %s failed: %s", entry.getKey(), entry.getValue().getMessage()));
 			}
 
 			throw new ClusterStateFailureException(

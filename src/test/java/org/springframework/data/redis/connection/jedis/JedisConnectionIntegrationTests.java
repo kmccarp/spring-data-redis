@@ -184,7 +184,7 @@ public class JedisConnectionIntegrationTests extends AbstractConnectionIntegrati
 
 	@Test
 	public void testExecWithoutMulti() {
-		assertThatExceptionOfType(InvalidDataAccessApiUsageException.class).isThrownBy(() -> connection.exec());
+		assertThatExceptionOfType(InvalidDataAccessApiUsageException.class).isThrownBy(connection::exec);
 	}
 
 	@Test

@@ -20,7 +20,7 @@ package org.springframework.data.redis.core.query;
  *
  * @author Costin Leau
  */
-public class SortQueryBuilder<K> extends DefaultSortCriterion<K> {
+public final class SortQueryBuilder<K> extends DefaultSortCriterion<K> {
 
 	private static final String NO_SORT_KEY = "~";
 

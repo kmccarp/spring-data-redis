@@ -203,6 +203,8 @@ class RedisConnectionUtilsUnitTests {
 
 	static class DummyTransactionManager extends AbstractPlatformTransactionManager {
 
+		private static final long serialVersionUID = 1;
+
 		@Override
 		protected Object doGetTransaction() throws TransactionException {
 			return new Object();

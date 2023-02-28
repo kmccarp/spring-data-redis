@@ -405,7 +405,7 @@ public class MessageListenerAdapter implements InitializingBean, MessageListener
 				// check out the argument numbers
 				Class<?>[] parameterTypes = method.getParameterTypes();
 
-				return ((parameterTypes.length == 2 && String.class.equals(parameterTypes[1])) || parameterTypes.length == 1);
+				return (parameterTypes.length == 2 && String.class.equals(parameterTypes[1])) || parameterTypes.length == 1;
 			}
 
 			return false;

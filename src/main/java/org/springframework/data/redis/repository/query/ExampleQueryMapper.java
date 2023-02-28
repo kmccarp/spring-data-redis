@@ -52,7 +52,7 @@ import org.springframework.util.StringUtils;
  */
 public class ExampleQueryMapper {
 
-	private final Set<StringMatcher> SUPPORTED_MATCHERS = EnumSet.of(StringMatcher.DEFAULT, StringMatcher.EXACT);
+	private final Set<StringMatcher> supportedMatchers = EnumSet.of(StringMatcher.DEFAULT, StringMatcher.EXACT);
 
 	private final MappingContext<RedisPersistentEntity<?>, RedisPersistentProperty> mappingContext;
 	private final IndexResolver indexResolver;
@@ -137,10 +137,10 @@ public class ExampleQueryMapper {
 			throw new InvalidDataAccessApiUsageException("Redis Query-by-Example supports only case-sensitive matching.");
 		}
 
-		if (!SUPPORTED_MATCHERS.contains(stringMatcher)) {
+		if (!supportedMatchers.contains(stringMatcher)) {
 			throw new InvalidDataAccessApiUsageException(
 					String.format("Redis Query-by-Example does not support string matcher %s; Supported matchers are: %s.",
-							stringMatcher, SUPPORTED_MATCHERS));
+							stringMatcher, supportedMatchers));
 		}
 
 		if (exampleSpecAccessor.hasPropertySpecifier(path)) {

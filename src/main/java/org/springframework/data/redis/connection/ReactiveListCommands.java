@@ -84,9 +84,9 @@ public interface ReactiveListCommands {
 	 */
 	class PushCommand extends KeyCommand {
 
-		private List<ByteBuffer> values;
-		private boolean upsert;
-		private Direction direction;
+		private final List<ByteBuffer> values;
+		private final boolean upsert;
+		private final Direction direction;
 
 		private PushCommand(@Nullable ByteBuffer key, List<ByteBuffer> values, Direction direction, boolean upsert) {
 

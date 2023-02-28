@@ -683,7 +683,7 @@ public interface RedisGeoCommands {
 		}
 
 		public Set<Flag> getFlags() {
-			return flags.stream().map(it -> (Flag) it).collect(Collectors.toSet());
+			return flags.stream().map(Flag.class::cast).collect(Collectors.toSet());
 		}
 
 		public enum Flag implements GeoCommandFlag {

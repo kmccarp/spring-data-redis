@@ -240,7 +240,7 @@ public class RedisClusterNode extends RedisNode {
 	 * @author Christoph Strobl
 	 * @since 1.7
 	 */
-	public static enum Flag {
+	public enum Flag {
 
 		MYSELF("myself"), MASTER("master"), REPLICA("slave"), FAIL("fail"), PFAIL("fail?"), HANDSHAKE("handshake"), NOADDR(
 				"noaddr"), NOFLAGS("noflags");

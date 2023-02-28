@@ -34,7 +34,7 @@ import org.springframework.lang.Nullable;
 public interface RedisServerCommands {
 
 	enum ShutdownOption {
-		SAVE, NOSAVE;
+		SAVE, NOSAVE
 	}
 
 	/**
