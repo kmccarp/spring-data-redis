@@ -121,12 +121,12 @@ public class PubSubTests<T> {
 	@ParameterizedRedisTest
 	void testMessageBatch() throws Exception {
 
-		int COUNT = 10;
-		for (int i = 0; i < COUNT; i++) {
+		int count = 10;
+		for (int i = 0; i < count; i++) {
 			template.convertAndSend(CHANNEL, getT());
 		}
 
-		for (int i = 0; i < COUNT; i++) {
+		for (int i = 0; i < count; i++) {
 			assertThat(bag.poll(1, TimeUnit.SECONDS)).as("message #" + i).isNotNull();
 		}
 	}

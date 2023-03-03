@@ -51,7 +51,7 @@ public class JedisScriptReturnConverter implements Converter<Object, Object> {
 			if (result == null) {
 				return Boolean.FALSE;
 			}
-			return ((Long) result == 1);
+			return (Long) result == 1;
 		}
 		if (returnType == ReturnType.MULTI) {
 			List<Object> resultList = (List<Object>) result;

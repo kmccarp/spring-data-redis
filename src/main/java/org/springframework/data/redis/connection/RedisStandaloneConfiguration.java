@@ -39,7 +39,7 @@ public class RedisStandaloneConfiguration
 	private String hostName = DEFAULT_HOST;
 	private int port = DEFAULT_PORT;
 	private int database;
-	private @Nullable String username = null;
+	private @Nullable String username;
 	private RedisPassword password = RedisPassword.none();
 
 	/**

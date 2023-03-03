@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
  * @author Mark Paluch
  * @author Christoph Strobl
  */
-public class LettuceTestClientResources {
+public final class LettuceTestClientResources {
 
 	private static final ClientResources SHARED_CLIENT_RESOURCES;
 

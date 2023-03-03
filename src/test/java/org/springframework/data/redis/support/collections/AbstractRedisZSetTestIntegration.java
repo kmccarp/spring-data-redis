@@ -103,7 +103,7 @@ public abstract class AbstractRedisZSetTestIntegration<T> extends AbstractRedisC
 		zSet.add(t2);
 		zSet.add(t3);
 
-		Double d = new Double("1");
+		Double d = Double.valueOf("1");
 
 		assertThat(zSet.score(t1)).isEqualTo(d);
 		assertThat(zSet.score(t2)).isEqualTo(d);
@@ -158,7 +158,7 @@ public abstract class AbstractRedisZSetTestIntegration<T> extends AbstractRedisC
 
 	@ParameterizedRedisTest
 	void testFirstException() {
-		assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() -> zSet.first());
+		assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(zSet::first);
 	}
 
 	@ParameterizedRedisTest
@@ -210,7 +210,7 @@ public abstract class AbstractRedisZSetTestIntegration<T> extends AbstractRedisC
 
 	@ParameterizedRedisTest
 	void testLastException() {
-		assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() -> zSet.last());
+		assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(zSet::last);
 	}
 
 	@ParameterizedRedisTest

@@ -26,6 +26,8 @@ import org.springframework.lang.Nullable;
  */
 public class RedisKeyspaceEvent extends ApplicationEvent {
 
+	private static final long serialVersionUID = 1;
+
 	private final @Nullable String channel;
 
 	/**

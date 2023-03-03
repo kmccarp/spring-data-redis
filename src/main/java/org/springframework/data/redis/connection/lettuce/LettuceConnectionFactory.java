@@ -114,9 +114,9 @@ public class LettuceConnectionFactory
 	private @Nullable AbstractRedisClient client;
 	private @Nullable LettuceConnectionProvider connectionProvider;
 	private @Nullable LettuceConnectionProvider reactiveConnectionProvider;
-	private boolean validateConnection = false;
+	private boolean validateConnection;
 	private boolean shareNativeConnection = true;
-	private boolean eagerInitialization = false;
+	private boolean eagerInitialization;
 	private @Nullable SharedConnection<byte[]> connection;
 	private @Nullable SharedConnection<ByteBuffer> reactiveConnection;
 	/** Synchronization monitor for the shared Connection */
@@ -1187,11 +1187,9 @@ public class LettuceConnectionFactory
 		ClusterClientOptions clusterClientOptions = clientOptions //
 				.filter(ClusterClientOptions.class::isInstance) //
 				.map(ClusterClientOptions.class::cast) //
-				.orElseGet(() -> {
-					return clientOptions //
+				.orElseGet(() -> clientOptions //
 							.map(it -> ClusterClientOptions.builder(it).build()) //
-							.orElseGet(ClusterClientOptions::create);
-				});
+							.orElseGet(ClusterClientOptions::create));
 
 		if (configuration.getMaxRedirects() != null) {
 			return clusterClientOptions.mutate().maxRedirects(configuration.getMaxRedirects()).build();

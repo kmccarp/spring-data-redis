@@ -186,7 +186,7 @@ public class RedisKeyValueTemplate extends KeyValueTemplate {
 	 * @param <T>
 	 * @since 1.7
 	 */
-	public static abstract class RedisKeyValueCallback<T> implements KeyValueCallback<T> {
+	public abstract static class RedisKeyValueCallback<T> implements KeyValueCallback<T> {
 
 		@Override
 		public T doInKeyValue(KeyValueAdapter adapter) {

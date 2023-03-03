@@ -103,7 +103,7 @@ public interface ByteBufferRecord extends MapRecord<ByteBuffer, ByteBuffer, Byte
 
 		value.forEach((k, v) -> targetMap.put(ByteUtils.getBytes(k), ByteUtils.getBytes(v)));
 
-		return Record.<ByteBuffer, OV> of((OV) (mapper).fromHash((Map) targetMap)).withId(getId())
+		return Record.<ByteBuffer, OV> of((OV) mapper.fromHash((Map) targetMap)).withId(getId())
 				.withStreamKey(getRequiredStream());
 	}
 

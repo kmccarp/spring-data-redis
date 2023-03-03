@@ -64,7 +64,7 @@ class LettuceReactiveClusterCommandsIntegrationTests extends LettuceReactiveClus
 
 		connection.clusterGetNodes().filter(RedisClusterNode::isMaster)
 				.filter(node -> (node.getPort() == 7379 || node.getPort() == 7382))
-				.flatMap(it -> connection.clusterGetReplicas(it)) //
+				.flatMap(connection::clusterGetReplicas) //
 				.collectList() //
 				.as(StepVerifier::create) //
 				.consumeNextWith(actual -> {

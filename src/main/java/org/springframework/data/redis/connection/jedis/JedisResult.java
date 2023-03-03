@@ -88,14 +88,14 @@ class JedisResult<T, R> extends FutureResult<Response<?>> {
 
 		private final Response<T> response;
 		private Converter<T, R> converter;
-		private boolean convertPipelineAndTxResults = false;
+		private boolean convertPipelineAndTxResults;
 		private Supplier<R> nullValueDefault = () -> null;
 
 		@SuppressWarnings("unchecked")
 		JedisResultBuilder(Response<T> response) {
 
 			this.response = response;
-			this.converter = (source) -> (R) source;
+			this.converter = source -> (R) source;
 		}
 
 		/**

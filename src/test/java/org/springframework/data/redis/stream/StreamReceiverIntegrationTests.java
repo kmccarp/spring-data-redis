@@ -293,6 +293,7 @@ public class StreamReceiverIntegrationTests {
 	@Data
 	@AllArgsConstructor
 	static class LoginEvent {
-		String firstname, lastname;
+		String firstname;
+		String lastname;
 	}
 }

@@ -47,6 +47,8 @@ import org.springframework.lang.Nullable;
  */
 public class RedisProperties extends Properties implements RedisMap<Object, Object> {
 
+	private static final long serialVersionUID = 1;
+
 	private final BoundHashOperations<String, String, String> hashOps;
 	private final RedisMap<String, String> delegate;
 
@@ -161,8 +163,9 @@ public class RedisProperties extends Properties implements RedisMap<Object, Obje
 	@Override
 	public synchronized boolean equals(Object o) {
 
-		if (o == this)
+		if (o == this) {
 			return true;
+		}
 
 		if (o instanceof RedisProperties) {
 			return o.hashCode() == hashCode();
@@ -272,7 +275,7 @@ public class RedisProperties extends Properties implements RedisMap<Object, Obje
 
 	@Override
 	public Object putIfAbsent(Object key, Object value) {
-		return (hashOps.putIfAbsent((String) key, (String) value) ? null : get(key));
+		return hashOps.putIfAbsent((String) key, (String) value) ? null : get(key);
 	}
 
 	@Override

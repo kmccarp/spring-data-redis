@@ -17,7 +17,7 @@ package org.springframework.data.redis.core;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 
@@ -39,15 +39,12 @@ class SessionUnitTests {
 		when(factory.getConnection()).thenReturn(conn);
 		doReturn(stringConn).when(template).preProcessConnection(eq(conn), anyBoolean());
 
-		template.execute(new SessionCallback<Object>() {
-			@SuppressWarnings("rawtypes")
-			public Object execute(RedisOperations operations) {
-				checkConnection(template, stringConn);
-				template.discard();
-				assertThat(operations).isSameAs(template);
-				checkConnection(template, stringConn);
-				return null;
-			}
+		template.execute(operations -> {
+			checkConnection(template, stringConn);
+			template.discard();
+			assertThat(operations).isSameAs(template);
+			checkConnection(template, stringConn);
+			return null;
 		});
 	}
 

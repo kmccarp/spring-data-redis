@@ -218,7 +218,7 @@ public interface ReactiveHashCommands {
 	 */
 	class HGetCommand extends KeyCommand {
 
-		private List<ByteBuffer> fields;
+		private final List<ByteBuffer> fields;
 
 		private HGetCommand(@Nullable ByteBuffer key, List<ByteBuffer> fields) {
 
@@ -524,7 +524,7 @@ public interface ReactiveHashCommands {
 	 */
 	class HRandFieldCommand extends KeyCommand {
 
-		private long count;
+		private final long count;
 
 		private HRandFieldCommand(@Nullable ByteBuffer key, long count) {
 
@@ -772,7 +772,7 @@ public interface ReactiveHashCommands {
 	 */
 	class HStrLenCommand extends KeyCommand {
 
-		private ByteBuffer field;
+		private final ByteBuffer field;
 
 		/**
 		 * Creates a new {@link HStrLenCommand} given a {@code key}.

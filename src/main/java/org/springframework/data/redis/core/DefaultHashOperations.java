@@ -23,7 +23,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.redis.connection.convert.Converters;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
@@ -243,13 +242,7 @@ class DefaultHashOperations<K, HK, HV> extends AbstractOperations<K, Object> imp
 		byte[] rawKey = rawKey(key);
 		return template.executeWithStickyConnection(
 				(RedisCallback<Cursor<Entry<HK, HV>>>) connection -> new ConvertingCursor<>(connection.hScan(rawKey, options),
-						new Converter<Entry<byte[], byte[]>, Entry<HK, HV>>() {
-
-							@Override
-							public Entry<HK, HV> convert(final Entry<byte[], byte[]> source) {
-								return Converters.entryOf(deserializeHashKey(source.getKey()), deserializeHashValue(source.getValue()));
-							}
-						}));
+						source -> Converters.entryOf(deserializeHashKey(source.getKey()), deserializeHashValue(source.getValue()))));
 
 	}
 }

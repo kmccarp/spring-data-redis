@@ -52,7 +52,7 @@ import org.springframework.data.redis.test.extension.parametrized.ParameterizedR
  */
 public class RedisPropertiesIntegrationTests extends RedisMapIntegrationTests {
 
-	private Properties defaults = new Properties();
+	private final Properties defaults = new Properties();
 	private RedisProperties props;
 
 	/**
@@ -188,7 +188,7 @@ public class RedisPropertiesIntegrationTests extends RedisMapIntegrationTests {
 	@ParameterizedRedisTest
 	@Override
 	public void testScanWorksCorrectly() {
-		assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(() -> super.testScanWorksCorrectly());
+		assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(super::testScanWorksCorrectly);
 	}
 
 	// DATAREDIS-241

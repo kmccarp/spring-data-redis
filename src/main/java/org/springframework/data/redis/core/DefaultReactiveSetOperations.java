@@ -130,9 +130,7 @@ class DefaultReactiveSetOperations<K, V> implements ReactiveSetOperations<K, V> 
 
 		Assert.notNull(key, "Key must not be null");
 
-		return createMono(connection -> {
-
-			return Flux.fromArray((V[]) objects) //
+		return createMono(connection -> Flux.fromArray((V[]) objects) //
 					.map(this::rawValue) //
 					.collectList() //
 					.flatMap(rawValues -> connection.sMIsMember(rawKey(key), rawValues)) //
@@ -145,8 +143,7 @@ class DefaultReactiveSetOperations<K, V> implements ReactiveSetOperations<K, V> 
 						}
 
 						return isMember;
-					});
-		});
+					}));
 	}
 
 	@Override
