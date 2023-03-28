@@ -51,7 +51,7 @@ abstract class AbstractOperations<K, V> {
 
 	// utility methods for the template internal methods
 	abstract class ValueDeserializingRedisCallback implements RedisCallback<V> {
-		private Object key;
+		private final Object key;
 
 		public ValueDeserializingRedisCallback(Object key) {
 			this.key = key;

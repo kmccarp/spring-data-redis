@@ -244,7 +244,7 @@ abstract class JedisConverters extends Converters {
 
 	public static ListPosition toListPosition(Position source) {
 		Assert.notNull(source, "list positions are mandatory");
-		return (Position.AFTER.equals(source) ? ListPosition.AFTER : ListPosition.BEFORE);
+		return Position.AFTER.equals(source) ? ListPosition.AFTER : ListPosition.BEFORE;
 	}
 
 	public static byte[][] toByteArrays(Map<byte[], byte[]> source) {
@@ -662,25 +662,19 @@ abstract class JedisConverters extends Converters {
 
 		if (source.hasFlags()) {
 			for (Flag flag : source.getFlags()) {
-				switch (flag) {
-					case WITHCOORD:
-						param.withCoord();
-						break;
-					case WITHDIST:
-						param.withDist();
-						break;
+				if (flag == RedisGeoCommands.GeoRadiusCommandArgs.Flag.WITHCOORD) {
+					param.withCoord();
+				} else if (flag == RedisGeoCommands.GeoRadiusCommandArgs.Flag.WITHDIST) {
+					param.withDist();
 				}
 			}
 		}
 
 		if (source.hasSortDirection()) {
-			switch (source.getSortDirection()) {
-				case ASC:
-					param.sortAscending();
-					break;
-				case DESC:
-					param.sortDescending();
-					break;
+			if (source.getSortDirection() == Sort.Direction.ASC) {
+				param.sortAscending();
+			} else if (source.getSortDirection() == Sort.Direction.DESC) {
+				param.sortDescending();
 			}
 		}
 

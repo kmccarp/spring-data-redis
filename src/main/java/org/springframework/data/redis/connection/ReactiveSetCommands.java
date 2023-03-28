@@ -53,9 +53,9 @@ public interface ReactiveSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/sadd">Redis Documentation: SADD</a>
 	 */
-	class SAddCommand extends KeyCommand {
+	final class SAddCommand extends KeyCommand {
 
-		private List<ByteBuffer> values;
+		private final List<ByteBuffer> values;
 
 		private SAddCommand(@Nullable ByteBuffer key, List<ByteBuffer> values) {
 
@@ -157,7 +157,7 @@ public interface ReactiveSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/srem">Redis Documentation: SREM</a>
 	 */
-	class SRemCommand extends KeyCommand {
+	final class SRemCommand extends KeyCommand {
 
 		private final List<ByteBuffer> values;
 
@@ -261,7 +261,7 @@ public interface ReactiveSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/spop">Redis Documentation: SPOP</a>
 	 */
-	class SPopCommand extends KeyCommand {
+	final class SPopCommand extends KeyCommand {
 
 		private final long count;
 
@@ -360,7 +360,7 @@ public interface ReactiveSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/smove">Redis Documentation: SMOVE</a>
 	 */
-	class SMoveCommand extends KeyCommand {
+	final class SMoveCommand extends KeyCommand {
 
 		private final @Nullable ByteBuffer destination;
 		private final ByteBuffer value;
@@ -485,7 +485,7 @@ public interface ReactiveSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/sismember">Redis Documentation: SISMEMBER</a>
 	 */
-	class SIsMemberCommand extends KeyCommand {
+	final class SIsMemberCommand extends KeyCommand {
 
 		private final ByteBuffer value;
 
@@ -562,7 +562,7 @@ public interface ReactiveSetCommands {
 	 * @since 2.6
 	 * @see <a href="https://redis.io/commands/smismember">Redis Documentation: SMISMEMBER</a>
 	 */
-	class SMIsMemberCommand extends KeyCommand {
+	final class SMIsMemberCommand extends KeyCommand {
 
 		private final List<ByteBuffer> values;
 
@@ -641,7 +641,7 @@ public interface ReactiveSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/sinter">Redis Documentation: SINTER</a>
 	 */
-	class SInterCommand implements Command {
+	final class SInterCommand implements Command {
 
 		private final List<ByteBuffer> keys;
 
@@ -705,7 +705,7 @@ public interface ReactiveSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/sinterstore">Redis Documentation: SINTERSTORE</a>
 	 */
-	class SInterStoreCommand extends KeyCommand {
+	final class SInterStoreCommand extends KeyCommand {
 
 		private final List<ByteBuffer> keys;
 
@@ -783,7 +783,7 @@ public interface ReactiveSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/sunion">Redis Documentation: SUNION</a>
 	 */
-	class SUnionCommand implements Command {
+	final class SUnionCommand implements Command {
 
 		private final List<ByteBuffer> keys;
 
@@ -847,7 +847,7 @@ public interface ReactiveSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/sunionstore">Redis Documentation: SUNIONSTORE</a>
 	 */
-	class SUnionStoreCommand extends KeyCommand {
+	final class SUnionStoreCommand extends KeyCommand {
 
 		private final List<ByteBuffer> keys;
 
@@ -925,7 +925,7 @@ public interface ReactiveSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/sdiff">Redis Documentation: SDIFF</a>
 	 */
-	class SDiffCommand implements Command {
+	final class SDiffCommand implements Command {
 
 		private final List<ByteBuffer> keys;
 
@@ -989,7 +989,7 @@ public interface ReactiveSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/sdiffstore">Redis Documentation: SDIFFSTORE</a>
 	 */
-	class SDiffStoreCommand extends KeyCommand {
+	final class SDiffStoreCommand extends KeyCommand {
 
 		private final List<ByteBuffer> keys;
 
@@ -1132,7 +1132,7 @@ public interface ReactiveSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/srandmember">Redis Documentation: SRANDMEMBER</a>
 	 */
-	class SRandMembersCommand extends KeyCommand {
+	final class SRandMembersCommand extends KeyCommand {
 
 		private final @Nullable Long count;
 

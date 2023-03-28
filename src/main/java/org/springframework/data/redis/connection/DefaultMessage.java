@@ -27,6 +27,8 @@ import org.springframework.util.Assert;
  */
 public class DefaultMessage implements Message {
 
+	private static final long serialVersionUID = 1;
+
 	private static final byte[] EMPTY = new byte[0];
 	private final byte[] channel;
 	private final byte[] body;

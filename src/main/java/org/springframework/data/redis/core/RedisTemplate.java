@@ -93,17 +93,17 @@ import org.springframework.util.CollectionUtils;
  */
 public class RedisTemplate<K, V> extends RedisAccessor implements RedisOperations<K, V>, BeanClassLoaderAware {
 
-	private boolean enableTransactionSupport = false;
-	private boolean exposeConnection = false;
-	private boolean initialized = false;
+	private boolean enableTransactionSupport;
+	private boolean exposeConnection;
+	private boolean initialized;
 	private boolean enableDefaultSerializer = true;
 	private @Nullable RedisSerializer<?> defaultSerializer;
 	private @Nullable ClassLoader classLoader;
 
-	@SuppressWarnings("rawtypes") private @Nullable RedisSerializer keySerializer = null;
-	@SuppressWarnings("rawtypes") private @Nullable RedisSerializer valueSerializer = null;
-	@SuppressWarnings("rawtypes") private @Nullable RedisSerializer hashKeySerializer = null;
-	@SuppressWarnings("rawtypes") private @Nullable RedisSerializer hashValueSerializer = null;
+	@SuppressWarnings("rawtypes") private @Nullable RedisSerializer keySerializer;
+	@SuppressWarnings("rawtypes") private @Nullable RedisSerializer valueSerializer;
+	@SuppressWarnings("rawtypes") private @Nullable RedisSerializer hashKeySerializer;
+	@SuppressWarnings("rawtypes") private @Nullable RedisSerializer hashValueSerializer;
 	private RedisSerializer<String> stringSerializer = RedisSerializer.string();
 
 	private @Nullable ScriptExecutor<K> scriptExecutor;
@@ -402,7 +402,7 @@ public class RedisTemplate<K, V> extends RedisAccessor implements RedisOperation
 				connToUse.openPipeline();
 			}
 
-			RedisConnection connToExpose = (exposeConnection ? connToUse : createRedisConnectionProxy(connToUse));
+			RedisConnection connToExpose = exposeConnection ? connToUse : createRedisConnectionProxy(connToUse);
 			T result = action.doInRedis(connToExpose);
 
 			// close pipeline
@@ -982,7 +982,7 @@ public class RedisTemplate<K, V> extends RedisAccessor implements RedisOperation
 
 	@Override
 	public <HK, HV> BoundHashOperations<K, HK, HV> boundHashOps(K key) {
-		return boundOperations.createProxy(BoundHashOperations.class, key, DataType.HASH, this, it -> it.opsForHash());
+		return boundOperations.createProxy(BoundHashOperations.class, key, DataType.HASH, this, RedisOperations::opsForHash);
 	}
 
 	@Override
@@ -1131,7 +1131,7 @@ public class RedisTemplate<K, V> extends RedisAccessor implements RedisOperation
 		Object setValue = rawSet.iterator().next();
 
 		if (setValue instanceof byte[] && valueSerializer != null) {
-			return (SerializationUtils.deserialize(rawSet, valueSerializer));
+			return SerializationUtils.deserialize(rawSet, valueSerializer);
 		} else if (setValue instanceof Tuple) {
 			return convertTupleValues(rawSet, valueSerializer);
 		} else {

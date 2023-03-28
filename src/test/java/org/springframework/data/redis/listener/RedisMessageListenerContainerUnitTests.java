@@ -121,7 +121,7 @@ class RedisMessageListenerContainerUnitTests {
 		}).when(executorMock).execute(any());
 
 		container.addMessageListener(adapter, new ChannelTopic("a"));
-		assertThatExceptionOfType(RedisListenerExecutionFailedException.class).isThrownBy(() -> container.start());
+		assertThatExceptionOfType(RedisListenerExecutionFailedException.class).isThrownBy(container::start);
 
 		assertThat(container.isRunning()).isTrue();
 		assertThat(container.isListening()).isFalse();
@@ -150,6 +150,6 @@ class RedisMessageListenerContainerUnitTests {
 
 	@Test // GH-964
 	void failsOnDuplicateInit() {
-		assertThatExceptionOfType(IllegalStateException.class).isThrownBy(() -> container.afterPropertiesSet());
+		assertThatExceptionOfType(IllegalStateException.class).isThrownBy(container::afterPropertiesSet);
 	}
 }

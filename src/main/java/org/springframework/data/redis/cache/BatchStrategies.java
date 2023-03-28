@@ -113,7 +113,7 @@ public abstract class BatchStrategies {
 				List<byte[]> keys = partitions.next();
 				count += keys.size();
 
-				if (keys.size() > 0) {
+				if (!keys.isEmpty()) {
 					connection.del(keys.toArray(new byte[0][]));
 				}
 			}

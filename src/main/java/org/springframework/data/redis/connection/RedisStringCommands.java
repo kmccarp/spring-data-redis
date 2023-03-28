@@ -33,7 +33,7 @@ import org.springframework.lang.Nullable;
 public interface RedisStringCommands {
 
 	enum BitOperation {
-		AND, OR, XOR, NOT;
+		AND, OR, XOR, NOT
 	}
 
 	/**

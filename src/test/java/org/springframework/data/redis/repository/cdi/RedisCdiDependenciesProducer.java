@@ -75,8 +75,7 @@ public class RedisCdiDependenciesProducer {
 	public RedisKeyValueTemplate redisKeyValueAdapterDefault(RedisOperations<?, ?> redisOperations) {
 
 		RedisKeyValueAdapter redisKeyValueAdapter = new RedisKeyValueAdapter(redisOperations);
-		RedisKeyValueTemplate keyValueTemplate = new RedisKeyValueTemplate(redisKeyValueAdapter, new RedisMappingContext());
-		return keyValueTemplate;
+		return new RedisKeyValueTemplate(redisKeyValueAdapter, new RedisMappingContext());
 	}
 
 }

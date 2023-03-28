@@ -40,7 +40,7 @@ import org.springframework.util.Assert;
  * @author Mark Paluch
  * @since 2.0
  */
-public class RedisCacheConfiguration {
+public final class RedisCacheConfiguration {
 
 	private final Duration ttl;
 	private final boolean cacheNullValues;

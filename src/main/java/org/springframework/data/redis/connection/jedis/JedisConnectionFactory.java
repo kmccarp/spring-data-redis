@@ -87,7 +87,7 @@ import org.springframework.util.ObjectUtils;
  */
 public class JedisConnectionFactory implements InitializingBean, DisposableBean, RedisConnectionFactory {
 
-	private final static Log log = LogFactory.getLog(JedisConnectionFactory.class);
+	private static final Log log = LogFactory.getLog(JedisConnectionFactory.class);
 	private static final ExceptionTranslationStrategy EXCEPTION_TRANSLATION = new PassThroughExceptionTranslationStrategy(
 			JedisExceptionConverter.INSTANCE);
 
@@ -459,8 +459,8 @@ public class JedisConnectionFactory implements InitializingBean, DisposableBean,
 			sentinelConfig = createSentinelClientConfig(sentinelConfiguration);
 		}
 
-		JedisConnection connection = (getUsePool() ? new JedisConnection(jedis, pool, this.clientConfig, sentinelConfig)
-				: new JedisConnection(jedis, null, this.clientConfig, sentinelConfig));
+		JedisConnection connection = getUsePool() ? new JedisConnection(jedis, pool, this.clientConfig, sentinelConfig)
+				: new JedisConnection(jedis, null, this.clientConfig, sentinelConfig);
 		connection.setConvertPipelineAndTxResults(convertPipelineAndTxResults);
 		return postProcessConnection(connection);
 	}
@@ -817,7 +817,7 @@ public class JedisConnectionFactory implements InitializingBean, DisposableBean,
 			try {
 
 				jedis = new Jedis(new HostAndPort(node.getHost(), node.getPort()), clientConfig);
-				if (jedis.ping().equalsIgnoreCase("pong")) {
+				if ("pong".equalsIgnoreCase(jedis.ping())) {
 					success = true;
 					return jedis;
 				}

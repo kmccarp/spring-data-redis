@@ -110,7 +110,7 @@ class BoundOperationsProxyFactory {
 	}
 
 	private boolean isStreamRead(Method method) {
-		return method.getName().equals("read")
+		return "read".equals(method.getName())
 				&& method.getParameterTypes()[method.getParameterCount() - 1].equals(ReadOffset.class);
 	}
 

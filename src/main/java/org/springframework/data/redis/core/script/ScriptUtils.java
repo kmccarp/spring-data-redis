@@ -30,7 +30,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
  * @author Christoph Strobl
  * @since 2.0
  */
-class ScriptUtils {
+final class ScriptUtils {
 
 	private ScriptUtils() {}
 

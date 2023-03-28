@@ -118,7 +118,7 @@ public interface RedisStreamCommands {
 	 * @author Liming Deng
 	 * @since 2.3
 	 */
-	class XAddOptions {
+	final class XAddOptions {
 
 		private static final XAddOptions NONE = new XAddOptions(null, false, false, null);
 
@@ -323,7 +323,7 @@ public interface RedisStreamCommands {
 	 * @author Christoph Strobl
 	 * @since 2.3
 	 */
-	class XClaimOptions {
+	final class XClaimOptions {
 
 		private final List<RecordId> ids;
 		private final Duration minIdleTime;
@@ -764,7 +764,7 @@ public interface RedisStreamCommands {
 	 * @author Christoph Strobl
 	 * @since 2.3
 	 */
-	class XPendingOptions {
+	final class XPendingOptions {
 
 		private final @Nullable String consumerName;
 		private final Range<?> range;

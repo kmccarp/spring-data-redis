@@ -29,7 +29,7 @@ import org.springframework.util.StringUtils;
  * @since 2.2
  * @see <a href="https://redis.io/topics/streams-intro#entry-ids">Redis Documentation - Entriy ID</a>
  */
-public class RecordId {
+public final class RecordId {
 
 	private static final String GENERATE_ID = "*";
 	private static final String DELIMITER = "-";
@@ -155,10 +155,12 @@ public class RecordId {
 
 	@Override
 	public boolean equals(@Nullable Object o) {
-		if (this == o)
+		if (this == o) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (o == null || getClass() != o.getClass()) {
 			return false;
+		}
 
 		RecordId recordId = (RecordId) o;
 

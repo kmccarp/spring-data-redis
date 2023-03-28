@@ -112,7 +112,7 @@ public class RedisRepositoryConfigurationExtension extends KeyValueRepositoryCon
 				REDIS_REFERENCE_RESOLVER_BEAN_NAME, configuration.getSource());
 
 		// Register converter
-		registerIfNotAlreadyRegistered(() -> createRedisConverterDefinition(), registry, REDIS_CONVERTER_BEAN_NAME,
+		registerIfNotAlreadyRegistered(RedisRepositoryConfigurationExtension::createRedisConverterDefinition, registry, REDIS_CONVERTER_BEAN_NAME,
 				configuration.getSource());
 
 		registerIfNotAlreadyRegistered(() -> createRedisKeyValueAdapter(configuration), registry, REDIS_ADAPTER_BEAN_NAME,

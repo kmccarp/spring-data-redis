@@ -309,7 +309,7 @@ public interface ReactiveKeyCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/rename">Redis Documentation: RENAME</a>
 	 */
-	class RenameCommand extends KeyCommand {
+	final class RenameCommand extends KeyCommand {
 
 		private @Nullable ByteBuffer newKey;
 
@@ -511,7 +511,7 @@ public interface ReactiveKeyCommands {
 	 * @see <a href="https://redis.io/commands/expire">Redis Documentation: EXPIRE</a>
 	 * @see <a href="https://redis.io/commands/pexpire">Redis Documentation: PEXPIRE</a>
 	 */
-	class ExpireCommand extends KeyCommand {
+	final class ExpireCommand extends KeyCommand {
 
 		private @Nullable Duration timeout;
 
@@ -616,7 +616,7 @@ public interface ReactiveKeyCommands {
 	 * @see <a href="https://redis.io/commands/expire">Redis Documentation: EXPIREAT</a>
 	 * @see <a href="https://redis.io/commands/pexpire">Redis Documentation: PEXPIREAT</a>
 	 */
-	class ExpireAtCommand extends KeyCommand {
+	final class ExpireAtCommand extends KeyCommand {
 
 		private @Nullable Instant expireAt;
 
@@ -789,7 +789,7 @@ public interface ReactiveKeyCommands {
 	 * @author Mark Paluch
 	 * @see <a href="https://redis.io/commands/move">Redis Documentation: MOVE</a>
 	 */
-	class MoveCommand extends KeyCommand {
+	final class MoveCommand extends KeyCommand {
 
 		private @Nullable Integer database;
 

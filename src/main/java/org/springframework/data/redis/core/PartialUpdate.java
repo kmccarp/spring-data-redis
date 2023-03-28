@@ -37,7 +37,7 @@ public class PartialUpdate<T> {
 	private final Object id;
 	private final Class<T> target;
 	private final @Nullable T value;
-	private boolean refreshTtl = false;
+	private boolean refreshTtl;
 
 	private final List<PropertyUpdate> propertyUpdates = new ArrayList<>();
 
@@ -186,7 +186,7 @@ public class PartialUpdate<T> {
 	 * @author Christoph Strobl
 	 * @since 1.8
 	 */
-	public static class PropertyUpdate {
+	public static final class PropertyUpdate {
 
 		private final UpdateCommand cmd;
 		private final String propertyPath;

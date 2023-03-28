@@ -214,7 +214,7 @@ public interface RedisZSetCommands {
 	 * @since 2.5
 	 * @see <a href="https://redis.io/commands/zadd">Redis Documentation: ZADD</a>
 	 */
-	class ZAddArgs {
+	final class ZAddArgs {
 
 		private static final ZAddArgs NONE = new ZAddArgs(EnumSet.noneOf(Flag.class));
 

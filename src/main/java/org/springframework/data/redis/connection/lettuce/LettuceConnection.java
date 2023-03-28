@@ -92,7 +92,7 @@ import org.springframework.util.ObjectUtils;
  */
 public class LettuceConnection extends AbstractRedisConnection {
 
-	private final Log LOGGER = LogFactory.getLog(getClass());
+	private final Log logger = LogFactory.getLog(getClass());
 
 	static final RedisCodec<byte[], byte[]> CODEC = ByteArrayCodec.INSTANCE;
 
@@ -122,9 +122,9 @@ public class LettuceConnection extends AbstractRedisConnection {
 	private final long timeout;
 
 	// refers only to main connection as pubsub happens on a different one
-	private boolean isClosed = false;
-	private boolean isMulti = false;
-	private boolean isPipelined = false;
+	private boolean isClosed;
+	private boolean isMulti;
+	private boolean isPipelined;
 	private @Nullable List<LettuceResult<?, ?>> ppline;
 	private @Nullable PipeliningFlushState flushState;
 	private final Queue<FutureResult<?>> txResults = new LinkedList<>();
@@ -134,19 +134,19 @@ public class LettuceConnection extends AbstractRedisConnection {
 	private PipeliningFlushPolicy pipeliningFlushPolicy = PipeliningFlushPolicy.flushEachCommand();
 
 	LettuceResult<?, ?> newLettuceResult(Future<?> resultHolder) {
-		return newLettuceResult(resultHolder, (val) -> val);
+		return newLettuceResult(resultHolder, val -> val);
 	}
 
 	<T, R> LettuceResult<T, R> newLettuceResult(Future<T> resultHolder, Converter<T, R> converter) {
 
-		return LettuceResultBuilder.<T, R> forResponse(resultHolder).mappedWith(converter)
+		return LettuceResultBuilder. forResponse(resultHolder).mappedWith(converter)
 				.convertPipelineAndTxResults(convertPipelineAndTxResults).build();
 	}
 
 	<T, R> LettuceResult<T, R> newLettuceResult(Future<T> resultHolder, Converter<T, R> converter,
 			Supplier<R> defaultValue) {
 
-		return LettuceResultBuilder.<T, R> forResponse(resultHolder).mappedWith(converter)
+		return LettuceResultBuilder. forResponse(resultHolder).mappedWith(converter)
 				.convertPipelineAndTxResults(convertPipelineAndTxResults).defaultNullTo(defaultValue).build();
 	}
 
@@ -359,7 +359,7 @@ public class LettuceConnection extends AbstractRedisConnection {
 		try {
 			reset();
 		} catch (RuntimeException e) {
-			LOGGER.debug("Failed to reset connection during close", e);
+			logger.debug("Failed to reset connection during close", e);
 		}
 	}
 
@@ -397,8 +397,8 @@ public class LettuceConnection extends AbstractRedisConnection {
 	public RedisClusterAsyncCommands<byte[], byte[]> getNativeConnection() {
 
 		LettuceSubscription subscription = this.subscription;
-		return (subscription != null && subscription.isAlive() ? subscription.getNativeConnection().async()
-				: getAsyncConnection());
+		return subscription != null && subscription.isAlive() ? subscription.getNativeConnection().async()
+				: getAsyncConnection();
 	}
 
 	@Override
@@ -628,7 +628,7 @@ public class LettuceConnection extends AbstractRedisConnection {
 
 	@Override
 	public boolean isSubscribed() {
-		return (subscription != null && subscription.isAlive());
+		return subscription != null && subscription.isAlive();
 	}
 
 	@Override
@@ -921,7 +921,7 @@ public class LettuceConnection extends AbstractRedisConnection {
 		StatefulRedisSentinelConnection<String, String> connection = null;
 		try {
 			connection = getConnection(node);
-			return connection.sync().ping().equalsIgnoreCase("pong");
+			return "pong".equalsIgnoreCase(connection.sync().ping());
 		} catch (Exception e) {
 			return false;
 		} finally {

@@ -34,7 +34,7 @@ public class RedisSocketConfiguration implements RedisConfiguration, DomainSocke
 
 	private String socket = DEFAULT_SOCKET;
 	private int database;
-	private @Nullable String username = null;
+	private @Nullable String username;
 	private RedisPassword password = RedisPassword.none();
 
 	/**

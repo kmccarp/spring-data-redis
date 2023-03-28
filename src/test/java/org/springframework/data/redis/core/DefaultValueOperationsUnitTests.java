@@ -52,7 +52,7 @@ class DefaultValueOperationsUnitTests<K, V> {
 
 		serializer = new StringRedisSerializer();
 
-		template = new RedisTemplate<String, V>();
+		template = new RedisTemplate<>();
 		template.setKeySerializer(serializer);
 		template.setConnectionFactory(connectionFactoryMock);
 		template.afterPropertiesSet();

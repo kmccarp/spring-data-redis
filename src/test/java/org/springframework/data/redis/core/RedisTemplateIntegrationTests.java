@@ -16,8 +16,8 @@
 package org.springframework.data.redis.core;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.assertj.core.api.Assumptions.*;
-import static org.awaitility.Awaitility.*;
+import static org.assertj.core.api.Assumptions.assumeThat;
+import static org.awaitility.Awaitility.await;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -27,7 +27,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.BeforeEach;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.data.redis.ConnectionFactoryTracker;
 import org.springframework.data.redis.ObjectFactory;
@@ -149,7 +148,7 @@ public class RedisTemplateIntegrationTests<K, V> {
 	void testTemplateNotInitialized() throws Exception {
 		RedisTemplate tpl = new RedisTemplate();
 		tpl.setConnectionFactory(redisTemplate.getConnectionFactory());
-		assertThatIllegalArgumentException().isThrownBy(() -> tpl.exec());
+		assertThatIllegalArgumentException().isThrownBy(tpl::exec);
 	}
 
 	@ParameterizedRedisTest
@@ -173,20 +172,17 @@ public class RedisTemplateIntegrationTests<K, V> {
 		V setValue = valueFactory.instance();
 		K zsetKey = keyFactory.instance();
 		V zsetValue = valueFactory.instance();
-		List<Object> results = redisTemplate.execute(new SessionCallback<List<Object>>() {
-			@SuppressWarnings({ "rawtypes", "unchecked" })
-			public List<Object> execute(RedisOperations operations) throws DataAccessException {
-				operations.multi();
-				operations.opsForValue().set(key1, value1);
-				operations.opsForValue().get(key1);
-				operations.opsForList().leftPush(listKey, listValue);
-				operations.opsForList().range(listKey, 0L, 1L);
-				operations.opsForSet().add(setKey, setValue);
-				operations.opsForSet().members(setKey);
-				operations.opsForZSet().add(zsetKey, zsetValue, 1d);
-				operations.opsForZSet().rangeWithScores(zsetKey, 0L, -1L);
-				return operations.exec();
-			}
+		List<Object> results = redisTemplate.execute(operations -> {
+			operations.multi();
+			operations.opsForValue().set(key1, value1);
+			operations.opsForValue().get(key1);
+			operations.opsForList().leftPush(listKey, listValue);
+			operations.opsForList().range(listKey, 0L, 1L);
+			operations.opsForSet().add(setKey, setValue);
+			operations.opsForSet().members(setKey);
+			operations.opsForZSet().add(zsetKey, zsetValue, 1d);
+			operations.opsForZSet().rangeWithScores(zsetKey, 0L, -1L);
+			return operations.exec();
 		});
 		List<V> list = Collections.singletonList(listValue);
 		Set<V> set = new HashSet<>(Collections.singletonList(setValue));
@@ -203,14 +199,11 @@ public class RedisTemplateIntegrationTests<K, V> {
 		V value1 = valueFactory.instance();
 		V value2 = valueFactory.instance();
 		redisTemplate.opsForValue().set(key1, value1);
-		redisTemplate.execute(new SessionCallback<List<Object>>() {
-			@SuppressWarnings({ "rawtypes", "unchecked" })
-			public List<Object> execute(RedisOperations operations) throws DataAccessException {
-				operations.multi();
-				operations.opsForValue().set(key1, value2);
-				operations.discard();
-				return null;
-			}
+		redisTemplate.execute(operations -> {
+			operations.multi();
+			operations.opsForValue().set(key1, value2);
+			operations.discard();
+			return null;
 		});
 		assertThat(redisTemplate.boundValueOps(key1).get()).isEqualTo(value1);
 	}
@@ -218,24 +211,21 @@ public class RedisTemplateIntegrationTests<K, V> {
 	@ParameterizedRedisTest
 	void testExecCustomSerializer() {
 		assumeThat(redisTemplate instanceof StringRedisTemplate).isTrue();
-		List<Object> results = redisTemplate.execute(new SessionCallback<List<Object>>() {
-			@SuppressWarnings({ "rawtypes", "unchecked" })
-			public List<Object> execute(RedisOperations operations) throws DataAccessException {
-				operations.multi();
-				operations.opsForValue().set("foo", "5");
-				operations.opsForValue().get("foo");
-				operations.opsForValue().append("foo1", "5");
-				operations.opsForList().leftPush("foolist", "6");
-				operations.opsForList().range("foolist", 0L, 1L);
-				operations.opsForSet().add("fooset", "7");
-				operations.opsForSet().members("fooset");
-				operations.opsForZSet().add("foozset", "9", 1d);
-				operations.opsForZSet().rangeWithScores("foozset", 0L, -1L);
-				operations.opsForZSet().range("foozset", 0, -1);
-				operations.opsForHash().put("foomap", "10", "11");
-				operations.opsForHash().entries("foomap");
-				return operations.exec(new GenericToStringSerializer<>(Long.class));
-			}
+		List<Object> results = redisTemplate.execute(operations -> {
+			operations.multi();
+			operations.opsForValue().set("foo", "5");
+			operations.opsForValue().get("foo");
+			operations.opsForValue().append("foo1", "5");
+			operations.opsForList().leftPush("foolist", "6");
+			operations.opsForList().range("foolist", 0L, 1L);
+			operations.opsForSet().add("fooset", "7");
+			operations.opsForSet().members("fooset");
+			operations.opsForZSet().add("foozset", "9", 1d);
+			operations.opsForZSet().rangeWithScores("foozset", 0L, -1L);
+			operations.opsForZSet().range("foozset", 0, -1);
+			operations.opsForHash().put("foomap", "10", "11");
+			operations.opsForHash().entries("foomap");
+			return operations.exec(new GenericToStringSerializer<>(Long.class));
 		});
 		// Everything should be converted to Longs
 		List<Long> list = Collections.singletonList(6L);
@@ -260,14 +250,11 @@ public class RedisTemplateIntegrationTests<K, V> {
 
 		StringRedisTemplate template = new StringRedisTemplate(factory2);
 		template.afterPropertiesSet();
-		List<Object> results = template.execute(new SessionCallback<List<Object>>() {
-			@SuppressWarnings({ "rawtypes", "unchecked" })
-			public List<Object> execute(RedisOperations operations) throws DataAccessException {
-				operations.multi();
-				operations.opsForValue().set("foo", "bar");
-				operations.opsForValue().get("foo");
-				return operations.exec();
-			}
+		List<Object> results = template.execute(operations -> {
+			operations.multi();
+			operations.opsForValue().set("foo", "bar");
+			operations.opsForValue().get("foo");
+			return operations.exec();
 		});
 		// first value is "OK" from set call, results should still be in byte[]
 		assertThat(new String((byte[]) results.get(1))).isEqualTo("bar");
@@ -349,22 +336,21 @@ public class RedisTemplateIntegrationTests<K, V> {
 
 		K key1 = keyFactory.instance();
 		V value1 = valueFactory.instance();
-		List<Object> pipelinedResults = redisTemplate.executePipelined(new SessionCallback() {
-			public Object execute(RedisOperations operations) throws DataAccessException {
-				operations.multi();
-				operations.opsForList().leftPush(key1, value1);
-				operations.opsForList().rightPop(key1);
-				operations.opsForList().size(key1);
-				operations.exec();
+		List<Object> pipelinedResults = redisTemplate.executePipelined(operations -> {
+			operations.multi();
+			operations.opsForList().leftPush(key1, value1);
+			operations.opsForList().rightPop(key1);
+			operations.opsForList().size(key1);
+			operations.exec();
 
-				try {
-					// Await EXEC completion as it's executed on a dedicated connection.
-					Thread.sleep(100);
-				} catch (InterruptedException e) {}
-				operations.opsForValue().set(key1, value1);
-				operations.opsForValue().get(key1);
-				return null;
+			try {
+				// Await EXEC completion as it's executed on a dedicated connection.
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
 			}
+			operations.opsForValue().set(key1, value1);
+			operations.opsForValue().get(key1);
+			return null;
 		});
 		// Should contain the List of deserialized exec results and the result of the last call to get()
 		assertThat(pipelinedResults).usingElementComparator(CollectionAwareComparator.INSTANCE)
@@ -376,17 +362,15 @@ public class RedisTemplateIntegrationTests<K, V> {
 	void testExecutePipelinedTxCustomSerializer() {
 		assumeThat(redisTemplate.getConnectionFactory()).isInstanceOf(LettuceConnectionFactory.class);
 		assumeThat(redisTemplate instanceof StringRedisTemplate).isTrue();
-		List<Object> pipelinedResults = redisTemplate.executePipelined(new SessionCallback() {
-			public Object execute(RedisOperations operations) throws DataAccessException {
-				operations.multi();
-				operations.opsForList().leftPush("fooList", "5");
-				operations.opsForList().rightPop("fooList");
-				operations.opsForList().size("fooList");
-				operations.exec();
-				operations.opsForValue().set("foo", "2");
-				operations.opsForValue().get("foo");
-				return null;
-			}
+		List<Object> pipelinedResults = redisTemplate.executePipelined(operations -> {
+			operations.multi();
+			operations.opsForList().leftPush("fooList", "5");
+			operations.opsForList().rightPop("fooList");
+			operations.opsForList().size("fooList");
+			operations.exec();
+			operations.opsForValue().set("foo", "2");
+			operations.opsForValue().get("foo");
+			return null;
 		}, new GenericToStringSerializer<>(Long.class));
 		// Should contain the List of deserialized exec results and the result of the last call to get()
 		assertThat(pipelinedResults).isEqualTo(Arrays.asList(Arrays.asList(1L, 5L, 0L), true, 2L));
@@ -395,12 +379,7 @@ public class RedisTemplateIntegrationTests<K, V> {
 	@ParameterizedRedisTest
 	public void testExecutePipelinedNonNullSessionCallback() {
 		assertThatExceptionOfType(InvalidDataAccessApiUsageException.class)
-				.isThrownBy(() -> redisTemplate.executePipelined(new SessionCallback<String>() {
-					@SuppressWarnings("rawtypes")
-					public String execute(RedisOperations operations) throws DataAccessException {
-						return "Whatup";
-					}
-				}));
+				.isThrownBy(() -> redisTemplate.executePipelined(operations -> "Whatup"));
 	}
 
 	@ParameterizedRedisTest // DATAREDIS-688
@@ -586,18 +565,14 @@ public class RedisTemplateIntegrationTests<K, V> {
 	public void testGetExpireMillisUsingTransactions() {
 
 		K key = keyFactory.instance();
-		List<Object> result = redisTemplate.execute(new SessionCallback<List<Object>>() {
+		List<Object> result = redisTemplate.execute(operations -> {
 
-			@Override
-			public List<Object> execute(RedisOperations operations) throws DataAccessException {
+			operations.multi();
+			operations.boundValueOps(key).set(valueFactory.instance());
+			operations.expire(key, 1, TimeUnit.DAYS);
+			operations.getExpire(key, TimeUnit.HOURS);
 
-				operations.multi();
-				operations.boundValueOps(key).set(valueFactory.instance());
-				operations.expire(key, 1, TimeUnit.DAYS);
-				operations.getExpire(key, TimeUnit.HOURS);
-
-				return operations.exec();
-			}
+			return operations.exec();
 		});
 
 		assertThat(result).hasSize(3);
@@ -610,17 +585,13 @@ public class RedisTemplateIntegrationTests<K, V> {
 	public void testGetExpireMillisUsingPipelining() {
 
 		K key = keyFactory.instance();
-		List<Object> result = redisTemplate.executePipelined(new SessionCallback<Object>() {
+		List<Object> result = redisTemplate.executePipelined(operations -> {
 
-			@Override
-			public Object execute(RedisOperations operations) throws DataAccessException {
+			operations.boundValueOps(key).set(valueFactory.instance());
+			operations.expire(key, 1, TimeUnit.DAYS);
+			operations.getExpire(key, TimeUnit.HOURS);
 
-				operations.boundValueOps(key).set(valueFactory.instance());
-				operations.expire(key, 1, TimeUnit.DAYS);
-				operations.getExpire(key, TimeUnit.HOURS);
-
-				return null;
-			}
+			return null;
 		});
 
 		assertThat(result).hasSize(3);
@@ -710,21 +681,19 @@ public class RedisTemplateIntegrationTests<K, V> {
 
 		Thread th = new Thread(() -> redisTemplate.opsForValue().set(key1, value2));
 
-		List<Object> results = redisTemplate.execute(new SessionCallback<List<Object>>() {
-			@SuppressWarnings({ "unchecked", "rawtypes" })
-			public List<Object> execute(RedisOperations operations) throws DataAccessException {
+		List<Object> results = redisTemplate.execute(operations -> {
 
-				operations.watch(key1);
+			operations.watch(key1);
 
-				th.start();
-				try {
-					th.join();
-				} catch (InterruptedException e) {}
-
-				operations.multi();
-				operations.opsForValue().set(key1, value3);
-				return operations.exec();
+			th.start();
+			try {
+				th.join();
+			} catch (InterruptedException e) {
 			}
+
+			operations.multi();
+			operations.opsForValue().set(key1, value3);
+			return operations.exec();
 		});
 
 		assertThat(results).isEmpty();
@@ -742,22 +711,20 @@ public class RedisTemplateIntegrationTests<K, V> {
 		redisTemplate.opsForValue().set(key1, value1);
 		Thread th = new Thread(() -> redisTemplate.opsForValue().set(key1, value2));
 
-		List<Object> results = redisTemplate.execute(new SessionCallback<List<Object>>() {
-			@SuppressWarnings({ "unchecked", "rawtypes" })
-			public List<Object> execute(RedisOperations operations) throws DataAccessException {
+		List<Object> results = redisTemplate.execute(operations -> {
 
-				operations.watch(key1);
+			operations.watch(key1);
 
-				th.start();
-				try {
-					th.join();
-				} catch (InterruptedException e) {}
-
-				operations.unwatch();
-				operations.multi();
-				operations.opsForValue().set(key1, value3);
-				return operations.exec();
+			th.start();
+			try {
+				th.join();
+			} catch (InterruptedException e) {
 			}
+
+			operations.unwatch();
+			operations.multi();
+			operations.opsForValue().set(key1, value3);
+			return operations.exec();
 		});
 
 		assertThat(results.size()).isEqualTo(1);
@@ -776,24 +743,22 @@ public class RedisTemplateIntegrationTests<K, V> {
 
 		Thread th = new Thread(() -> redisTemplate.opsForValue().set(key1, value2));
 
-		List<Object> results = redisTemplate.execute(new SessionCallback<List<Object>>() {
-			@SuppressWarnings({ "unchecked", "rawtypes" })
-			public List<Object> execute(RedisOperations operations) throws DataAccessException {
+		List<Object> results = redisTemplate.execute(operations -> {
 
-				List<K> keys = new ArrayList<>();
-				keys.add(key1);
-				keys.add(key2);
-				operations.watch(keys);
+			List<K> keys = new ArrayList<>();
+			keys.add(key1);
+			keys.add(key2);
+			operations.watch(keys);
 
-				th.start();
-				try {
-					th.join();
-				} catch (InterruptedException e) {}
-
-				operations.multi();
-				operations.opsForValue().set(key1, value3);
-				return operations.exec();
+			th.start();
+			try {
+				th.join();
+			} catch (InterruptedException e) {
 			}
+
+			operations.multi();
+			operations.opsForValue().set(key1, value3);
+			return operations.exec();
 		});
 
 		assertThat(results).isEmpty();

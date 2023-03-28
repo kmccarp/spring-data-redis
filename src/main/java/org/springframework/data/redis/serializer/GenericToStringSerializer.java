@@ -96,8 +96,8 @@ public class GenericToStringSerializer<T> implements RedisSerializer<T>, BeanFac
 			ConfigurableBeanFactory cFB = (ConfigurableBeanFactory) beanFactory;
 			ConversionService conversionService = cFB.getConversionService();
 
-			converter = (conversionService != null ? new Converter(conversionService)
-					: new Converter(cFB.getTypeConverter()));
+			converter = conversionService != null ? new Converter(conversionService)
+					: new Converter(cFB.getTypeConverter());
 		}
 	}
 

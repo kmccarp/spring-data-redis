@@ -66,7 +66,7 @@ class DefaultStreamMessageListenerContainer<K, V extends Record<K, ?>> implement
 
 	private final List<Subscription> subscriptions = new ArrayList<>();
 
-	private boolean running = false;
+	private boolean running;
 
 	/**
 	 * Create a new {@link DefaultStreamMessageListenerContainer}.
@@ -145,7 +145,7 @@ class DefaultStreamMessageListenerContainer<K, V extends Record<K, ?>> implement
 
 			subscriptions.stream() //
 					.filter(it -> !it.isActive()) //
-					.filter(it -> it instanceof TaskSubscription) //
+					.filter(TaskSubscription.class::isInstance) //
 					.map(TaskSubscription.class::cast) //
 					.map(TaskSubscription::getTask) //
 					.forEach(taskExecutor::execute);
@@ -232,11 +232,11 @@ class DefaultStreamMessageListenerContainer<K, V extends Record<K, ?>> implement
 					: this.readOptions;
 			Consumer consumer = consumerStreamRequest.getConsumer();
 
-			return (offset) -> template.execute((RedisCallback<List<ByteRecord>>) connection -> connection.streamCommands()
+			return offset -> template.execute((RedisCallback<List<ByteRecord>>) connection -> connection.streamCommands()
 					.xReadGroup(consumer, readOptions, StreamOffset.create(rawKey, offset)));
 		}
 
-		return (offset) -> template.execute((RedisCallback<List<ByteRecord>>) connection -> connection.streamCommands()
+		return offset -> template.execute((RedisCallback<List<ByteRecord>>) connection -> connection.streamCommands()
 				.xRead(readOptions, StreamOffset.create(rawKey, offset)));
 	}
 
@@ -307,10 +307,12 @@ class DefaultStreamMessageListenerContainer<K, V extends Record<K, ?>> implement
 
 		@Override
 		public boolean equals(@Nullable Object o) {
-			if (this == o)
+			if (this == o) {
 				return true;
-			if (o == null || getClass() != o.getClass())
+			}
+			if (o == null || getClass() != o.getClass()) {
 				return false;
+			}
 
 			TaskSubscription that = (TaskSubscription) o;
 

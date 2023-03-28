@@ -124,7 +124,7 @@ public class ConversionTestEntities {
 		@Id String id;
 	}
 
-	public static enum Gender {
+	public enum Gender {
 		MALE, FEMALE {
 
 			@Override

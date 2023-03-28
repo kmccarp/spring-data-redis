@@ -202,7 +202,7 @@ public class RedisAtomicDoubleIntegrationTests {
 
 		template.delete("test");
 
-		assertThatExceptionOfType(DataRetrievalFailureException.class).isThrownBy(() -> test.get())
+		assertThatExceptionOfType(DataRetrievalFailureException.class).isThrownBy(test::get)
 				.withMessageContaining("'test' seems to no longer exist");
 	}
 
