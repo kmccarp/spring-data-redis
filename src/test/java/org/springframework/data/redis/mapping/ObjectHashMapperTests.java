@@ -42,25 +42,25 @@ class ObjectHashMapperTests extends AbstractHashMapperTests {
 
 	@Test // DATAREDIS-503
 	void testSimpleType() {
-		assertBackAndForwardMapping(new Integer(100));
+		assertBackAndForwardMapping(Integer.valueOf(100));
 	}
 
 	@Test // DATAREDIS-503
 	void fromHashShouldCastToType() {
 
 		ObjectHashMapper objectHashMapper = new ObjectHashMapper();
-		Map<byte[], byte[]> hash = objectHashMapper.toHash(new Integer(100));
+		Map<byte[], byte[]> hash = objectHashMapper.toHash(Integer.valueOf(100));
 
 		Integer result = objectHashMapper.fromHash(hash, Integer.class);
 
-		assertThat(result).isEqualTo(new Integer(100));
+		assertThat(result).isEqualTo(Integer.valueOf(100));
 	}
 
 	@Test // DATAREDIS-503
 	void fromHashShouldFailIfTypeDoesNotMatch() {
 
 		ObjectHashMapper objectHashMapper = new ObjectHashMapper();
-		Map<byte[], byte[]> hash = objectHashMapper.toHash(new Integer(100));
+		Map<byte[], byte[]> hash = objectHashMapper.toHash(Integer.valueOf(100));
 
 		assertThatExceptionOfType(ClassCastException.class).isThrownBy(() -> objectHashMapper.fromHash(hash, String.class));
 	}

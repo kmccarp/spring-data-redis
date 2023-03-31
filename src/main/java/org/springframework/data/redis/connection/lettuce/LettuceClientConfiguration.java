@@ -357,7 +357,7 @@ public interface LettuceClientConfiguration {
 	 */
 	class LettuceSslClientConfigurationBuilder {
 
-		private LettuceClientConfigurationBuilder delegate;
+		private final LettuceClientConfigurationBuilder delegate;
 
 		LettuceSslClientConfigurationBuilder(LettuceClientConfigurationBuilder delegate) {
 

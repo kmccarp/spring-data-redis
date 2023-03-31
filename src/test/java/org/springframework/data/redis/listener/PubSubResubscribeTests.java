@@ -133,8 +133,8 @@ public class PubSubResubscribeTests {
 		String payload1 = "do";
 		String payload2 = "re mi";
 
-		final String PATTERN = "p*";
-		final String ANOTHER_CHANNEL = "pubsub::test::extra";
+		final String pattern = "p*";
+		final String anotherChannel = "pubsub::test::extra";
 
 		BlockingDeque<String> bag2 = new LinkedBlockingDeque<>(99);
 		MessageListenerAdapter anotherListener = new MessageListenerAdapter(new MessageHandler("handler2", bag2));
@@ -142,21 +142,21 @@ public class PubSubResubscribeTests {
 		anotherListener.afterPropertiesSet();
 
 		// remove adapter from all channels
-		container.addMessageListener(anotherListener, new PatternTopic(PATTERN));
+		container.addMessageListener(anotherListener, new PatternTopic(pattern));
 
 		// Wait for async subscription tasks to setup
 		// test no messages are sent just to patterns
 		template.convertAndSend(CHANNEL, payload1);
-		template.convertAndSend(ANOTHER_CHANNEL, payload2);
+		template.convertAndSend(anotherChannel, payload2);
 
 		await().atMost(Duration.ofSeconds(2)).until(() -> bag2.contains(payload1) && bag2.contains(payload2));
 
 		// bind original listener on another channel
-		container.addMessageListener(adapter, new ChannelTopic(ANOTHER_CHANNEL));
+		container.addMessageListener(adapter, new ChannelTopic(anotherChannel));
 
 		// Wait for async subscription tasks to setup
 		template.convertAndSend(CHANNEL, payload1);
-		template.convertAndSend(ANOTHER_CHANNEL, payload2);
+		template.convertAndSend(anotherChannel, payload2);
 
 		await().atMost(Duration.ofSeconds(2)).until(() -> bag.contains(payload2));
 

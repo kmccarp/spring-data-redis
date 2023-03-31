@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public class PersonObjectFactory implements ObjectFactory<Person> {
 
-	private int counter = 0;
+	private int counter;
 
 	public Person instance() {
 		String uuid = UUID.randomUUID().toString();

@@ -167,7 +167,7 @@ public class SpelIndexResolverUnitTests {
 
 	static class Session {
 
-		private Map<String, Object> sessionAttrs = new HashMap<>();
+		private final Map<String, Object> sessionAttrs = new HashMap<>();
 
 		void setAttribute(String attrName, Object attrValue) {
 			this.sessionAttrs.put(attrName, attrValue);

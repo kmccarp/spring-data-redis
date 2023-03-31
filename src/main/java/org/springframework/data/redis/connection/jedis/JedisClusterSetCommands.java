@@ -180,7 +180,7 @@ class JedisClusterSetCommands implements RedisSetCommands {
 
 		Collection<Set<byte[]>> resultList = connection.getClusterCommandExecutor()
 				.executeMultiKeyCommand(
-						(JedisMultiKeyClusterCommandCallback<Set<byte[]>>) (client, key) -> client.smembers(key),
+						(JedisMultiKeyClusterCommandCallback<Set<byte[]>>) Jedis::smembers,
 						Arrays.asList(keys))
 				.resultsAsList();
 
@@ -246,7 +246,7 @@ class JedisClusterSetCommands implements RedisSetCommands {
 
 		Collection<Set<byte[]>> resultList = connection.getClusterCommandExecutor()
 				.executeMultiKeyCommand(
-						(JedisMultiKeyClusterCommandCallback<Set<byte[]>>) (client, key) -> client.smembers(key),
+						(JedisMultiKeyClusterCommandCallback<Set<byte[]>>) Jedis::smembers,
 						Arrays.asList(keys))
 				.resultsAsList();
 
@@ -306,7 +306,7 @@ class JedisClusterSetCommands implements RedisSetCommands {
 		ByteArraySet values = new ByteArraySet(sMembers(source));
 		Collection<Set<byte[]>> resultList = connection.getClusterCommandExecutor()
 				.executeMultiKeyCommand(
-						(JedisMultiKeyClusterCommandCallback<Set<byte[]>>) (client, key) -> client.smembers(key),
+						(JedisMultiKeyClusterCommandCallback<Set<byte[]>>) Jedis::smembers,
 						Arrays.asList(others))
 				.resultsAsList();
 

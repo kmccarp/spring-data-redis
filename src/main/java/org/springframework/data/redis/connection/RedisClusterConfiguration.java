@@ -49,7 +49,7 @@ public class RedisClusterConfiguration implements RedisConfiguration, ClusterCon
 
 	private Set<RedisNode> clusterNodes;
 	private @Nullable Integer maxRedirects;
-	private @Nullable String username = null;
+	private @Nullable String username;
 	private RedisPassword password = RedisPassword.none();
 
 	/**

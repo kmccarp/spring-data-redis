@@ -57,11 +57,11 @@ public interface ReactiveStringCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/set">Redis Documentation: SET</a>
 	 */
-	class SetCommand extends KeyCommand {
+	final class SetCommand extends KeyCommand {
 
 		private @Nullable ByteBuffer value;
-		private Expiration expiration;
-		private SetOption option;
+		private final Expiration expiration;
+		private final SetOption option;
 
 		private SetCommand(ByteBuffer key, @Nullable ByteBuffer value, @Nullable Expiration expiration,
 				@Nullable SetOption option) {
@@ -251,7 +251,7 @@ public interface ReactiveStringCommands {
 	 * @author Mark Paluch
 	 * @since 2.6
 	 */
-	class GetExCommand extends KeyCommand {
+	final class GetExCommand extends KeyCommand {
 
 		private final Expiration expiration;
 
@@ -460,9 +460,9 @@ public interface ReactiveStringCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/mset">Redis Documentation: MSET</a>
 	 */
-	class MSetCommand implements Command {
+	final class MSetCommand implements Command {
 
-		private Map<ByteBuffer, ByteBuffer> keyValuePairs;
+		private final Map<ByteBuffer, ByteBuffer> keyValuePairs;
 
 		private MSetCommand(Map<ByteBuffer, ByteBuffer> keyValuePairs) {
 			this.keyValuePairs = keyValuePairs;
@@ -549,7 +549,7 @@ public interface ReactiveStringCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/append">Redis Documentation: APPEND</a>
 	 */
-	class AppendCommand extends KeyCommand {
+	final class AppendCommand extends KeyCommand {
 
 		private @Nullable ByteBuffer value;
 
@@ -653,7 +653,7 @@ public interface ReactiveStringCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/setrange">Redis Documentation: SETRANGE</a>
 	 */
-	class SetRangeCommand extends KeyCommand {
+	final class SetRangeCommand extends KeyCommand {
 
 		private @Nullable ByteBuffer value;
 		private @Nullable Long offset;
@@ -752,7 +752,7 @@ public interface ReactiveStringCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/getbit">Redis Documentation: GETBIT</a>
 	 */
-	class GetBitCommand extends KeyCommand {
+	final class GetBitCommand extends KeyCommand {
 
 		private @Nullable Long offset;
 
@@ -825,10 +825,10 @@ public interface ReactiveStringCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/setbit">Redis Documentation: SETBIT</a>
 	 */
-	class SetBitCommand extends KeyCommand {
+	final class SetBitCommand extends KeyCommand {
 
 		private @Nullable Long offset;
-		private boolean value;
+		private final boolean value;
 
 		private SetBitCommand(ByteBuffer key, Long offset, boolean value) {
 
@@ -917,9 +917,9 @@ public interface ReactiveStringCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/bitcount">Redis Documentation: BITCOUNT</a>
 	 */
-	class BitCountCommand extends KeyCommand {
+	final class BitCountCommand extends KeyCommand {
 
-		private Range<Long> range;
+		private final Range<Long> range;
 
 		private BitCountCommand(ByteBuffer key, Range<Long> range) {
 
@@ -1012,7 +1012,7 @@ public interface ReactiveStringCommands {
 	 * @see <a href="https://redis.io/commands/bitfield">Redis Documentation: BITFIELD</a>
 	 * @since 2.1
 	 */
-	class BitFieldCommand extends KeyCommand {
+	final class BitFieldCommand extends KeyCommand {
 
 		private @Nullable BitFieldSubCommands subcommands;
 
@@ -1091,10 +1091,10 @@ public interface ReactiveStringCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/bitop">Redis Documentation: BITOP</a>
 	 */
-	class BitOpCommand {
+	final class BitOpCommand {
 
-		private List<ByteBuffer> keys;
-		private BitOperation bitOp;
+		private final List<ByteBuffer> keys;
+		private final BitOperation bitOp;
 		private @Nullable ByteBuffer destinationKey;
 
 		private BitOpCommand(List<ByteBuffer> keys, BitOperation bitOp, @Nullable ByteBuffer destinationKey) {
@@ -1201,10 +1201,10 @@ public interface ReactiveStringCommands {
 	 * @author Christoph Strobl
 	 * @since 2.1
 	 */
-	class BitPosCommand extends KeyCommand {
+	final class BitPosCommand extends KeyCommand {
 
-		private boolean bit;
-		private Range<Long> range;
+		private final boolean bit;
+		private final Range<Long> range;
 
 		private BitPosCommand(@Nullable ByteBuffer key, boolean bit, Range<Long> range) {
 			super(key);

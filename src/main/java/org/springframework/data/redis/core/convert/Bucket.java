@@ -286,7 +286,7 @@ public class Bucket {
 
 		Iterator<Entry<String, byte[]>> iterator = data.entrySet().iterator();
 
-		for (;;) {
+		while () {
 
 			Entry<String, byte[]> e = iterator.next();
 			sb.append(e.getKey());
@@ -319,7 +319,7 @@ public class Bucket {
 	 * @author Mark Paluch
 	 * @since 2.1
 	 */
-	public static class BucketPropertyPath {
+	public static final class BucketPropertyPath {
 
 		private final Bucket bucket;
 		private final @Nullable String prefix;

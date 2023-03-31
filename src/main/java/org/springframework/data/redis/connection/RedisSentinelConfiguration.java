@@ -53,8 +53,8 @@ public class RedisSentinelConfiguration implements RedisConfiguration, SentinelC
 	private Set<RedisNode> sentinels;
 	private int database;
 
-	private @Nullable String dataNodeUsername = null;
-	private @Nullable String sentinelUsername = null;
+	private @Nullable String dataNodeUsername;
+	private @Nullable String sentinelUsername;
 	private RedisPassword dataNodePassword = RedisPassword.none();
 	private RedisPassword sentinelPassword = RedisPassword.none();
 

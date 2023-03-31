@@ -51,7 +51,7 @@ import org.springframework.lang.Nullable;
  * @author Mark Paluch
  * @author Christoph Strobl
  */
-abstract public class ReactiveOperationsTestParams {
+public abstract class ReactiveOperationsTestParams {
 
 	public static Collection<Fixture<?, ?>> testParams() {
 

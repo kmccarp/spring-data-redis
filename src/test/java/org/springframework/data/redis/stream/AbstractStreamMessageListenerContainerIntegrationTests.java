@@ -411,6 +411,7 @@ abstract class AbstractStreamMessageListenerContainerIntegrationTests {
 	@Data
 	@AllArgsConstructor
 	static class LoginEvent {
-		String firstname, lastname;
+		String firstname;
+		String lastname;
 	}
 }

@@ -242,9 +242,7 @@ class ReactiveRedisMessageListenerContainerUnitTests {
 
 		Flux<PatternMessage<String, String, String>> messageStream = container.receive(PatternTopic.of("foo*"));
 
-		messageStream.as(StepVerifier::create).then(() -> {
-			container.destroy();
-		}).verifyError(CancellationException.class);
+		messageStream.as(StepVerifier::create).then(container::destroy).verifyError(CancellationException.class);
 	}
 
 	@Test // DATAREDIS-612

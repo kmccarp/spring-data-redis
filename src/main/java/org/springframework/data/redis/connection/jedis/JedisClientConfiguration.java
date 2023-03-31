@@ -266,7 +266,7 @@ public interface JedisClientConfiguration {
 	 * Default {@link JedisClientConfigurationBuilder} implementation to build an immutable
 	 * {@link JedisClientConfiguration}.
 	 */
-	class DefaultJedisClientConfigurationBuilder implements JedisClientConfigurationBuilder,
+	final class DefaultJedisClientConfigurationBuilder implements JedisClientConfigurationBuilder,
 			JedisPoolingClientConfigurationBuilder, JedisSslClientConfigurationBuilder {
 
 		private boolean useSsl;

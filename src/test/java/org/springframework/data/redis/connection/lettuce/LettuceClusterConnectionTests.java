@@ -393,7 +393,7 @@ public class LettuceClusterConnectionTests implements ClusterConnectionTests {
 
 	@Test // DATAREDIS-315
 	public void discardShouldThrowException() {
-		assertThatExceptionOfType(DataAccessException.class).isThrownBy(() -> clusterConnection.discard());
+		assertThatExceptionOfType(DataAccessException.class).isThrownBy(clusterConnection::discard);
 	}
 
 	@Test // DATAREDIS-315
@@ -428,7 +428,7 @@ public class LettuceClusterConnectionTests implements ClusterConnectionTests {
 
 	@Test // DATAREDIS-315
 	public void execShouldThrowException() {
-		assertThatExceptionOfType(DataAccessException.class).isThrownBy(() -> clusterConnection.exec());
+		assertThatExceptionOfType(DataAccessException.class).isThrownBy(clusterConnection::exec);
 	}
 
 	@Test // DATAREDIS-529
@@ -1405,7 +1405,7 @@ public class LettuceClusterConnectionTests implements ClusterConnectionTests {
 
 	@Test // DATAREDIS-315
 	public void multiShouldThrowException() {
-		assertThatExceptionOfType(DataAccessException.class).isThrownBy(() -> clusterConnection.multi());
+		assertThatExceptionOfType(DataAccessException.class).isThrownBy(clusterConnection::multi);
 	}
 
 	@Test // DATAREDIS-315
@@ -2087,7 +2087,7 @@ public class LettuceClusterConnectionTests implements ClusterConnectionTests {
 	public void sscanShouldRetrieveAllValuesInSetCorrectly() {
 
 		for (int i = 0; i < 30; i++) {
-			nativeConnection.sadd(KEY_1, Integer.valueOf(i).toString());
+			nativeConnection.sadd(KEY_1, Integer.toString(i));
 		}
 
 		int count = 0;
@@ -2157,12 +2157,12 @@ public class LettuceClusterConnectionTests implements ClusterConnectionTests {
 
 	@Test // DATAREDIS-315
 	public void unwatchShouldThrowException() {
-		assertThatExceptionOfType(DataAccessException.class).isThrownBy(() -> clusterConnection.unwatch());
+		assertThatExceptionOfType(DataAccessException.class).isThrownBy(clusterConnection::unwatch);
 	}
 
 	@Test // DATAREDIS-315
 	public void watchShouldThrowException() {
-		assertThatExceptionOfType(DataAccessException.class).isThrownBy(() -> clusterConnection.watch());
+		assertThatExceptionOfType(DataAccessException.class).isThrownBy(clusterConnection::watch);
 	}
 
 	@Test // DATAREDIS-674

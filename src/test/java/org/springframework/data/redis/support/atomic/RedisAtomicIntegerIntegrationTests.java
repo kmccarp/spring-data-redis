@@ -144,13 +144,13 @@ public class RedisAtomicIntegerIntegrationTests {
 	void testCompareSet() throws Exception {
 
 		AtomicBoolean alreadySet = new AtomicBoolean(false);
-		int NUM = 50;
-		String KEY = getClass().getSimpleName() + ":atomic:counter";
-		CountDownLatch latch = new CountDownLatch(NUM);
+		int num = 50;
+		String key = getClass().getSimpleName() + ":atomic:counter";
+		CountDownLatch latch = new CountDownLatch(num);
 		AtomicBoolean failed = new AtomicBoolean(false);
-		RedisAtomicInteger atomicInteger = new RedisAtomicInteger(KEY, factory);
+		RedisAtomicInteger atomicInteger = new RedisAtomicInteger(key, factory);
 
-		for (int i = 0; i < NUM; i++) {
+		for (int i = 0; i < num; i++) {
 
 			new Thread(() -> {
 

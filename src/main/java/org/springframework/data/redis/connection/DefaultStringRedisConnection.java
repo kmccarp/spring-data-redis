@@ -115,7 +115,7 @@ public class DefaultStringRedisConnection implements StringRedisConnection, Deco
 
 	@SuppressWarnings("rawtypes") private Queue<Converter> pipelineConverters = new LinkedList<>();
 	@SuppressWarnings("rawtypes") private Queue<Converter> txConverters = new LinkedList<>();
-	private boolean deserializePipelineAndTxResults = false;
+	private boolean deserializePipelineAndTxResults;
 
 	private Entry<String, String> convertEntry(Entry<byte[], byte[]> source) {
 		return Converters.entryOf(bytesToString.convert(source.getKey()), bytesToString.convert(source.getValue()));

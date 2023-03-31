@@ -26,7 +26,7 @@ import org.springframework.util.Assert;
  * @author Shyngys Sapraliyev
  * @since 2.0
  */
-class DefaultRedisSerializationContext<K, V> implements RedisSerializationContext<K, V> {
+final class DefaultRedisSerializationContext<K, V> implements RedisSerializationContext<K, V> {
 
 	private final SerializationPair<K> keyTuple;
 	private final SerializationPair<V> valueTuple;
@@ -84,7 +84,7 @@ class DefaultRedisSerializationContext<K, V> implements RedisSerializationContex
 		private @Nullable SerializationPair<V> valueTuple;
 		private @Nullable SerializationPair<?> hashKeyTuple;
 		private @Nullable SerializationPair<?> hashValueTuple;
-		private SerializationPair<String> stringTuple = SerializationPair.fromSerializer(RedisSerializer.string());
+		private final SerializationPair<String> stringTuple = SerializationPair.fromSerializer(RedisSerializer.string());
 
 		@Override
 		public RedisSerializationContextBuilder<K, V> key(SerializationPair<K> tuple) {

@@ -541,12 +541,14 @@ public class RedisCacheTests {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	static class Person implements Serializable {
+		private static final long serialVersionUID = 1;
 		String firstame;
 		Date birthdate;
 	}
 
 	@RequiredArgsConstructor // toString not overridden
 	static class InvalidKey implements Serializable {
+		private static final long serialVersionUID = 1;
 		final String firstame;
 		final Date birthdate;
 	}
@@ -554,6 +556,7 @@ public class RedisCacheTests {
 	@Data
 	@RequiredArgsConstructor
 	static class ComplexKey implements Serializable {
+		private static final long serialVersionUID = 1;
 		final String firstame;
 		final Date birthdate;
 	}
