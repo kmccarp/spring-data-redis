@@ -15,7 +15,7 @@
  */
 package org.springframework.data.redis.core;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 import java.io.Serializable;
@@ -31,7 +31,6 @@ import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
 import org.springframework.instrument.classloading.ShadowingClassLoader;
-import org.springframework.lang.Nullable;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 /**
@@ -104,15 +103,11 @@ class RedisTemplateUnitTests {
 	@Test // DATAREDIS-988
 	void executeSessionShouldReuseConnection() {
 
-		template.execute(new SessionCallback<Object>() {
-			@Nullable
-			@Override
-			public <K, V> Object execute(RedisOperations<K, V> operations) throws DataAccessException {
+		template.execute(operations -> {
 
-				template.multi();
-				template.multi();
-				return null;
-			}
+			template.multi();
+			template.multi();
+			return null;
 		});
 
 		verify(connectionFactoryMock).getConnection();
@@ -122,14 +117,11 @@ class RedisTemplateUnitTests {
 	@Test // DATAREDIS-988
 	void executeSessionInTransactionShouldReuseConnection() {
 
-		template.execute(new SessionCallback<Object>() {
-			@Override
-			public <K, V> Object execute(RedisOperations<K, V> operations) throws DataAccessException {
+		template.execute(operations -> {
 
-				template.multi();
-				template.multi();
-				return null;
-			}
+			template.multi();
+			template.multi();
+			return null;
 		});
 
 		verify(connectionFactoryMock).getConnection();
@@ -141,15 +133,11 @@ class RedisTemplateUnitTests {
 
 		template.setEnableTransactionSupport(true);
 
-		template.execute(new RedisCallback<Object>() {
-			@Nullable
-			@Override
-			public Object doInRedis(RedisConnection connection) throws DataAccessException {
+		template.execute(connection -> {
 
-				template.multi();
-				template.multi();
-				return null;
-			}
+			template.multi();
+			template.multi();
+			return null;
 		});
 
 		verify(connectionFactoryMock, times(3)).getConnection();

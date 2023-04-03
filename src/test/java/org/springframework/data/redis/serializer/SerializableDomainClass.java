@@ -22,5 +22,6 @@ import java.io.Serializable;
  * @author Mark Paluch
  */
 public class SerializableDomainClass implements Serializable {
+	private static final long serialVersionUID = 1;
 
 }

@@ -493,13 +493,10 @@ public class DefaultZSetOperationsIntegrationTests<K, V> {
 		final TypedTuple<V> tuple2 = new DefaultTypedTuple<>(valueFactory.instance(), 3.2);
 		final TypedTuple<V> tuple3 = new DefaultTypedTuple<>(valueFactory.instance(), 0.8);
 
-		Set<TypedTuple<V>> values = new HashSet<TypedTuple<V>>() {
-			{
-				add(tuple1);
-				add(tuple2);
-				add(tuple3);
-			}
-		};
+		Set<TypedTuple<V>> values = new HashSet<>();
+		values.add(tuple1);
+		values.add(tuple2);
+		values.add(tuple3);
 
 		zSetOps.add(key, values);
 

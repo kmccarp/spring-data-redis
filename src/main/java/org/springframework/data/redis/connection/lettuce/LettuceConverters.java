@@ -193,11 +193,11 @@ public abstract class LettuceConverters extends Converters {
 
 	public static boolean toBoolean(Position where) {
 		Assert.notNull(where, "list positions are mandatory");
-		return (Position.AFTER.equals(where) ? false : true);
+		return Position.AFTER.equals(where) ? false : true;
 	}
 
 	public static int toInt(boolean value) {
-		return (value ? 1 : 0);
+		return value ? 1 : 0;
 	}
 
 	public static Map<byte[], byte[]> toMap(List<byte[]> source) {
@@ -561,21 +561,18 @@ public abstract class LettuceConverters extends Converters {
 				args.keepttl();
 			} else if (!expiration.isPersistent()) {
 
-				switch (expiration.getTimeUnit()) {
-					case MILLISECONDS:
-						if (expiration.isUnixTimestamp()) {
-							args.pxAt(expiration.getConverted(TimeUnit.MILLISECONDS));
-						} else {
-							args.px(expiration.getConverted(TimeUnit.MILLISECONDS));
-						}
-						break;
-					default:
-						if (expiration.isUnixTimestamp()) {
-							args.exAt(expiration.getConverted(TimeUnit.SECONDS));
-						} else {
-							args.ex(expiration.getConverted(TimeUnit.SECONDS));
-						}
-						break;
+				if (expiration.getTimeUnit() == TimeUnit.MILLISECONDS) {
+					if (expiration.isUnixTimestamp()) {
+						args.pxAt(expiration.getConverted(TimeUnit.MILLISECONDS));
+					} else {
+						args.px(expiration.getConverted(TimeUnit.MILLISECONDS));
+					}
+				} else {
+					if (expiration.isUnixTimestamp()) {
+						args.exAt(expiration.getConverted(TimeUnit.SECONDS));
+					} else {
+						args.ex(expiration.getConverted(TimeUnit.SECONDS));
+					}
 				}
 			}
 		}
@@ -685,13 +682,10 @@ public abstract class LettuceConverters extends Converters {
 		}
 
 		if (args.hasSortDirection()) {
-			switch (args.getSortDirection()) {
-				case ASC:
-					geoArgs.asc();
-					break;
-				case DESC:
-					geoArgs.desc();
-					break;
+			if (args.getSortDirection() == Sort.Direction.ASC) {
+				geoArgs.asc();
+			} else if (args.getSortDirection() == Sort.Direction.DESC) {
+				geoArgs.desc();
 			}
 		}
 
@@ -951,7 +945,7 @@ public abstract class LettuceConverters extends Converters {
 	 * @author Christoph Strobl
 	 * @since 1.8
 	 */
-	static enum GeoResultsConverterFactory {
+	enum GeoResultsConverterFactory {
 
 		INSTANCE;
 
@@ -989,7 +983,7 @@ public abstract class LettuceConverters extends Converters {
 	 * @author Christoph Strobl
 	 * @since 1.8
 	 */
-	static enum GeoResultConverterFactory {
+	enum GeoResultConverterFactory {
 
 		INSTANCE;
 

@@ -61,7 +61,7 @@ public interface ReactiveGeoCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/geoadd">Redis Documentation: GEOADD</a>
 	 */
-	class GeoAddCommand extends KeyCommand {
+	final class GeoAddCommand extends KeyCommand {
 
 		private final List<GeoLocation<ByteBuffer>> geoLocations;
 
@@ -181,7 +181,7 @@ public interface ReactiveGeoCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/geodist">Redis Documentation: GEODIST</a>
 	 */
-	class GeoDistCommand extends KeyCommand {
+	final class GeoDistCommand extends KeyCommand {
 
 		private final ByteBuffer from;
 		private final ByteBuffer to;
@@ -351,7 +351,7 @@ public interface ReactiveGeoCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/geohash">Redis Documentation: GEOHASH</a>
 	 */
-	class GeoHashCommand extends KeyCommand {
+	final class GeoHashCommand extends KeyCommand {
 
 		private final List<ByteBuffer> members;
 
@@ -458,7 +458,7 @@ public interface ReactiveGeoCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/geopos">Redis Documentation: GEOPOS</a>
 	 */
-	class GeoPosCommand extends KeyCommand {
+	final class GeoPosCommand extends KeyCommand {
 
 		private final List<ByteBuffer> members;
 
@@ -563,7 +563,7 @@ public interface ReactiveGeoCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/georadius">Redis Documentation: GEORADIUS</a>
 	 */
-	class GeoRadiusCommand extends KeyCommand {
+	final class GeoRadiusCommand extends KeyCommand {
 
 		private final Distance distance;
 		private final @Nullable Point point;
@@ -912,7 +912,7 @@ public interface ReactiveGeoCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/georadiusbymember">Redis Documentation: GEORADIUSBYMEMBER</a>
 	 */
-	class GeoRadiusByMemberCommand extends KeyCommand {
+	final class GeoRadiusByMemberCommand extends KeyCommand {
 
 		private final Distance distance;
 		private final @Nullable ByteBuffer member;
@@ -1249,7 +1249,7 @@ public interface ReactiveGeoCommands {
 	 * @since 2.6
 	 * @see <a href="https://redis.io/commands/geosearch">Redis Documentation: GEOSEARCH</a>
 	 */
-	class GeoSearchCommand extends KeyCommand {
+	final class GeoSearchCommand extends KeyCommand {
 
 		private final @Nullable GeoReference<ByteBuffer> reference;
 		private final @Nullable GeoShape shape;
@@ -1337,7 +1337,7 @@ public interface ReactiveGeoCommands {
 	 * @since 2.6
 	 * @see <a href="https://redis.io/commands/geosearchstore">Redis Documentation: GEOSEARCHSTORE</a>
 	 */
-	class GeoSearchStoreCommand extends KeyCommand {
+	final class GeoSearchStoreCommand extends KeyCommand {
 
 		private final @Nullable ByteBuffer destKey;
 		private final @Nullable GeoReference<ByteBuffer> reference;

@@ -39,21 +39,25 @@ class SimpleRedisSerializerTests {
 	@EqualsAndHashCode
 	private static class A implements Serializable {
 
+		private static final long serialVersionUID = 1;
+
 		private Integer value = Integer.valueOf(30);
 	}
 
 	@EqualsAndHashCode
 	private static class B implements Serializable {
 
+		private static final long serialVersionUID = 1;
+
 		private String name = getClass().getName();
 		private A a = new A();
 	}
 
-	private RedisSerializer serializer = new JdkSerializationRedisSerializer();
+	private final RedisSerializer serializer = new JdkSerializationRedisSerializer();
 
 	@Test
 	void testBasicSerializationRoundtrip() throws Exception {
-		verifySerializedObjects(new Integer(300), new Double(200), new B());
+		verifySerializedObjects(Integer.valueOf(300), Double.valueOf(200), new B());
 	}
 
 	private void verifySerializedObjects(Object... objects) {

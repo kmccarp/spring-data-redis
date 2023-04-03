@@ -244,7 +244,7 @@ public abstract class AbstractRedisListIntegrationTests<T> extends AbstractRedis
 	@EnabledOnCommand("LMOVE")
 	void testMoveFirstTo() {
 
-		RedisList<T> target = new DefaultRedisList<T>(template.boundListOps(collection.getKey() + ":target"));
+		RedisList<T> target = new DefaultRedisList<>(template.boundListOps(collection.getKey() + ":target"));
 
 		T t1 = getT();
 		T t2 = getT();
@@ -265,7 +265,7 @@ public abstract class AbstractRedisListIntegrationTests<T> extends AbstractRedis
 	@EnabledOnCommand("LMOVE")
 	void testMoveLastTo() {
 
-		RedisList<T> target = new DefaultRedisList<T>(template.boundListOps(collection.getKey() + ":target"));
+		RedisList<T> target = new DefaultRedisList<>(template.boundListOps(collection.getKey() + ":target"));
 
 		T t1 = getT();
 		T t2 = getT();
@@ -328,7 +328,7 @@ public abstract class AbstractRedisListIntegrationTests<T> extends AbstractRedis
 	@SuppressWarnings("unchecked")
 	@ParameterizedRedisTest
 	void testCappedCollection() throws Exception {
-		RedisList<T> cappedList = new DefaultRedisList<T>(template.boundListOps(collection.getKey() + ":capped"), 1);
+		RedisList<T> cappedList = new DefaultRedisList<>(template.boundListOps(collection.getKey() + ":capped"), 1);
 		T first = getT();
 		cappedList.offer(first);
 		assertThat(cappedList).hasSize(1);

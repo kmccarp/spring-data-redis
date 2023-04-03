@@ -280,7 +280,7 @@ public class RedisCacheManager extends AbstractTransactionSupportingCacheManager
 	 * @author Kezhu Wang
 	 * @since 2.0
 	 */
-	public static class RedisCacheManagerBuilder {
+	public static final class RedisCacheManagerBuilder {
 
 		private @Nullable RedisCacheWriter cacheWriter;
 		private CacheStatisticsCollector statisticsCollector = CacheStatisticsCollector.none();

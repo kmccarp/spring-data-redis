@@ -34,7 +34,7 @@ import org.junit.jupiter.api.Test;
  * @author Jennifer Hickey
  * @author Christoph Strobl
  */
-abstract public class AbstractConnectionPipelineIntegrationTests extends AbstractConnectionIntegrationTests {
+public abstract class AbstractConnectionPipelineIntegrationTests extends AbstractConnectionIntegrationTests {
 
 	@Override
 	@Disabled

@@ -36,7 +36,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 @ExtendWith(MockitoExtension.class)
 class DefaultScriptExecutorUnitTests {
 
-	private final DefaultRedisScript<String> SCRIPT = new DefaultRedisScript<>("return KEYS[0]", String.class);
+	private final DefaultRedisScript<String> script = new DefaultRedisScript<>("return KEYS[0]", String.class);
 
 	private StringRedisTemplate template;
 	private @Mock RedisConnection redisConnectionMock;
@@ -59,7 +59,7 @@ class DefaultScriptExecutorUnitTests {
 
 		when(redisConnectionMock.evalSha(anyString(), any(ReturnType.class), anyInt())).thenReturn("FOO".getBytes());
 
-		executor.execute(SCRIPT, null);
+		executor.execute(script, null);
 
 		verify(redisConnectionMock, times(1)).evalSha(anyString(), any(ReturnType.class), anyInt());
 	}
@@ -69,7 +69,7 @@ class DefaultScriptExecutorUnitTests {
 
 		when(redisConnectionMock.evalSha(anyString(), any(ReturnType.class), anyInt())).thenReturn("FOO".getBytes());
 
-		executor.execute(SCRIPT, null);
+		executor.execute(script, null);
 
 		verify(redisConnectionMock, never()).eval(any(byte[].class), any(ReturnType.class), anyInt());
 	}
@@ -80,7 +80,7 @@ class DefaultScriptExecutorUnitTests {
 		when(redisConnectionMock.evalSha(anyString(), any(ReturnType.class), anyInt())).thenThrow(
 				new RedisSystemException("NOSCRIPT No matching script; Please use EVAL.", new Exception()));
 
-		executor.execute(SCRIPT, null);
+		executor.execute(script, null);
 
 		verify(redisConnectionMock, times(1)).eval(any(byte[].class), any(ReturnType.class), anyInt());
 	}
@@ -91,7 +91,7 @@ class DefaultScriptExecutorUnitTests {
 		when(redisConnectionMock.evalSha(anyString(), any(ReturnType.class), anyInt())).thenThrow(
 				new UnsupportedOperationException("NOSCRIPT No matching script; Please use EVAL.", new Exception()));
 
-		assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(() -> executor.execute(SCRIPT, null));
+		assertThatExceptionOfType(UnsupportedOperationException.class).isThrownBy(() -> executor.execute(script, null));
 	}
 
 	@Test // DATAREDIS-347
@@ -100,6 +100,6 @@ class DefaultScriptExecutorUnitTests {
 		when(redisConnectionMock.evalSha(anyString(), any(ReturnType.class), anyInt())).thenThrow(
 				new RedisSystemException("Found Script but could not execute it.", new Exception()));
 
-		assertThatExceptionOfType(RedisSystemException.class).isThrownBy(() -> executor.execute(SCRIPT, null));
+		assertThatExceptionOfType(RedisSystemException.class).isThrownBy(() -> executor.execute(script, null));
 	}
 }

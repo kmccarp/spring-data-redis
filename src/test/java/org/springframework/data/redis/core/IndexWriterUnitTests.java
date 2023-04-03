@@ -31,7 +31,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.support.GenericConversionService;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.data.redis.connection.RedisConnection;
@@ -91,7 +90,7 @@ class IndexWriterUnitTests {
 
 		writer.removeKeyFromExistingIndexes(KEY_BIN, new StubIndxedData());
 
-		verify(connectionMock).keys(eq(("persons:address.city:*").getBytes(CHARSET)));
+		verify(connectionMock).keys(eq("persons:address.city:*".getBytes(CHARSET)));
 		verifyNoMoreInteractions(connectionMock);
 	}
 
@@ -144,13 +143,7 @@ class IndexWriterUnitTests {
 		DummyObject value = new DummyObject();
 		final String identityHexString = ObjectUtils.getIdentityHexString(value);
 
-		((GenericConversionService) converter.getConversionService()).addConverter(new Converter<DummyObject, byte[]>() {
-
-					@Override
-					public byte[] convert(DummyObject source) {
-						return identityHexString.getBytes(CHARSET);
-					}
-				});
+		((GenericConversionService) converter.getConversionService()).addConverter(source -> identityHexString.getBytes(CHARSET));
 
 		writer.addKeyToIndex(KEY_BIN, new SimpleIndexedPropertyValue(KEYSPACE, "firstname", value));
 

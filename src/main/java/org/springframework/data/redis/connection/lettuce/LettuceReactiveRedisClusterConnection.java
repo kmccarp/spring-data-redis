@@ -181,11 +181,9 @@ class LettuceReactiveRedisClusterConnection extends LettuceReactiveRedisConnecti
 	public Mono<Map<RedisClusterNode, Collection<RedisClusterNode>>> clusterGetMasterReplicaMap() {
 
 		return Flux.fromStream(() -> topologyProvider.getTopology().getActiveMasterNodes().stream()) //
-				.flatMap(node -> {
-					return Mono.just(node).zipWith(execute(node, cmd -> cmd.clusterSlaves(node.getId())) //
+				.flatMap(node -> Mono.just(node).zipWith(execute(node, cmd -> cmd.clusterSlaves(node.getId())) //
 							.collectList() //
-							.map(Converters::toSetOfRedisClusterNodes));
-				}).collect(Collectors.toMap(Tuple2::getT1, Tuple2::getT2));
+							.map(Converters::toSetOfRedisClusterNodes))).collect(Collectors.toMap(Tuple2::getT1, Tuple2::getT2));
 	}
 
 	@Override

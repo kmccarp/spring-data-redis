@@ -86,7 +86,7 @@ class RedisListenerContainerParser extends AbstractSimpleBeanDefinitionParser {
 	}
 
 	protected boolean isEligibleAttribute(String attributeName) {
-		return (!"phase".equals(attributeName));
+		return !"phase".equals(attributeName);
 	}
 
 	/**

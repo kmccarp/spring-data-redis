@@ -119,7 +119,7 @@ class SynchronizingMessageListener implements MessageListener, SubscriptionListe
 		private static final int NOT_DONE = 0;
 		private static final int DONE_DONE = 0;
 
-		private volatile int done = NOT_DONE;
+		private final volatile int done = NOT_DONE;
 		private final Set<ByteArrayWrapper> remainingPatterns;
 		private final Set<ByteArrayWrapper> remainingChannels;
 

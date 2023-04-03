@@ -366,10 +366,8 @@ public class LettuceReactiveStreamCommandsIntegrationTests extends LettuceReacti
 				.xReadGroup(Consumer.from("my-group", "my-consumer"),
 						StreamOffset.create(KEY_1_BBUFFER, ReadOffset.lastConsumed())) //
 				.delayElements(Duration.ofMillis(5)).next() //
-				.flatMapMany(record -> {
-					return connection.streamCommands().xClaim(KEY_1_BBUFFER, "my-group", "my-consumer",
-							XClaimOptions.minIdle(Duration.ofMillis(1)).ids(record.getId()));
-				}
+				.flatMapMany(record -> connection.streamCommands().xClaim(KEY_1_BBUFFER, "my-group", "my-consumer",
+							XClaimOptions.minIdle(Duration.ofMillis(1)).ids(record.getId()))
 
 				).as(StepVerifier::create) //
 				.assertNext(it -> assertThat(it.getId().getValue()).isEqualTo(expected)) //

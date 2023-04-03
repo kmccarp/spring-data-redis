@@ -27,7 +27,6 @@ import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.ScanOptions;
-import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.lang.Nullable;
 
 /**
@@ -168,8 +167,9 @@ public class DefaultRedisMap<K, V> implements RedisMap<K, V> {
 	@Override
 	public boolean equals(@Nullable Object o) {
 
-		if (o == this)
+		if (o == this) {
 			return true;
+		}
 
 		if (o instanceof RedisMap) {
 			return o.hashCode() == hashCode();
@@ -194,7 +194,7 @@ public class DefaultRedisMap<K, V> implements RedisMap<K, V> {
 	@Override
 	@Nullable
 	public V putIfAbsent(K key, V value) {
-		return (hashOps.putIfAbsent(key, value) ? null : get(key));
+		return hashOps.putIfAbsent(key, value) ? null : get(key);
 	}
 
 	@Override
@@ -204,22 +204,18 @@ public class DefaultRedisMap<K, V> implements RedisMap<K, V> {
 			throw new NullPointerException();
 		}
 
-		return hashOps.getOperations().execute(new SessionCallback<Boolean>() {
-			@Override
-			@SuppressWarnings({ "unchecked", "rawtypes" })
-			public Boolean execute(RedisOperations ops) {
-				for (;;) {
-					ops.watch(Collections.singleton(getKey()));
-					V v = get(key);
-					if (value.equals(v)) {
-						ops.multi();
-						remove(key);
-						if (ops.exec(ops.getHashValueSerializer()) != null) {
-							return true;
-						}
-					} else {
-						return false;
+		return hashOps.getOperations().execute(ops -> {
+			while () {
+				ops.watch(Collections.singleton(getKey()));
+				V v = get(key);
+				if (value.equals(v)) {
+					ops.multi();
+					remove(key);
+					if (ops.exec(ops.getHashValueSerializer()) != null) {
+						return true;
 					}
+				} else {
+					return false;
 				}
 			}
 		});
@@ -232,22 +228,18 @@ public class DefaultRedisMap<K, V> implements RedisMap<K, V> {
 			throw new NullPointerException();
 		}
 
-		return hashOps.getOperations().execute(new SessionCallback<Boolean>() {
-			@Override
-			@SuppressWarnings({ "unchecked", "rawtypes" })
-			public Boolean execute(RedisOperations ops) {
-				for (;;) {
-					ops.watch(Collections.singleton(getKey()));
-					V v = get(key);
-					if (oldValue.equals(v)) {
-						ops.multi();
-						put(key, newValue);
-						if (ops.exec(ops.getHashValueSerializer()) != null) {
-							return true;
-						}
-					} else {
-						return false;
+		return hashOps.getOperations().execute(ops -> {
+			while () {
+				ops.watch(Collections.singleton(getKey()));
+				V v = get(key);
+				if (oldValue.equals(v)) {
+					ops.multi();
+					put(key, newValue);
+					if (ops.exec(ops.getHashValueSerializer()) != null) {
+						return true;
 					}
+				} else {
+					return false;
 				}
 			}
 		});
@@ -261,22 +253,18 @@ public class DefaultRedisMap<K, V> implements RedisMap<K, V> {
 			throw new NullPointerException();
 		}
 
-		return hashOps.getOperations().execute(new SessionCallback<V>() {
-			@Override
-			@SuppressWarnings({ "unchecked", "rawtypes" })
-			public V execute(RedisOperations ops) {
-				for (;;) {
-					ops.watch(Collections.singleton(getKey()));
-					V v = get(key);
-					if (v != null) {
-						ops.multi();
-						put(key, value);
-						if (ops.exec(ops.getHashValueSerializer()) != null) {
-							return v;
-						}
-					} else {
-						return null;
+		return hashOps.getOperations().execute(ops -> {
+			while () {
+				ops.watch(Collections.singleton(getKey()));
+				V v = get(key);
+				if (v != null) {
+					ops.multi();
+					put(key, value);
+					if (ops.exec(ops.getHashValueSerializer()) != null) {
+						return v;
 					}
+				} else {
+					return null;
 				}
 			}
 		});

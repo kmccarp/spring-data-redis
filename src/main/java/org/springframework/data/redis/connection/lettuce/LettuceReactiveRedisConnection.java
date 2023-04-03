@@ -383,7 +383,7 @@ class LettuceReactiveRedisConnection implements ReactiveRedisConnection {
 		}
 
 		enum State {
-			INITIAL, CONNECTION_REQUESTED, CLOSING, CLOSED;
+			INITIAL, CONNECTION_REQUESTED, CLOSING, CLOSED
 		}
 	}
 }

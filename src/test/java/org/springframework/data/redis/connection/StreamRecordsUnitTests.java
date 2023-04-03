@@ -56,6 +56,7 @@ class StreamRecordsUnitTests {
 	private static final byte[] SERIALIZED_JSON_OBJECT_VAL = JSON_REDIS_SERIALIZER.serialize(OBJECT_VAL);
 
 	private static class DummyObject implements Serializable {
+		private static final long serialVersionUID = 1;
 		private final Integer dummyId = 1;
 
 		public Integer getDummyId() {

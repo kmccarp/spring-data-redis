@@ -184,7 +184,7 @@ class GenericJackson2JsonRedisSerializerUnitTests {
 
 		GenericJackson2JsonRedisSerializer gs = new GenericJackson2JsonRedisSerializer();
 		CountAndArray result = (CountAndArray) gs.deserialize(
-				("{\"@class\":\"org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializerUnitTests$CountAndArray\", \"count\":1, \"available\":[0,1]}")
+				"{\"@class\":\"org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializerUnitTests$CountAndArray\", \"count\":1, \"available\":[0,1]}"
 						.getBytes());
 
 		assertThat(result.getCount()).isEqualTo(1);
@@ -216,9 +216,7 @@ class GenericJackson2JsonRedisSerializerUnitTests {
 		user.name = "Walter White";
 
 		GenericJackson2JsonRedisSerializer serializer = new GenericJackson2JsonRedisSerializer((String) null,
-				JacksonObjectReader.create(), (mapper, source) -> {
-					return mapper.writerWithView(Views.Basic.class).writeValueAsBytes(source);
-				});
+				JacksonObjectReader.create(), (mapper, source) -> mapper.writerWithView(Views.Basic.class).writeValueAsBytes(source));
 
 		byte[] result = serializer.serialize(user);
 
@@ -229,9 +227,7 @@ class GenericJackson2JsonRedisSerializerUnitTests {
 	void considersWriterForCustomObjectMapper() {
 
 		GenericJackson2JsonRedisSerializer serializer = new GenericJackson2JsonRedisSerializer(new ObjectMapper(),
-				JacksonObjectReader.create(), (mapper, source) -> {
-					return mapper.writerWithView(Views.Basic.class).writeValueAsBytes(source);
-				});
+				JacksonObjectReader.create(), (mapper, source) -> mapper.writerWithView(Views.Basic.class).writeValueAsBytes(source));
 
 		User user = new User();
 		user.email = "walter@heisenberg.com";
@@ -276,7 +272,7 @@ class GenericJackson2JsonRedisSerializerUnitTests {
 
 		GenericJackson2JsonRedisSerializer gs = new GenericJackson2JsonRedisSerializer();
 		CountAndArray result = (CountAndArray) gs.deserialize(
-				("{\"@class\":\"org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializerUnitTests$CountAndArray\", \"count\":1, \"arrayOfPrimitiveWrapper\":[0,1]}")
+				"{\"@class\":\"org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializerUnitTests$CountAndArray\", \"count\":1, \"arrayOfPrimitiveWrapper\":[0,1]}"
 						.getBytes());
 
 		assertThat(result.getCount()).isEqualTo(1);
@@ -376,7 +372,7 @@ class GenericJackson2JsonRedisSerializerUnitTests {
 
 		GenericJackson2JsonRedisSerializer serializer = new GenericJackson2JsonRedisSerializer();
 
-		assertThat(serializer.serialize(EnumType.ONE)).isEqualTo(("\"ONE\"").getBytes(StandardCharsets.UTF_8));
+		assertThat(serializer.serialize(EnumType.ONE)).isEqualTo("\"ONE\"".getBytes(StandardCharsets.UTF_8));
 	}
 
 	@Test // GH-2396
@@ -395,7 +391,7 @@ class GenericJackson2JsonRedisSerializerUnitTests {
 		WithJsr310 source = new WithJsr310();
 		source.myDate = java.time.LocalDate.of(2022,9,2);
 
-		assertThat(serializer.serialize(source)).isEqualTo(("{\"@class\":\"org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializerUnitTests$WithJsr310\",\"myDate\":[2022,9,2]}").getBytes(StandardCharsets.UTF_8));
+		assertThat(serializer.serialize(source)).isEqualTo("{\"@class\":\"org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializerUnitTests$WithJsr310\",\"myDate\":[2022,9,2]}".getBytes(StandardCharsets.UTF_8));
 	}
 
 	@Test // GH-2396

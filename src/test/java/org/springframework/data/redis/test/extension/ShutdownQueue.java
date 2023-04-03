@@ -39,9 +39,9 @@ public enum ShutdownQueue {
 				while ((closeable = INSTANCE.closeables.pollLast()) != null) {
 					try {
 						closeable.close();
-					} catch (Exception o_O) {
+					} catch (Exception oO) {
 						// ignore
-						o_O.printStackTrace();
+						oO.printStackTrace();
 					}
 				}
 

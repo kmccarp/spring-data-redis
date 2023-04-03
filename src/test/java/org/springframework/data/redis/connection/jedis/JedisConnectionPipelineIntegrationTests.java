@@ -161,7 +161,7 @@ public class JedisConnectionPipelineIntegrationTests extends AbstractConnectionP
 
 	@Test
 	public void testScriptKill() {
-		assertThatExceptionOfType(InvalidDataAccessApiUsageException.class).isThrownBy(() -> connection.scriptKill());
+		assertThatExceptionOfType(InvalidDataAccessApiUsageException.class).isThrownBy(connection::scriptKill);
 	}
 
 	@Test

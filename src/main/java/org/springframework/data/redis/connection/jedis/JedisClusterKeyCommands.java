@@ -89,7 +89,7 @@ class JedisClusterKeyCommands implements RedisKeyCommands {
 		}
 
 		return (long) connection.getClusterCommandExecutor()
-				.executeMultiKeyCommand((JedisMultiKeyClusterCommandCallback<Long>) (client, key) -> client.del(key),
+				.executeMultiKeyCommand((JedisMultiKeyClusterCommandCallback<Long>) Jedis::del,
 						Arrays.asList(keys))
 				.resultsAsList().size();
 	}
@@ -171,9 +171,7 @@ class JedisClusterKeyCommands implements RedisKeyCommands {
 		Assert.notNull(options, "Options must not be null");
 
 		return connection.getClusterCommandExecutor()
-				.executeCommandOnSingleNode((JedisClusterCommandCallback<Cursor<byte[]>>) client -> {
-
-					return new ScanCursor<byte[]>(0, options) {
+				.executeCommandOnSingleNode((JedisClusterCommandCallback<Cursor<byte[]>>) client -> new ScanCursor<byte[]>(0, options) {
 
 						@Override
 						protected ScanIteration<byte[]> doScan(long cursorId, ScanOptions options) {
@@ -183,8 +181,7 @@ class JedisClusterKeyCommands implements RedisKeyCommands {
 							return new ScanIteration<>(Long.valueOf(result.getCursor()),
 									JedisConverters.stringListToByteList().convert(result.getResult()));
 						}
-					}.open();
-				}, node).getValue();
+					}.open(), node).getValue();
 	}
 
 	@Override
@@ -217,7 +214,7 @@ class JedisClusterKeyCommands implements RedisKeyCommands {
 		Assert.notNull(node, "RedisClusterNode must not be null");
 
 		return connection.getClusterCommandExecutor()
-				.executeCommandOnSingleNode((JedisClusterCommandCallback<byte[]>) client -> client.randomBinaryKey(), node)
+				.executeCommandOnSingleNode((JedisClusterCommandCallback<byte[]>) Jedis::randomBinaryKey, node)
 				.getValue();
 	}
 

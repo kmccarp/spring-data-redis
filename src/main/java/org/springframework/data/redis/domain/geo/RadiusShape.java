@@ -27,6 +27,8 @@ import org.springframework.util.Assert;
  */
 public class RadiusShape implements GeoShape {
 
+	private static final long serialVersionUID = 1;
+
 	private final Distance radius;
 
 	public RadiusShape(Distance radius) {

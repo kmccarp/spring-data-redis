@@ -748,7 +748,7 @@ public class MappingRedisConverter implements RedisConverter, InitializingBean {
 				break;
 			}
 
-			String currentPath = path + (path.equals("") ? "" : ".") + "[" + i + "]";
+			String currentPath = path + ("".equals(path) ? "" : ".") + "[" + i + "]";
 
 			if (!ClassUtils.isAssignable(typeHint.getType(), value.getClass())) {
 				throw new MappingException(
@@ -1195,7 +1195,7 @@ public class MappingRedisConverter implements RedisConverter, InitializingBean {
 	 * @author Stefan Berger
 	 * @since 1.8.10
 	 */
-	public static class KeyspaceIdentifier {
+	public static final class KeyspaceIdentifier {
 
 		public static final String PHANTOM = "phantom";
 		public static final String DELIMITER = ":";
@@ -1275,7 +1275,7 @@ public class MappingRedisConverter implements RedisConverter, InitializingBean {
 	 * @author Stefan Berger
 	 * @since 1.8.10
 	 */
-	public static class BinaryKeyspaceIdentifier {
+	public static final class BinaryKeyspaceIdentifier {
 
 		public static final byte[] PHANTOM = KeyspaceIdentifier.PHANTOM.getBytes();
 		public static final byte DELIMITER = ':';

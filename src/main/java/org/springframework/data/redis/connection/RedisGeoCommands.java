@@ -327,7 +327,7 @@ public interface RedisGeoCommands {
 	 * @author Christoph Strobl
 	 * @since 2.6
 	 */
-	class GeoSearchCommandArgs implements GeoCommandArgs, Cloneable {
+	final class GeoSearchCommandArgs implements GeoCommandArgs, Cloneable {
 
 		protected final Set<GeoCommandFlag> flags = new LinkedHashSet<>(2, 1);
 
@@ -470,7 +470,7 @@ public interface RedisGeoCommands {
 	 * @author Mark Paluch
 	 * @since 2.6
 	 */
-	class GeoSearchStoreCommandArgs implements GeoCommandArgs, Cloneable {
+	final class GeoSearchStoreCommandArgs implements GeoCommandArgs, Cloneable {
 
 		private final Set<GeoCommandFlag> flags = new LinkedHashSet<>(2, 1);
 
@@ -607,7 +607,7 @@ public interface RedisGeoCommands {
 	 * @author Christoph Strobl
 	 * @since 1.8
 	 */
-	class GeoRadiusCommandArgs extends GeoSearchCommandArgs implements Cloneable {
+	final class GeoRadiusCommandArgs extends GeoSearchCommandArgs implements Cloneable {
 
 		private GeoRadiusCommandArgs() {}
 
@@ -683,7 +683,7 @@ public interface RedisGeoCommands {
 		}
 
 		public Set<Flag> getFlags() {
-			return flags.stream().map(it -> (Flag) it).collect(Collectors.toSet());
+			return flags.stream().map(Flag.class::cast).collect(Collectors.toSet());
 		}
 
 		public enum Flag implements GeoCommandFlag {

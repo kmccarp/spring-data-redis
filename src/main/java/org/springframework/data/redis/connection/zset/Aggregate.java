@@ -22,5 +22,5 @@ package org.springframework.data.redis.connection.zset;
  * @since 3.0
  */
 public enum Aggregate {
-	SUM, MIN, MAX;
+	SUM, MIN, MAX
 }

@@ -240,7 +240,8 @@ public class RedisAtomicInteger extends Number implements Serializable, BoundKey
 
 		Assert.notNull(updateFunction, "Update function must not be null");
 
-		int previousValue, newValue;
+		int previousValue;
+		int newValue;
 
 		do {
 			previousValue = get();
@@ -265,7 +266,8 @@ public class RedisAtomicInteger extends Number implements Serializable, BoundKey
 
 		Assert.notNull(accumulatorFunction, "Accumulator function must not be null");
 
-		int previousValue, newValue;
+		int previousValue;
+		int newValue;
 
 		do {
 			previousValue = get();
@@ -316,7 +318,8 @@ public class RedisAtomicInteger extends Number implements Serializable, BoundKey
 
 		Assert.notNull(updateFunction, "Update function must not be null");
 
-		int previousValue, newValue;
+		int previousValue;
+		int newValue;
 
 		do {
 			previousValue = get();
@@ -341,7 +344,8 @@ public class RedisAtomicInteger extends Number implements Serializable, BoundKey
 
 		Assert.notNull(accumulatorFunction, "Accumulator function must not be null");
 
-		int previousValue, newValue;
+		int previousValue;
+		int newValue;
 
 		do {
 			previousValue = get();

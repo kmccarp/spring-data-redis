@@ -85,8 +85,8 @@ public abstract class AbstractTransactionalTestBase {
 
 	private @Autowired RedisConnectionFactory factory;
 
-	private List<String> KEYS = Arrays.asList("spring", "data", "redis");
-	private boolean valuesShouldHaveBeenPersisted = false;
+	private List<String> keys = Arrays.asList("spring", "data", "redis");
+	private boolean valuesShouldHaveBeenPersisted;
 
 	@BeforeEach
 	public void setUp() {
@@ -105,7 +105,7 @@ public abstract class AbstractTransactionalTestBase {
 	public void verifyTransactionResult() {
 
 		RedisConnection connection = factory.getConnection();
-		for (String key : KEYS) {
+		for (String key : keys) {
 			assertThat(connection.exists(key.getBytes()))
 					.as("Values for " + key + " should " + (valuesShouldHaveBeenPersisted ? "" : "NOT ") + "have been found.")
 					.isEqualTo(valuesShouldHaveBeenPersisted);
@@ -117,7 +117,7 @@ public abstract class AbstractTransactionalTestBase {
 	@Test // DATAREDIS-73
 	public void valueOperationSetShouldBeRolledBackCorrectly() {
 
-		for (String key : KEYS) {
+		for (String key : keys) {
 			template.opsForValue().set(key, key + "-value");
 		}
 	}
@@ -127,7 +127,7 @@ public abstract class AbstractTransactionalTestBase {
 	public void valueOperationSetShouldBeCommittedCorrectly() {
 
 		this.valuesShouldHaveBeenPersisted = true;
-		for (String key : KEYS) {
+		for (String key : keys) {
 			template.opsForValue().set(key, key + "-value");
 		}
 	}
@@ -137,7 +137,7 @@ public abstract class AbstractTransactionalTestBase {
 	public void valueOperationShouldWorkWithReadOnlyTransactions() {
 
 		this.valuesShouldHaveBeenPersisted = false;
-		for (String key : KEYS) {
+		for (String key : keys) {
 			template.opsForValue().get(key);
 		}
 	}
@@ -146,8 +146,8 @@ public abstract class AbstractTransactionalTestBase {
 	@Test // DATAREDIS-73, DATAREDIS-1063
 	public void listOperationLPushShoudBeRolledBackCorrectly() {
 
-		for (String key : KEYS) {
-			template.opsForList().leftPushAll(key, KEYS.toArray(new String[0]));
+		for (String key : keys) {
+			template.opsForList().leftPushAll(key, keys.toArray(new String[0]));
 		}
 	}
 
@@ -156,8 +156,8 @@ public abstract class AbstractTransactionalTestBase {
 	public void listOperationLPushShouldBeCommittedCorrectly() {
 
 		this.valuesShouldHaveBeenPersisted = true;
-		for (String key : KEYS) {
-			template.opsForList().leftPushAll(key, KEYS.toArray(new String[0]));
+		for (String key : keys) {
+			template.opsForList().leftPushAll(key, keys.toArray(new String[0]));
 		}
 	}
 }

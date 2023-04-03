@@ -140,9 +140,9 @@ public class RedisMessageListenerContainer implements InitializingBean, Disposab
 	private final AtomicReference<State> state = new AtomicReference<>(State.notListening());
 
 	// whether the container has been initialized via afterPropertiesSet
-	private boolean afterPropertiesSet = false;
+	private boolean afterPropertiesSet;
 
-	private boolean manageExecutor = false;
+	private boolean manageExecutor;
 
 	// lookup maps
 	// to avoid creation of hashes for each message, the maps use raw byte arrays (wrapped to respect the equals/hashcode
@@ -197,7 +197,7 @@ public class RedisMessageListenerContainer implements InitializingBean, Disposab
 	 * @see org.springframework.core.task.SimpleAsyncTaskExecutor#SimpleAsyncTaskExecutor(String)
 	 */
 	protected TaskExecutor createDefaultTaskExecutor() {
-		String threadNamePrefix = (beanName != null ? beanName + "-" : DEFAULT_THREAD_NAME_PREFIX);
+		String threadNamePrefix = beanName != null ? beanName + "-" : DEFAULT_THREAD_NAME_PREFIX;
 		return new SimpleAsyncTaskExecutor(threadNamePrefix);
 	}
 
@@ -641,8 +641,9 @@ public class RedisMessageListenerContainer implements InitializingBean, Disposab
 				collection.add(listener);
 				channels.add(holder.getArray());
 
-				if (trace)
+				if (trace) {
 					logger.trace("Adding listener '" + listener + "' on channel '" + topic.getTopic() + "'");
+				}
 			}
 
 			else if (topic instanceof PatternTopic) {
@@ -654,8 +655,9 @@ public class RedisMessageListenerContainer implements InitializingBean, Disposab
 				collection.add(listener);
 				patterns.add(holder.getArray());
 
-				if (trace)
+				if (trace) {
 					logger.trace("Adding listener '" + listener + "' for pattern '" + topic.getTopic() + "'");
+				}
 			}
 
 			else {
@@ -986,7 +988,7 @@ public class RedisMessageListenerContainer implements InitializingBean, Disposab
 
 	private void dispatchMessage(Collection<MessageListener> listeners, Message message, @Nullable byte[] pattern) {
 
-		byte[] source = (pattern != null ? pattern.clone() : message.getChannel());
+		byte[] source = pattern != null ? pattern.clone() : message.getChannel();
 
 		Executor executor = getRequiredTaskExecutor();
 		for (MessageListener messageListener : listeners) {
@@ -1036,7 +1038,7 @@ public class RedisMessageListenerContainer implements InitializingBean, Disposab
 	 * @author Mark Paluch
 	 * @since 2.7
 	 */
-	static class State {
+	static final class State {
 
 		private final boolean prepareListening;
 		private final boolean listening;

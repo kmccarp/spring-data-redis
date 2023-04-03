@@ -89,12 +89,13 @@ public class RedisQueryCreator extends AbstractQueryCreator<KeyValueQuery<RedisO
 		KeyValueQuery<RedisOperationChain> query = new KeyValueQuery<>(criteria);
 
 		if (query.getCriteria() != null && !CollectionUtils.isEmpty(query.getCriteria().getSismember())
-				&& !CollectionUtils.isEmpty(query.getCriteria().getOrSismember()))
+	&& !CollectionUtils.isEmpty(query.getCriteria().getOrSismember())) {
 			if (query.getCriteria().getSismember().size() == 1 && query.getCriteria().getOrSismember().size() == 1) {
 
 				query.getCriteria().getOrSismember().add(query.getCriteria().getSismember().iterator().next());
 				query.getCriteria().getSismember().clear();
 			}
+		}
 
 		if (sort.isSorted()) {
 			query.setSort(sort);

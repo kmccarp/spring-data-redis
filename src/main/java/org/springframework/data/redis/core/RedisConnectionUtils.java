@@ -461,7 +461,7 @@ public abstract class RedisConnectionUtils {
 
 		public Object intercept(Object obj, Method method, Object[] args) throws Throwable {
 
-			if (method.getName().equals("getTargetConnection")) {
+			if ("getTargetConnection".equals(method.getName())) {
 				// Handle getTargetConnection method: return underlying RedisConnection.
 				return obj;
 			}
@@ -519,7 +519,7 @@ public abstract class RedisConnectionUtils {
 
 		@Nullable private RedisConnection connection;
 
-		private boolean transactionActive = false;
+		private boolean transactionActive;
 
 		/**
 		 * Create a new RedisConnectionHolder for the given Redis Connection assuming that there is no ongoing transaction.
@@ -535,7 +535,7 @@ public abstract class RedisConnectionUtils {
 		 * Return whether this holder currently has a {@link RedisConnection}.
 		 */
 		protected boolean hasConnection() {
-			return (this.connection != null);
+			return this.connection != null;
 		}
 
 		@Nullable

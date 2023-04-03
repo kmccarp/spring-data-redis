@@ -75,7 +75,7 @@ import org.springframework.util.CollectionUtils;
  */
 public class JedisConnection extends AbstractRedisConnection {
 
-	private final Log LOGGER = LogFactory.getLog(getClass());
+	private final Log logger = LogFactory.getLog(getClass());
 
 	private static final ExceptionTranslationStrategy EXCEPTION_TRANSLATION = new FallbackExceptionTranslationStrategy(
 			JedisExceptionConverter.INSTANCE);
@@ -310,7 +310,7 @@ public class JedisConnection extends AbstractRedisConnection {
 				subscription.close();
 			}
 		} catch (Exception ex) {
-			LOGGER.debug("Cannot terminate subscription", ex);
+			logger.debug("Cannot terminate subscription", ex);
 		} finally {
 			this.subscription = null;
 		}
@@ -326,13 +326,13 @@ public class JedisConnection extends AbstractRedisConnection {
 		try {
 			jedis.quit();
 		} catch (Exception ex) {
-			LOGGER.debug("Failed to QUIT during close", ex);
+			logger.debug("Failed to QUIT during close", ex);
 		}
 
 		try {
 			jedis.disconnect();
 		} catch (Exception ex) {
-			LOGGER.debug("Failed to disconnect during close", ex);
+			logger.debug("Failed to disconnect during close", ex);
 		}
 	}
 
@@ -542,7 +542,7 @@ public class JedisConnection extends AbstractRedisConnection {
 
 	<T, R> JedisResult<T, R> newJedisResult(Response<T> response, Converter<T, R> converter, Supplier<R> defaultValue) {
 
-		return JedisResultBuilder.<T, R> forResponse(response).mappedWith(converter)
+		return JedisResultBuilder. forResponse(response).mappedWith(converter)
 				.convertPipelineAndTxResults(convertPipelineAndTxResults).mapNullTo(defaultValue).build();
 	}
 
@@ -604,7 +604,7 @@ public class JedisConnection extends AbstractRedisConnection {
 
 	@Override
 	public boolean isSubscribed() {
-		return (subscription != null && subscription.isAlive());
+		return subscription != null && subscription.isAlive();
 	}
 
 	@Override
@@ -666,7 +666,7 @@ public class JedisConnection extends AbstractRedisConnection {
 		try {
 			verification = getJedis(node);
 			verification.connect();
-			return verification.ping().equalsIgnoreCase("pong");
+			return "pong".equalsIgnoreCase(verification.ping());
 		} catch (Exception e) {
 			return false;
 		} finally {

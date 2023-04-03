@@ -54,7 +54,7 @@ import org.springframework.util.ObjectUtils;
  */
 class RedisConnectionUnitTests {
 
-	private final RedisNode SENTINEL_1 = new RedisNodeBuilder().listeningAt("localhost", 23679).build();
+	private final RedisNode sentinel1 = new RedisNodeBuilder().listeningAt("localhost", 23679).build();
 	private AbstractDelegatingRedisConnectionStub connection;
 	private RedisSentinelConnection sentinelConnectionMock;
 
@@ -63,7 +63,7 @@ class RedisConnectionUnitTests {
 		sentinelConnectionMock = mock(RedisSentinelConnection.class);
 
 		connection = new AbstractDelegatingRedisConnectionStub(mock(AbstractRedisConnection.class, CALLS_REAL_METHODS));
-		connection.setSentinelConfiguration(new RedisSentinelConfiguration().master("mymaster").sentinel(SENTINEL_1));
+		connection.setSentinelConfiguration(new RedisSentinelConfiguration().master("mymaster").sentinel(sentinel1));
 		connection.setSentinelConnection(sentinelConnectionMock);
 	}
 
@@ -72,7 +72,7 @@ class RedisConnectionUnitTests {
 
 		when(sentinelConnectionMock.isOpen()).thenReturn(true).thenReturn(false);
 
-		connection.setActiveNode(SENTINEL_1);
+		connection.setActiveNode(sentinel1);
 		connection.getSentinelConnection();
 		connection.close();
 
@@ -85,7 +85,7 @@ class RedisConnectionUnitTests {
 		when(sentinelConnectionMock.isOpen()).thenReturn(true);
 		when(sentinelConnectionMock.isOpen()).thenReturn(false);
 
-		connection.setActiveNode(SENTINEL_1);
+		connection.setActiveNode(sentinel1);
 		connection.getSentinelConnection();
 		connection.close();
 

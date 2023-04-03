@@ -15,8 +15,8 @@
  */
 package org.springframework.data.redis.core;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.assertj.core.api.Assumptions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assumptions.assumeThat;
 import static org.assertj.core.data.Offset.offset;
 import static org.springframework.data.redis.connection.RedisGeoCommands.DistanceUnit.*;
 import static org.springframework.data.redis.connection.RedisGeoCommands.GeoRadiusCommandArgs.*;
@@ -29,7 +29,6 @@ import java.util.Map;
 import org.assertj.core.data.Offset;
 import org.junit.jupiter.api.BeforeEach;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.data.geo.Circle;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.GeoResults;
@@ -44,7 +43,6 @@ import org.springframework.data.redis.domain.geo.GeoReference;
 import org.springframework.data.redis.test.condition.EnabledOnCommand;
 import org.springframework.data.redis.test.extension.parametrized.MethodSource;
 import org.springframework.data.redis.test.extension.parametrized.ParameterizedRedisTest;
-import org.springframework.lang.Nullable;
 
 /**
  * Integration test of {@link org.springframework.data.redis.core.DefaultGeoOperations}
@@ -236,14 +234,7 @@ public class DefaultGeoOperationsIntegrationTests<K, M> {
 		geoOperations.add(key, POINT_PALERMO, valueFactory.instance());
 		geoOperations.add(key, POINT_CATANIA, valueFactory.instance());
 
-		List<Object> result = redisTemplate.executePipelined(new SessionCallback<GeoResults>() {
-			@Nullable
-			@Override
-			public <K, V> GeoResults execute(RedisOperations<K, V> operations) throws DataAccessException {
-
-				return operations.opsForGeo().radius((K) key, new Circle(POINT_PALERMO, new Distance(1, KILOMETERS)));
-			}
-		});
+		List<Object> result = redisTemplate.executePipelined(operations -> operations.opsForGeo().radius((K) key, new Circle(POINT_PALERMO, new Distance(1, KILOMETERS))));
 
 		GeoResults<GeoLocation<?>> results = (GeoResults<GeoLocation<?>>) result.get(0);
 		assertThat(results).hasSize(1);
