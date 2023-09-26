@@ -62,7 +62,7 @@ class AbstractRedisCollectionUnitTests {
 		redisTemplateSpy.setConnectionFactory(connectionFactoryMock);
 		redisTemplateSpy.afterPropertiesSet();
 
-		collection = new AbstractRedisCollection<String>("key", redisTemplateSpy) {
+		collection = new AbstractRedisCollection<>("key", redisTemplateSpy) {
 
 			private List<String> delegate = new ArrayList<>();
 

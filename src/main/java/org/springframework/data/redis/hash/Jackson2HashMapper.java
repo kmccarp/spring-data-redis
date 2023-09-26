@@ -256,10 +256,8 @@ public class Jackson2HashMapper implements HashMapper<Object, String, Object> {
 
 				Map<String, Object> unflattenedHash = doUnflatten(hash);
 				byte[] unflattenedHashedBytes = this.untypedMapper.writeValueAsBytes(unflattenedHash);
-				Object hashedObject = this.typingMapper.reader().forType(Object.class)
+				return this.typingMapper.reader().forType(Object.class)
 						.readValue(unflattenedHashedBytes);
-
-				return hashedObject;
 			}
 
 			return this.typingMapper.treeToValue(this.untypedMapper.valueToTree(hash), Object.class);
@@ -403,7 +401,7 @@ public class Jackson2HashMapper implements HashMapper<Object, String, Object> {
 					if (next.isArray()) {
 						flattenCollection(propertyPrefix, next.elements(), resultMap);
 					}
-					if (currentNode.asText().equals("java.util.Date")) {
+					if ("java.util.Date".equals(currentNode.asText())) {
 						resultMap.put(propertyPrefix, next.asText());
 						break;
 					}

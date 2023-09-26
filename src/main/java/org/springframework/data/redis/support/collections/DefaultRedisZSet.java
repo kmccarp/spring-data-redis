@@ -331,7 +331,7 @@ public class DefaultRedisZSet<E> extends AbstractRedisCollection<E> implements R
 
 	@Override
 	public boolean contains(Object o) {
-		return (boundZSetOps.rank(o) != null);
+		return boundZSetOps.rank(o) != null;
 	}
 
 	@Override

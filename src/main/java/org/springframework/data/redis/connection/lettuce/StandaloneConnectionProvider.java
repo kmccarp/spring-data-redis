@@ -76,7 +76,7 @@ class StandaloneConnectionProvider implements LettuceConnectionProvider, TargetA
 		this.codec = codec;
 		this.readFrom = Optional.ofNullable(readFrom);
 
-		redisURISupplier = new Supplier<RedisURI>() {
+		redisURISupplier = new Supplier<>() {
 
 			AtomicReference<RedisURI> uriFieldReference = new AtomicReference<>();
 

@@ -128,7 +128,7 @@ public class JedisConnection extends AbstractRedisConnection {
 	private final JedisStringCommands stringCommands = new JedisStringCommands(this);
 	private final JedisZSetCommands zSetCommands = new JedisZSetCommands(this);
 
-	private final Log LOGGER = LogFactory.getLog(getClass());
+	private final Log logger = LogFactory.getLog(getClass());
 
 	private List<JedisResult> pipelinedResults = new ArrayList<>();
 
@@ -556,7 +556,7 @@ public class JedisConnection extends AbstractRedisConnection {
 
 	<T, R> JedisResult<T, R> newJedisResult(Response<T> response, Converter<T, R> converter, Supplier<R> defaultValue) {
 
-		return JedisResultBuilder.<T, R> forResponse(response).mappedWith(converter)
+		return JedisResultBuilder. forResponse(response).mappedWith(converter)
 				.convertPipelineAndTxResults(convertPipelineAndTxResults).mapNullTo(defaultValue).build();
 	}
 
@@ -684,7 +684,7 @@ public class JedisConnection extends AbstractRedisConnection {
 		try {
 			verification = getJedis(node);
 			verification.connect();
-			return verification.ping().equalsIgnoreCase("pong");
+			return "pong".equalsIgnoreCase(verification.ping());
 		} catch (Exception cause) {
 			return false;
 		} finally {
@@ -729,8 +729,8 @@ public class JedisConnection extends AbstractRedisConnection {
 			operation.run();
 		}
 		catch (Exception cause) {
-			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug(logMessage, cause);
+			if (logger.isDebugEnabled()) {
+				logger.debug(logMessage, cause);
 			}
 		}
 	}

@@ -49,7 +49,7 @@ public abstract class DecodeUtils {
 
 	@Nullable
 	public static byte[] encode(@Nullable String string) {
-		return (string == null ? null : Base64.getEncoder().encode(string.getBytes()));
+		return string == null ? null : Base64.getEncoder().encode(string.getBytes());
 	}
 
 	public static Map<byte[], byte[]> encodeMap(Map<String, byte[]> map) {

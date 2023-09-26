@@ -218,7 +218,7 @@ public interface ReactiveRedisConnection extends Closeable {
 	 * @author Christoph Strobl
 	 * @since 2.1
 	 */
-	class KeyScanCommand extends KeyCommand {
+	final class KeyScanCommand extends KeyCommand {
 
 		private final ScanOptions options;
 
@@ -263,7 +263,7 @@ public interface ReactiveRedisConnection extends Closeable {
 	/**
 	 * @author Christoph Strobl
 	 */
-	class RangeCommand extends KeyCommand {
+	final class RangeCommand extends KeyCommand {
 
 		Range<Long> range;
 
@@ -367,10 +367,12 @@ public interface ReactiveRedisConnection extends Closeable {
 
 		@Override
 		public boolean equals(@Nullable Object o) {
-			if (this == o)
+			if (this == o) {
 				return true;
-			if (o == null || getClass() != o.getClass())
+			}
+			if (o == null || getClass() != o.getClass()) {
 				return false;
+			}
 
 			CommandResponse<?, ?> that = (CommandResponse<?, ?>) o;
 

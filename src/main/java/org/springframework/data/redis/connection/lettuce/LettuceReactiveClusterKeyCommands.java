@@ -40,7 +40,7 @@ import org.springframework.util.Assert;
  */
 class LettuceReactiveClusterKeyCommands extends LettuceReactiveKeyCommands implements ReactiveClusterKeyCommands {
 
-	private LettuceReactiveRedisClusterConnection connection;
+	private final LettuceReactiveRedisClusterConnection connection;
 
 	/**
 	 * Create new {@link LettuceReactiveClusterKeyCommands}.

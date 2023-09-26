@@ -41,7 +41,7 @@ public class RedisStaticMasterReplicaConfiguration implements RedisConfiguration
 
 	private List<RedisStandaloneConfiguration> nodes = new ArrayList<>();
 	private int database;
-	private @Nullable String username = null;
+	private @Nullable String username;
 	private RedisPassword password = RedisPassword.none();
 
 	/**

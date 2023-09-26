@@ -35,7 +35,7 @@ import org.springframework.util.Assert;
  */
 public abstract class AbstractRedisConnection implements RedisConnection {
 
-	private final Log LOGGER = LogFactory.getLog(getClass());
+	private final Log logger = LogFactory.getLog(getClass());
 
 	private @Nullable RedisSentinelConfiguration sentinelConfiguration;
 	private final Map<RedisNode, RedisSentinelConnection> connectionCache = new ConcurrentHashMap<>();
@@ -115,7 +115,7 @@ public abstract class AbstractRedisConnection implements RedisConnection {
 			try {
 				connection.close();
 			} catch (IOException e) {
-				LOGGER.info("Failed to close sentinel connection", e);
+				logger.info("Failed to close sentinel connection", e);
 			}
 		}
 	}

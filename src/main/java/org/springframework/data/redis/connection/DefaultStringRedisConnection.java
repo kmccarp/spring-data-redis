@@ -101,7 +101,7 @@ public class DefaultStringRedisConnection implements StringRedisConnection, Deco
 	private MapConverter<String, byte[]> stringMapToByteMap = new MapConverter<>(stringToBytes);
 	private SetConverter<byte[], String> byteSetToStringSet = new SetConverter<>(bytesToString);
 	private Converter<GeoResults<GeoLocation<byte[]>>, GeoResults<GeoLocation<String>>> byteGeoResultsToStringGeoResults;
-	private Converter<ByteRecord, StringRecord> byteMapRecordToStringMapRecordConverter = new Converter<ByteRecord, StringRecord>() {
+	private Converter<ByteRecord, StringRecord> byteMapRecordToStringMapRecordConverter = new Converter<>() {
 
 		@Nullable
 		@Override
@@ -115,7 +115,7 @@ public class DefaultStringRedisConnection implements StringRedisConnection, Deco
 
 	@SuppressWarnings("rawtypes") private Queue<Converter> pipelineConverters = new LinkedList<>();
 	@SuppressWarnings("rawtypes") private Queue<Converter> txConverters = new LinkedList<>();
-	private boolean deserializePipelineAndTxResults = false;
+	private boolean deserializePipelineAndTxResults;
 
 	private Entry<String, String> convertEntry(Entry<byte[], byte[]> source) {
 		return Converters.entryOf(bytesToString.convert(source.getKey()), bytesToString.convert(source.getValue()));

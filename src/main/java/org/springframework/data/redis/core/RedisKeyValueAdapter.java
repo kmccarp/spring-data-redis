@@ -117,7 +117,7 @@ public class RedisKeyValueAdapter extends AbstractKeyValueAdapter
 	private @Nullable ApplicationEventPublisher eventPublisher;
 
 	private EnableKeyspaceEvents enableKeyspaceEvents = EnableKeyspaceEvents.OFF;
-	private @Nullable String keyspaceNotificationsConfigParameter = null;
+	private @Nullable String keyspaceNotificationsConfigParameter;
 	private ShadowCopy shadowCopy = ShadowCopy.DEFAULT;
 
 	/**

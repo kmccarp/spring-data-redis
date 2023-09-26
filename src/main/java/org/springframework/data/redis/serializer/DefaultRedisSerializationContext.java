@@ -27,7 +27,7 @@ import org.springframework.util.Assert;
  * @author John Blum
  * @since 2.0
  */
-class DefaultRedisSerializationContext<K, V> implements RedisSerializationContext<K, V> {
+final class DefaultRedisSerializationContext<K, V> implements RedisSerializationContext<K, V> {
 
 	private final SerializationPair<K> keyTuple;
 	private final SerializationPair<V> valueTuple;

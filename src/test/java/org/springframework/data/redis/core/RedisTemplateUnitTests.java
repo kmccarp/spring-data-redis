@@ -104,7 +104,7 @@ class RedisTemplateUnitTests {
 	@Test // DATAREDIS-988
 	void executeSessionShouldReuseConnection() {
 
-		template.execute(new SessionCallback<Object>() {
+		template.execute(new SessionCallback<>() {
 			@Nullable
 			@Override
 			public <K, V> Object execute(RedisOperations<K, V> operations) throws DataAccessException {
@@ -122,7 +122,7 @@ class RedisTemplateUnitTests {
 	@Test // DATAREDIS-988
 	void executeSessionInTransactionShouldReuseConnection() {
 
-		template.execute(new SessionCallback<Object>() {
+		template.execute(new SessionCallback<>() {
 			@Override
 			public <K, V> Object execute(RedisOperations<K, V> operations) throws DataAccessException {
 
@@ -141,7 +141,7 @@ class RedisTemplateUnitTests {
 
 		template.setEnableTransactionSupport(true);
 
-		template.execute(new RedisCallback<Object>() {
+		template.execute(new RedisCallback<>() {
 			@Nullable
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {

@@ -297,7 +297,7 @@ class JedisConnectionUnitTests {
 		@Test // DATAREDIS-267
 		public void killClientShouldDelegateCallCorrectly() {
 			assertThatExceptionOfType(InvalidDataAccessApiUsageException.class)
-					.isThrownBy(() -> super.killClientShouldDelegateCallCorrectly());
+					.isThrownBy(super::killClientShouldDelegateCallCorrectly);
 		}
 
 		@Test
@@ -305,7 +305,7 @@ class JedisConnectionUnitTests {
 		// DATAREDIS-270
 		public void getClientNameShouldSendRequestCorrectly() {
 			assertThatExceptionOfType(InvalidDataAccessApiUsageException.class)
-					.isThrownBy(() -> super.getClientNameShouldSendRequestCorrectly());
+					.isThrownBy(super::getClientNameShouldSendRequestCorrectly);
 		}
 
 		@Test
@@ -313,61 +313,61 @@ class JedisConnectionUnitTests {
 		// DATAREDIS-277
 		public void replicaOfShouldBeSentCorrectly() {
 			assertThatExceptionOfType(InvalidDataAccessApiUsageException.class)
-					.isThrownBy(() -> super.replicaOfShouldBeSentCorrectly());
+					.isThrownBy(super::replicaOfShouldBeSentCorrectly);
 		}
 
 		@Test // DATAREDIS-277
 		public void replicaOfNoOneShouldBeSentCorrectly() {
 			assertThatExceptionOfType(InvalidDataAccessApiUsageException.class)
-					.isThrownBy(() -> super.replicaOfNoOneShouldBeSentCorrectly());
+					.isThrownBy(super::replicaOfNoOneShouldBeSentCorrectly);
 		}
 
 		@Test // DATAREDIS-531
 		public void scanShouldKeepTheConnectionOpen() {
 			assertThatExceptionOfType(InvalidDataAccessApiUsageException.class)
-					.isThrownBy(() -> super.scanShouldKeepTheConnectionOpen());
+					.isThrownBy(super::scanShouldKeepTheConnectionOpen);
 		}
 
 		@Test // DATAREDIS-531
 		public void scanShouldCloseTheConnectionWhenCursorIsClosed() {
 			assertThatExceptionOfType(InvalidDataAccessApiUsageException.class)
-					.isThrownBy(() -> super.scanShouldCloseTheConnectionWhenCursorIsClosed());
+					.isThrownBy(super::scanShouldCloseTheConnectionWhenCursorIsClosed);
 		}
 
 		@Test // DATAREDIS-531
 		public void sScanShouldKeepTheConnectionOpen() {
 			assertThatExceptionOfType(InvalidDataAccessApiUsageException.class)
-					.isThrownBy(() -> super.sScanShouldKeepTheConnectionOpen());
+					.isThrownBy(super::sScanShouldKeepTheConnectionOpen);
 		}
 
 		@Test // DATAREDIS-531
 		public void sScanShouldCloseTheConnectionWhenCursorIsClosed() {
 			assertThatExceptionOfType(InvalidDataAccessApiUsageException.class)
-					.isThrownBy(() -> super.sScanShouldCloseTheConnectionWhenCursorIsClosed());
+					.isThrownBy(super::sScanShouldCloseTheConnectionWhenCursorIsClosed);
 		}
 
 		@Test // DATAREDIS-531
 		public void zScanShouldKeepTheConnectionOpen() {
 			assertThatExceptionOfType(InvalidDataAccessApiUsageException.class)
-					.isThrownBy(() -> super.zScanShouldKeepTheConnectionOpen());
+					.isThrownBy(super::zScanShouldKeepTheConnectionOpen);
 		}
 
 		@Test // DATAREDIS-531
 		public void zScanShouldCloseTheConnectionWhenCursorIsClosed() {
 			assertThatExceptionOfType(InvalidDataAccessApiUsageException.class)
-					.isThrownBy(() -> super.zScanShouldCloseTheConnectionWhenCursorIsClosed());
+					.isThrownBy(super::zScanShouldCloseTheConnectionWhenCursorIsClosed);
 		}
 
 		@Test // DATAREDIS-531
 		public void hScanShouldKeepTheConnectionOpen() {
 			assertThatExceptionOfType(InvalidDataAccessApiUsageException.class)
-					.isThrownBy(() -> super.hScanShouldKeepTheConnectionOpen());
+					.isThrownBy(super::hScanShouldKeepTheConnectionOpen);
 		}
 
 		@Test // DATAREDIS-531
 		public void hScanShouldCloseTheConnectionWhenCursorIsClosed() {
 			assertThatExceptionOfType(InvalidDataAccessApiUsageException.class)
-					.isThrownBy(() -> super.hScanShouldCloseTheConnectionWhenCursorIsClosed());
+					.isThrownBy(super::hScanShouldCloseTheConnectionWhenCursorIsClosed);
 		}
 
 	}

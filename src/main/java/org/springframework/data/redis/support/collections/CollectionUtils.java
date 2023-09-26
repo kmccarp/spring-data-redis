@@ -62,7 +62,7 @@ public abstract class CollectionUtils {
 
 	static <K> void rename(final K key, final K newKey, RedisOperations<K, ?> operations) {
 
-		operations.execute(new SessionCallback<Object>() {
+		operations.execute(new SessionCallback<>() {
 
 			@SuppressWarnings("unchecked")
 			public Object execute(RedisOperations operations) throws DataAccessException {

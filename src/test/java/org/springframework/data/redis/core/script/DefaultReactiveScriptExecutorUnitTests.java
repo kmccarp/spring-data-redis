@@ -47,7 +47,7 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 @ExtendWith(MockitoExtension.class)
 class DefaultReactiveScriptExecutorUnitTests {
 
-	private final DefaultRedisScript<String> SCRIPT = new DefaultRedisScript<>("return KEYS[0]", String.class);
+	private final DefaultRedisScript<String> script = new DefaultRedisScript<>("return KEYS[0]", String.class);
 
 	@Mock ReactiveRedisConnectionFactory connectionFactoryMock;
 	@Mock ReactiveRedisConnection connectionMock;
@@ -71,7 +71,7 @@ class DefaultReactiveScriptExecutorUnitTests {
 		when(scriptingCommandsMock.evalSha(anyString(), any(ReturnType.class), anyInt()))
 				.thenReturn(Flux.just(ByteBuffer.wrap("FOO".getBytes())));
 
-		executor.execute(SCRIPT).as(StepVerifier::create).expectNext("FOO").verifyComplete();
+		executor.execute(script).as(StepVerifier::create).expectNext("FOO").verifyComplete();
 
 		verify(scriptingCommandsMock).evalSha(anyString(), any(ReturnType.class), anyInt());
 		verify(scriptingCommandsMock, never()).eval(any(), any(ReturnType.class), anyInt());
@@ -86,7 +86,7 @@ class DefaultReactiveScriptExecutorUnitTests {
 		when(scriptingCommandsMock.eval(any(), any(ReturnType.class), anyInt()))
 				.thenReturn(Flux.just(ByteBuffer.wrap("FOO".getBytes())));
 
-		executor.execute(SCRIPT).as(StepVerifier::create).expectNext("FOO").verifyComplete();
+		executor.execute(script).as(StepVerifier::create).expectNext("FOO").verifyComplete();
 
 		verify(scriptingCommandsMock).evalSha(anyString(), any(ReturnType.class), anyInt());
 		verify(scriptingCommandsMock).eval(any(), any(ReturnType.class), anyInt());
@@ -98,7 +98,7 @@ class DefaultReactiveScriptExecutorUnitTests {
 		when(scriptingCommandsMock.evalSha(anyString(), any(ReturnType.class), anyInt())).thenReturn(Flux
 				.error(new UnsupportedOperationException("NOSCRIPT No matching script; Please use EVAL.", new Exception())));
 
-		executor.execute(SCRIPT).as(StepVerifier::create).verifyError(UnsupportedOperationException.class);
+		executor.execute(script).as(StepVerifier::create).verifyError(UnsupportedOperationException.class);
 	}
 
 	@Test // DATAREDIS-683
@@ -107,7 +107,7 @@ class DefaultReactiveScriptExecutorUnitTests {
 		when(scriptingCommandsMock.evalSha(anyString(), any(ReturnType.class), anyInt()))
 				.thenReturn(Flux.just(ByteBuffer.wrap("FOO".getBytes())));
 
-		Flux<String> execute = executor.execute(SCRIPT, Collections.emptyList());
+		Flux<String> execute = executor.execute(script, Collections.emptyList());
 
 		verify(connectionMock, never()).close();
 
@@ -123,7 +123,7 @@ class DefaultReactiveScriptExecutorUnitTests {
 		when(scriptingCommandsMock.evalSha(anyString(), any(ReturnType.class), anyInt()))
 				.thenReturn(Flux.error(new RuntimeException()));
 
-		executor.execute(SCRIPT).as(StepVerifier::create).verifyError();
+		executor.execute(script).as(StepVerifier::create).verifyError();
 
 		verify(connectionMock).closeLater();
 		verify(connectionMock, never()).close();

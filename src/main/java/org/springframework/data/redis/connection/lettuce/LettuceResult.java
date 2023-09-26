@@ -90,14 +90,14 @@ class LettuceResult<T, R> extends FutureResult<RedisCommand<?, T, ?>> {
 
 		private final Future<T> response;
 		private Converter<T, R> converter;
-		private boolean convertPipelineAndTxResults = false;
+		private boolean convertPipelineAndTxResults;
 		private Supplier<R> nullValueDefault = () -> null;
 
 		@SuppressWarnings("unchecked")
 		LettuceResultBuilder(Future<T> response) {
 
 			this.response = response;
-			this.converter = (source) -> (R) source;
+			this.converter = source -> (R) source;
 		}
 
 		/**

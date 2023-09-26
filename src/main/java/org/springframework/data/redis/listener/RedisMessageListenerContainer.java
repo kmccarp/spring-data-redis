@@ -139,10 +139,10 @@ public class RedisMessageListenerContainer implements InitializingBean, Disposab
 	private @Nullable String beanName;
 
 	// whether the container has been initialized via afterPropertiesSet
-	private boolean afterPropertiesSet = false;
+	private boolean afterPropertiesSet;
 
 	// whether the TaskExecutor was created by the container
-	private boolean manageExecutor = false;
+	private boolean manageExecutor;
 
 	private @Nullable Subscriber subscriber;
 
@@ -973,7 +973,7 @@ public class RedisMessageListenerContainer implements InitializingBean, Disposab
 
 	private void dispatchMessage(Collection<MessageListener> listeners, Message message, @Nullable byte[] pattern) {
 
-		byte[] source = (pattern != null ? pattern.clone() : message.getChannel());
+		byte[] source = pattern != null ? pattern.clone() : message.getChannel();
 		Executor executor = getRequiredTaskExecutor();
 
 		for (MessageListener messageListener : listeners) {
@@ -1033,7 +1033,7 @@ public class RedisMessageListenerContainer implements InitializingBean, Disposab
 	 * @author Mark Paluch
 	 * @since 2.7
 	 */
-	static class State {
+	static final class State {
 
 		private final boolean prepareListening;
 		private final boolean listening;

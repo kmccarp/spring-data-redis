@@ -250,7 +250,7 @@ class DefaultValueOperations<K, V> extends AbstractOperations<K, V> implements V
 		byte[] rawKey = rawKey(key);
 		byte[] rawValue = rawValue(value);
 
-		execute(new RedisCallback<Object>() {
+		execute(new RedisCallback<>() {
 
 			@Override
 			public Object doInRedis(RedisConnection connection) throws DataAccessException {

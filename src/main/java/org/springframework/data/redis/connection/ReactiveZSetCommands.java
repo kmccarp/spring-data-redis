@@ -58,7 +58,7 @@ public interface ReactiveZSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/zadd">Redis Documentation: ZADD</a>
 	 */
-	class ZAddCommand extends KeyCommand {
+	final class ZAddCommand extends KeyCommand {
 
 		private final List<Tuple> tuples;
 		private final boolean upsert;
@@ -275,7 +275,7 @@ public interface ReactiveZSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/zrem">Redis Documentation: ZREM</a>
 	 */
-	class ZRemCommand extends KeyCommand {
+	final class ZRemCommand extends KeyCommand {
 
 		private final List<ByteBuffer> values;
 
@@ -379,7 +379,7 @@ public interface ReactiveZSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/zincrby">Redis Documentation: ZINCRBY</a>
 	 */
-	class ZIncrByCommand extends KeyCommand {
+	final class ZIncrByCommand extends KeyCommand {
 
 		private final ByteBuffer value;
 		private final @Nullable Number increment;
@@ -484,7 +484,7 @@ public interface ReactiveZSetCommands {
 	 * @since 2.6
 	 * @see <a href="https://redis.io/commands/srandmember">Redis Documentation: ZRANDMEMBER</a>
 	 */
-	class ZRandMemberCommand extends KeyCommand {
+	final class ZRandMemberCommand extends KeyCommand {
 
 		private final long count;
 
@@ -620,7 +620,7 @@ public interface ReactiveZSetCommands {
 	 * @see <a href="https://redis.io/commands/zrank">Redis Documentation: ZRANK</a>
 	 * @see <a href="https://redis.io/commands/zrevrank">Redis Documentation: ZREVRANK</a>
 	 */
-	class ZRankCommand extends KeyCommand {
+	final class ZRankCommand extends KeyCommand {
 
 		private final ByteBuffer value;
 		private final Direction direction;
@@ -739,7 +739,7 @@ public interface ReactiveZSetCommands {
 	 * @see <a href="https://redis.io/commands/zrange">Redis Documentation: ZRANGE</a>
 	 * @see <a href="https://redis.io/commands/zrevrange">Redis Documentation: ZREVRANGE</a>
 	 */
-	class ZRangeCommand extends KeyCommand {
+	final class ZRangeCommand extends KeyCommand {
 
 		private final Range<Long> range;
 		private final boolean withScores;
@@ -909,7 +909,7 @@ public interface ReactiveZSetCommands {
 	 * @since 3.0
 	 * @see <a href="https://redis.io/commands/zrangestore">Redis Documentation: ZRANGESTORE</a>
 	 */
-	class ZRangeStoreCommand extends KeyCommand {
+	final class ZRangeStoreCommand extends KeyCommand {
 
 		private final ByteBuffer destKey;
 		private final RangeMode rangeMode;
@@ -1153,7 +1153,7 @@ public interface ReactiveZSetCommands {
 	 * @see <a href="https://redis.io/commands/zrangebyscore">Redis Documentation: ZRANGEBYSCORE</a>
 	 * @see <a href="https://redis.io/commands/zrevrangebyscore">Redis Documentation: ZREVRANGEBYSCORE</a>
 	 */
-	class ZRangeByScoreCommand extends KeyCommand {
+	final class ZRangeByScoreCommand extends KeyCommand {
 
 		private final Range<Double> range;
 		private final boolean withScores;
@@ -1469,7 +1469,7 @@ public interface ReactiveZSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/zcount">Redis Documentation: ZCOUNT</a>
 	 */
-	class ZCountCommand extends KeyCommand {
+	final class ZCountCommand extends KeyCommand {
 
 		private final Range<Double> range;
 
@@ -1549,7 +1549,7 @@ public interface ReactiveZSetCommands {
 	 * @since 2.4
 	 * @see <a href="https://redis.io/commands/zlexcount">Redis Documentation: ZLEXCOUNT</a>
 	 */
-	class ZLexCountCommand extends KeyCommand {
+	final class ZLexCountCommand extends KeyCommand {
 
 		private final Range<String> range;
 
@@ -1633,7 +1633,7 @@ public interface ReactiveZSetCommands {
 	 * @see <a href="https://redis.io/commands/zpopmin">Redis Documentation: ZPOPMIN</a>
 	 * @see <a href="https://redis.io/commands/zpopmax">Redis Documentation: ZPOPMAX</a>
 	 */
-	class ZPopCommand extends KeyCommand {
+	final class ZPopCommand extends KeyCommand {
 
 		private final PopDirection direction;
 
@@ -1707,7 +1707,7 @@ public interface ReactiveZSetCommands {
 	 * @see <a href="https://redis.io/commands/bzpopmin">Redis Documentation: BZPOPMIN</a>
 	 * @see <a href="https://redis.io/commands/bzpopmax">Redis Documentation: BZPOPMAX</a>
 	 */
-	class BZPopCommand extends KeyCommand {
+	final class BZPopCommand extends KeyCommand {
 
 		private final PopDirection direction;
 
@@ -1957,7 +1957,7 @@ public interface ReactiveZSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/zscore">Redis Documentation: ZSCORE</a>
 	 */
-	class ZScoreCommand extends KeyCommand {
+	final class ZScoreCommand extends KeyCommand {
 
 		private final ByteBuffer value;
 
@@ -2034,7 +2034,7 @@ public interface ReactiveZSetCommands {
 	 * @since 2.6
 	 * @see <a href="https://redis.io/commands/zmscore">Redis Documentation: ZMSCORE</a>
 	 */
-	class ZMScoreCommand extends KeyCommand {
+	final class ZMScoreCommand extends KeyCommand {
 
 		private final Collection<ByteBuffer> values;
 
@@ -2126,7 +2126,7 @@ public interface ReactiveZSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/zremrangebyrank">Redis Documentation: ZREMRANGEBYRANK</a>
 	 */
-	class ZRemRangeByRankCommand extends KeyCommand {
+	final class ZRemRangeByRankCommand extends KeyCommand {
 
 		private final Range<Long> range;
 
@@ -2201,7 +2201,7 @@ public interface ReactiveZSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/zremrangebyscore">Redis Documentation: ZREMRANGEBYSCORE</a>
 	 */
-	class ZRemRangeByScoreCommand extends KeyCommand {
+	final class ZRemRangeByScoreCommand extends KeyCommand {
 
 		private final Range<Double> range;
 
@@ -2275,7 +2275,7 @@ public interface ReactiveZSetCommands {
 	 * @since 2.5
 	 * @see <a href="https://redis.io/commands/zremrangebylex">Redis Documentation: ZREMRANGEBYLEX</a>
 	 */
-	class ZRemRangeByLexCommand extends KeyCommand {
+	final class ZRemRangeByLexCommand extends KeyCommand {
 
 		private final Range<String> range;
 
@@ -2351,7 +2351,7 @@ public interface ReactiveZSetCommands {
 	 * @since 2.6
 	 * @see <a href="https://redis.io/commands/zdiff">Redis Documentation: ZDIFF</a>
 	 */
-	class ZDiffCommand implements Command {
+	final class ZDiffCommand implements Command {
 
 		private final List<ByteBuffer> keys;
 
@@ -2437,7 +2437,7 @@ public interface ReactiveZSetCommands {
 	 * @since 2.6
 	 * @see <a href="https://redis.io/commands/zdiffstore">Redis Documentation: ZDIFFSTORE</a>
 	 */
-	class ZDiffStoreCommand extends KeyCommand {
+	final class ZDiffStoreCommand extends KeyCommand {
 
 		private final List<ByteBuffer> sourceKeys;
 
@@ -2520,7 +2520,7 @@ public interface ReactiveZSetCommands {
 	 * @see <a href="https://redis.io/commands/zinter">Redis Documentation: ZINTER</a>
 	 * @see <a href="https://redis.io/commands/zunion">Redis Documentation: ZUNION</a>
 	 */
-	class ZAggregateCommand implements Command {
+	final class ZAggregateCommand implements Command {
 
 		private final List<ByteBuffer> sourceKeys;
 		private final List<Double> weights;
@@ -2616,7 +2616,7 @@ public interface ReactiveZSetCommands {
 	 * @see <a href="https://redis.io/commands/zinterstore">Redis Documentation: ZINTERSTORE</a>
 	 * @see <a href="https://redis.io/commands/zunionstore">Redis Documentation: ZUNIONSTORE</a>
 	 */
-	class ZAggregateStoreCommand extends KeyCommand {
+	final class ZAggregateStoreCommand extends KeyCommand {
 
 		private final List<ByteBuffer> sourceKeys;
 		private final List<Double> weights;
@@ -2832,7 +2832,7 @@ public interface ReactiveZSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/zinterstore">Redis Documentation: ZINTERSTORE</a>
 	 */
-	class ZInterStoreCommand extends ZAggregateStoreCommand {
+	final class ZInterStoreCommand extends ZAggregateStoreCommand {
 
 		private ZInterStoreCommand(ByteBuffer key, List<ByteBuffer> sourceKeys, List<Double> weights,
 				@Nullable Aggregate aggregate) {
@@ -3117,7 +3117,7 @@ public interface ReactiveZSetCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/zunionstore">Redis Documentation: ZUNIONSTORE</a>
 	 */
-	class ZUnionStoreCommand extends ZAggregateStoreCommand {
+	final class ZUnionStoreCommand extends ZAggregateStoreCommand {
 
 		private ZUnionStoreCommand(@Nullable ByteBuffer key, List<ByteBuffer> sourceKeys, List<Double> weights,
 				@Nullable Aggregate aggregate) {
@@ -3289,7 +3289,7 @@ public interface ReactiveZSetCommands {
 	 * @see <a href="https://redis.io/commands/zrangebylex">Redis Documentation: ZRANGEBYLEX</a>
 	 * @see <a href="https://redis.io/commands/zrevrangebylex">Redis Documentation: ZREVRANGEBYLEX</a>
 	 */
-	class ZRangeByLexCommand extends KeyCommand {
+	final class ZRangeByLexCommand extends KeyCommand {
 
 		private final Range<String> range;
 		private final Direction direction;

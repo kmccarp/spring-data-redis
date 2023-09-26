@@ -101,7 +101,7 @@ public class StreamInfo {
 	 *
 	 * @author Christoph Strobl
 	 */
-	public static class XInfoStream extends XInfoObject {
+	public static final class XInfoStream extends XInfoObject {
 
 		private static final Map<String, Class<?>> typeHints;
 
@@ -220,7 +220,7 @@ public class StreamInfo {
 	 *
 	 * @author Christoph Strobl
 	 */
-	public static class XInfoGroups implements Streamable<XInfoGroup> {
+	public static final class XInfoGroups implements Streamable<XInfoGroup> {
 
 		private final List<XInfoGroup> groupInfoList;
 
@@ -316,7 +316,7 @@ public class StreamInfo {
 
 	}
 
-	public static class XInfoGroup extends XInfoObject {
+	public static final class XInfoGroup extends XInfoObject {
 
 		private XInfoGroup(List<Object> raw) {
 			super(raw, DEFAULT_TYPE_HINTS);

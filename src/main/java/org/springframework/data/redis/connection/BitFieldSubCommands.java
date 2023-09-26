@@ -34,7 +34,7 @@ import org.springframework.util.ObjectUtils;
  * @author Yanam
  * @since 2.1
  */
-public class BitFieldSubCommands implements Iterable<BitFieldSubCommand> {
+public final class BitFieldSubCommands implements Iterable<BitFieldSubCommand> {
 
 	private final List<BitFieldSubCommand> subCommands;
 
@@ -175,7 +175,7 @@ public class BitFieldSubCommands implements Iterable<BitFieldSubCommand> {
 	/**
 	 * @author Christoph Strobl
 	 */
-	public static class BitFieldSetBuilder {
+	public static final class BitFieldSetBuilder {
 
 		private BitFieldSubCommands ref;
 
@@ -230,7 +230,7 @@ public class BitFieldSubCommands implements Iterable<BitFieldSubCommand> {
 	/**
 	 * @author Christoph Strobl
 	 */
-	public static class BitFieldGetBuilder {
+	public static final class BitFieldGetBuilder {
 
 		private BitFieldSubCommands ref;
 
@@ -273,7 +273,7 @@ public class BitFieldSubCommands implements Iterable<BitFieldSubCommand> {
 	/**
 	 * @author Christoph Strobl
 	 */
-	public class BitFieldIncrByBuilder {
+	public final class BitFieldIncrByBuilder {
 
 		private BitFieldSubCommands ref;
 
@@ -374,7 +374,7 @@ public class BitFieldSubCommands implements Iterable<BitFieldSubCommand> {
 	 * @author Mark Paluch
 	 * @since 2.1
 	 */
-	public static class Offset {
+	public static final class Offset {
 
 		private final long offset;
 		private final boolean zeroBased;
@@ -463,7 +463,7 @@ public class BitFieldSubCommands implements Iterable<BitFieldSubCommand> {
 	 * @author Mark Paluch
 	 * @since 2.1
 	 */
-	public static class BitFieldType {
+	public static final class BitFieldType {
 
 		/** 8 bit signed Integer */
 		public static final BitFieldType INT_8 = new BitFieldType(true, 8);
@@ -561,7 +561,7 @@ public class BitFieldSubCommands implements Iterable<BitFieldSubCommand> {
 
 		@Override
 		public int hashCode() {
-			int result = (signed ? 1 : 0);
+			int result = signed ? 1 : 0;
 			result = 31 * result + bits;
 			return result;
 		}
@@ -576,7 +576,7 @@ public class BitFieldSubCommands implements Iterable<BitFieldSubCommand> {
 	/**
 	 * @author Christoph Strobl
 	 */
-	public static abstract class AbstractBitFieldSubCommand implements BitFieldSubCommand {
+	public abstract static class AbstractBitFieldSubCommand implements BitFieldSubCommand {
 
 		BitFieldType type;
 		Offset offset;
@@ -687,10 +687,7 @@ public class BitFieldSubCommands implements Iterable<BitFieldSubCommand> {
 				return false;
 			}
 			BitFieldSet that = (BitFieldSet) o;
-			if (value != that.value) {
-				return false;
-			}
-			return true;
+			return value == that.value;
 		}
 
 		@Override

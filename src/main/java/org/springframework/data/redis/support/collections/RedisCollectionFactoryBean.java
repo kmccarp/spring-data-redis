@@ -168,7 +168,7 @@ public class RedisCollectionFactoryBean implements SmartFactoryBean<RedisStore>,
 
 	@Override
 	public Class<?> getObjectType() {
-		return (store != null ? store.get().getClass() : RedisStore.class);
+		return store != null ? store.get().getClass() : RedisStore.class;
 	}
 
 	@Override
