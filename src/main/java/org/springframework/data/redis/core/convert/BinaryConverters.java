@@ -247,7 +247,7 @@ final class BinaryConverters {
 			}
 
 			String value = toString(source);
-			return ("1".equals(value) || "true".equalsIgnoreCase(value)) ? Boolean.TRUE : Boolean.FALSE;
+			return "1".equals(value) || "true".equalsIgnoreCase(value) ? Boolean.TRUE : Boolean.FALSE;
 		}
 	}
 

@@ -52,7 +52,7 @@ import org.springframework.util.StringUtils;
  */
 public class ExampleQueryMapper {
 
-	private final Set<StringMatcher> SUPPORTED_MATCHERS = EnumSet.of(StringMatcher.DEFAULT, StringMatcher.EXACT);
+	private static final Set<StringMatcher> SUPPORTED_MATCHERS = EnumSet.of(StringMatcher.DEFAULT, StringMatcher.EXACT);
 
 	private final MappingContext<RedisPersistentEntity<?>, RedisPersistentProperty> mappingContext;
 	private final IndexResolver indexResolver;

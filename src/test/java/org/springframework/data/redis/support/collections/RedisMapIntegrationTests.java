@@ -57,7 +57,7 @@ public class RedisMapIntegrationTests extends AbstractRedisMapIntegrationTests<O
 	@SuppressWarnings("unchecked")
 	RedisMap<Object, Object> createMap() {
 		String redisName = getClass().getSimpleName();
-		return new DefaultRedisMap<Object, Object>(redisName, template);
+		return new DefaultRedisMap<>(redisName, template);
 	}
 
 	// DATAREDIS-241

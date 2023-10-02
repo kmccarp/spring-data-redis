@@ -53,7 +53,7 @@ public class RedisClusterConfiguration implements RedisConfiguration, ClusterCon
 
 	private final Set<RedisNode> clusterNodes;
 
-	private @Nullable String username = null;
+	private @Nullable String username;
 
 	/**
 	 * Creates a new, default {@link RedisClusterConfiguration}.

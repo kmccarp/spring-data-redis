@@ -397,7 +397,7 @@ public class RedisCacheManager extends AbstractTransactionSupportingCacheManager
 	 * @author John Blum
 	 * @since 2.0
 	 */
-	public static class RedisCacheManagerBuilder {
+	public static final class RedisCacheManagerBuilder {
 
 		/**
 		 * Factory method returning a new {@literal Builder} used to create and configure a {@link RedisCacheManager}

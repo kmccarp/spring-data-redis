@@ -266,7 +266,7 @@ class LettuceReactiveHashCommands implements ReactiveHashCommands {
 
 	private static Map.Entry<ByteBuffer, ByteBuffer> toEntry(KeyValue<ByteBuffer, ByteBuffer> kv) {
 
-		return new Entry<ByteBuffer, ByteBuffer>() {
+		return new Entry<>() {
 
 			@Override
 			public ByteBuffer getKey() {

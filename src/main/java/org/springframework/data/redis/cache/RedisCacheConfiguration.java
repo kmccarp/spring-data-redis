@@ -44,7 +44,7 @@ import org.springframework.util.Assert;
  * @author John Blum
  * @since 2.0
  */
-public class RedisCacheConfiguration {
+public final class RedisCacheConfiguration {
 
 	protected static final boolean DEFAULT_CACHE_NULL_VALUES = true;
 	protected static final boolean DEFAULT_ENABLE_TIME_TO_IDLE_EXPIRATION = false;

@@ -26,6 +26,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.data.redis.SettingsUtils;
 import org.springframework.data.redis.connection.AbstractConnectionPipelineIntegrationTests;
+import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.util.ConnectionVerifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -69,7 +70,7 @@ public class JedisConnectionPipelineIntegrationTests extends AbstractConnectionP
 		factory2.setDatabase(1);
 
 		ConnectionVerifier.create(factory2) //
-				.execute(conn2 -> conn2.openPipeline()) //
+				.execute(RedisConnection::openPipeline) //
 				.verifyAndRun(connectionFactory -> {
 					connectionFactory.getConnection();
 					connectionFactory.destroy();
@@ -161,7 +162,7 @@ public class JedisConnectionPipelineIntegrationTests extends AbstractConnectionP
 
 	@Test
 	public void testScriptKill() {
-		assertThatExceptionOfType(InvalidDataAccessApiUsageException.class).isThrownBy(() -> connection.scriptKill());
+		assertThatExceptionOfType(InvalidDataAccessApiUsageException.class).isThrownBy(connection::scriptKill);
 	}
 
 	@Test

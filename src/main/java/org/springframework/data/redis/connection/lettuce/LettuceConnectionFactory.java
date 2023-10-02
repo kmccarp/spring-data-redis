@@ -114,12 +114,12 @@ public class LettuceConnectionFactory implements RedisConnectionFactory, Reactiv
 	private static final ExceptionTranslationStrategy EXCEPTION_TRANSLATION = new PassThroughExceptionTranslationStrategy(
 			LettuceExceptionConverter.INSTANCE);
 
-	private boolean validateConnection = false;
+	private boolean validateConnection;
 	private boolean shareNativeConnection = true;
-	private boolean eagerInitialization = false;
+	private boolean eagerInitialization;
 	private boolean convertPipelineAndTxResults = true;
 
-	private int phase = 0; // in between min and max values
+	private int phase; // in between min and max values
 
 	private @Nullable AbstractRedisClient client;
 
@@ -152,7 +152,7 @@ public class LettuceConnectionFactory implements RedisConnectionFactory, Reactiv
 	 * Lifecycle state of this factory.
 	 */
 	enum State {
-		CREATED, STARTING, STARTED, STOPPING, STOPPED, DESTROYED;
+		CREATED, STARTING, STARTED, STOPPING, STOPPED, DESTROYED
 	}
 
 	/**

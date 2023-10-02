@@ -55,7 +55,7 @@ import org.springframework.util.CollectionUtils;
  */
 public class PathIndexResolver implements IndexResolver {
 
-	private final Set<Class<?>> VALUE_TYPES = new HashSet<>(Arrays.<Class<?>> asList(Point.class, GeoLocation.class));
+	private static final Set<Class<?>> VALUE_TYPES = new HashSet<>(Arrays.<Class<?>> asList(Point.class, GeoLocation.class));
 
 	private final ConfigurableIndexDefinitionProvider indexConfiguration;
 	private final RedisMappingContext mappingContext;
@@ -112,7 +112,7 @@ public class PathIndexResolver implements IndexResolver {
 		final PersistentPropertyAccessor accessor = entity.getPropertyAccessor(value);
 		final Set<IndexedData> indexes = new LinkedHashSet<>();
 
-		entity.doWithProperties(new PropertyHandler<RedisPersistentProperty>() {
+		entity.doWithProperties(new PropertyHandler<>() {
 
 			@Override
 			public void doWithPersistentProperty(RedisPersistentProperty persistentProperty) {

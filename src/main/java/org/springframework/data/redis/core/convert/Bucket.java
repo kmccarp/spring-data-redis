@@ -319,7 +319,7 @@ public class Bucket {
 	 * @author Mark Paluch
 	 * @since 2.1
 	 */
-	public static class BucketPropertyPath {
+	public static final class BucketPropertyPath {
 
 		private final Bucket bucket;
 		private final @Nullable String prefix;

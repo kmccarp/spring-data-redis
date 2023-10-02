@@ -122,7 +122,7 @@ public class DefaultReactiveScriptExecutor<K> implements ReactiveScriptExecutor<
 	protected ByteBuffer[] keysAndArgs(RedisElementWriter argsWriter, List<K> keys, List<?> args) {
 
 		return Stream.concat(keys.stream().map(t -> keySerializer().getWriter().write(t)),
-				args.stream().map(t -> argsWriter.write(t))).toArray(size -> new ByteBuffer[size]);
+				args.stream().map(argsWriter::write)).toArray(size -> new ByteBuffer[size]);
 	}
 
 	/**

@@ -87,7 +87,7 @@ class JedisConnectionFactoryIntegrationTests {
 
 		factory.stop();
 		assertThat(factory.isRunning()).isFalse();
-		assertThatIllegalStateException().isThrownBy(() -> factory.getConnection());
+		assertThatIllegalStateException().isThrownBy(factory::getConnection);
 
 		factory.start();
 		assertThat(factory.isRunning()).isTrue();

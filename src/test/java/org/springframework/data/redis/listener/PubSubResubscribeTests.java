@@ -173,10 +173,10 @@ public class PubSubResubscribeTests {
 		String anotherPayload1 = "od";
 		String anotherPayload2 = "mi er";
 
-		String ANOTHER_CHANNEL = "pubsub::test::extra";
+		String anotherChannel = "pubsub::test::extra";
 
 		// bind listener on another channel
-		container.addMessageListener(adapter, new ChannelTopic(ANOTHER_CHANNEL));
+		container.addMessageListener(adapter, new ChannelTopic(anotherChannel));
 		container.removeMessageListener(null, new ChannelTopic(CHANNEL));
 
 		// Listener removed from channel
@@ -184,8 +184,8 @@ public class PubSubResubscribeTests {
 		template.convertAndSend(CHANNEL, payload2);
 
 		// Listener receives messages on another channel
-		template.convertAndSend(ANOTHER_CHANNEL, anotherPayload1);
-		template.convertAndSend(ANOTHER_CHANNEL, anotherPayload2);
+		template.convertAndSend(anotherChannel, anotherPayload1);
+		template.convertAndSend(anotherChannel, anotherPayload2);
 
 		await().atMost(Duration.ofSeconds(2)).until(() -> bag.contains(anotherPayload1) && bag.contains(anotherPayload2));
 	}

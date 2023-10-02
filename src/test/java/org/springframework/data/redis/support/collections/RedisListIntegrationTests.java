@@ -41,6 +41,6 @@ public class RedisListIntegrationTests extends AbstractRedisListIntegrationTests
 	}
 
 	AbstractRedisCollection<Object> createCollection() {
-		return new DefaultRedisList<Object>(getClass().getName(), this.template);
+		return new DefaultRedisList<>(getClass().getName(), this.template);
 	}
 }

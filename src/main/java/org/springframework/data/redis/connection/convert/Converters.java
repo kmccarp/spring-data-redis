@@ -134,7 +134,7 @@ public abstract class Converters {
 	}
 
 	public static byte[] toBit(Boolean source) {
-		return (source ? ONE : ZERO);
+		return source ? ONE : ZERO;
 	}
 
 	/**
@@ -443,7 +443,7 @@ public abstract class Converters {
 
 		if (ClassUtils.isAssignable(Map.class, targetType) && source instanceof List) {
 
-			List<Object> sourceCollection = ((List<Object>) source);
+			List<Object> sourceCollection = (List<Object>) source;
 			Map<String, Object> targetMap = new LinkedHashMap<>();
 
 			for (int i = 0; i < sourceCollection.size(); i = i + 2) {

@@ -168,8 +168,9 @@ public class DefaultRedisMap<K, V> implements RedisMap<K, V> {
 	@Override
 	public boolean equals(@Nullable Object o) {
 
-		if (o == this)
+		if (o == this) {
 			return true;
+		}
 
 		if (o instanceof RedisMap) {
 			return o.hashCode() == hashCode();
@@ -194,7 +195,7 @@ public class DefaultRedisMap<K, V> implements RedisMap<K, V> {
 	@Override
 	@Nullable
 	public V putIfAbsent(K key, V value) {
-		return (hashOps.putIfAbsent(key, value) ? null : get(key));
+		return hashOps.putIfAbsent(key, value) ? null : get(key);
 	}
 
 	@Override
@@ -204,7 +205,7 @@ public class DefaultRedisMap<K, V> implements RedisMap<K, V> {
 			throw new NullPointerException();
 		}
 
-		return hashOps.getOperations().execute(new SessionCallback<Boolean>() {
+		return hashOps.getOperations().execute(new SessionCallback<>() {
 			@Override
 			@SuppressWarnings({ "unchecked", "rawtypes" })
 			public Boolean execute(RedisOperations ops) {
@@ -232,7 +233,7 @@ public class DefaultRedisMap<K, V> implements RedisMap<K, V> {
 			throw new NullPointerException();
 		}
 
-		return hashOps.getOperations().execute(new SessionCallback<Boolean>() {
+		return hashOps.getOperations().execute(new SessionCallback<>() {
 			@Override
 			@SuppressWarnings({ "unchecked", "rawtypes" })
 			public Boolean execute(RedisOperations ops) {

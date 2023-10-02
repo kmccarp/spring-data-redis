@@ -64,7 +64,7 @@ public interface ReactiveNumberCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/incrby">Redis Documentation: INCRBY</a>
 	 */
-	class IncrByCommand<T extends Number> extends KeyCommand {
+	final class IncrByCommand<T extends Number> extends KeyCommand {
 
 		private @Nullable T value;
 
@@ -124,7 +124,7 @@ public interface ReactiveNumberCommands {
 		Assert.notNull(key, "Key must not be null");
 		Assert.notNull(value, "Value must not be null");
 
-		return incrBy(Mono.just(IncrByCommand.<T> incr(key).by(value))).next().map(NumericResponse::getOutput);
+		return incrBy(Mono.just(IncrByCommand. incr(key).by(value))).next().map(NumericResponse::getOutput);
 	}
 
 	/**
@@ -144,7 +144,7 @@ public interface ReactiveNumberCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/decrby">Redis Documentation: DECRBY</a>
 	 */
-	class DecrByCommand<T extends Number> extends KeyCommand {
+	final class DecrByCommand<T extends Number> extends KeyCommand {
 
 		private @Nullable T value;
 
@@ -225,7 +225,7 @@ public interface ReactiveNumberCommands {
 		Assert.notNull(key, "Key must not be null");
 		Assert.notNull(value, "Value must not be null");
 
-		return decrBy(Mono.just(DecrByCommand.<T> decr(key).by(value))).next().map(NumericResponse::getOutput);
+		return decrBy(Mono.just(DecrByCommand. decr(key).by(value))).next().map(NumericResponse::getOutput);
 	}
 
 	/**
@@ -242,7 +242,7 @@ public interface ReactiveNumberCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/hincrby">Redis Documentation: HINCRBY</a>
 	 */
-	class HIncrByCommand<T extends Number> extends KeyCommand {
+	final class HIncrByCommand<T extends Number> extends KeyCommand {
 
 		private final ByteBuffer field;
 		private final @Nullable T value;
@@ -326,7 +326,7 @@ public interface ReactiveNumberCommands {
 		Assert.notNull(field, "Field must not be null");
 		Assert.notNull(value, "Value must not be null");
 
-		return hIncrBy(Mono.just(HIncrByCommand.<T> incr(field).by(value).forKey(key))).next()
+		return hIncrBy(Mono.just(HIncrByCommand. incr(field).by(value).forKey(key))).next()
 				.map(NumericResponse::getOutput);
 	}
 

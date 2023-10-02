@@ -54,7 +54,7 @@ public interface ReactiveHashCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/hset">Redis Documentation: HSET</a>
 	 */
-	class HSetCommand extends KeyCommand {
+	final class HSetCommand extends KeyCommand {
 
 		private static final ByteBuffer SINGLE_VALUE_KEY = ByteBuffer.allocate(0);
 		private final Map<ByteBuffer, ByteBuffer> fieldValueMap;
@@ -216,7 +216,7 @@ public interface ReactiveHashCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/hget">Redis Documentation: HGET</a>
 	 */
-	class HGetCommand extends KeyCommand {
+	final class HGetCommand extends KeyCommand {
 
 		private List<ByteBuffer> fields;
 
@@ -320,7 +320,7 @@ public interface ReactiveHashCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/hexists">Redis Documentation: HEXISTS</a>
 	 */
-	class HExistsCommand extends KeyCommand {
+	final class HExistsCommand extends KeyCommand {
 
 		private final ByteBuffer field;
 
@@ -394,7 +394,7 @@ public interface ReactiveHashCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/hdel">Redis Documentation: HDEL</a>
 	 */
-	class HDelCommand extends KeyCommand {
+	final class HDelCommand extends KeyCommand {
 
 		private final List<ByteBuffer> fields;
 
@@ -522,7 +522,7 @@ public interface ReactiveHashCommands {
 	 * @since 2.6
 	 * @see <a href="https://redis.io/commands/hrandfield">Redis Documentation: HRANDFIELD</a>
 	 */
-	class HRandFieldCommand extends KeyCommand {
+	final class HRandFieldCommand extends KeyCommand {
 
 		private long count;
 
@@ -770,7 +770,7 @@ public interface ReactiveHashCommands {
 	 * @see <a href="https://redis.io/commands/hstrlen">Redis Documentation: HSTRLEN</a>
 	 * @since 2.1
 	 */
-	class HStrLenCommand extends KeyCommand {
+	final class HStrLenCommand extends KeyCommand {
 
 		private ByteBuffer field;
 

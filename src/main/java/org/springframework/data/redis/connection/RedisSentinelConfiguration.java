@@ -59,8 +59,8 @@ public class RedisSentinelConfiguration implements RedisConfiguration, SentinelC
 
 	private final Set<RedisNode> sentinels;
 
-	private @Nullable String dataNodeUsername = null;
-	private @Nullable String sentinelUsername = null;
+	private @Nullable String dataNodeUsername;
+	private @Nullable String sentinelUsername;
 
 	/**
 	 * Creates a new, default {@link RedisSentinelConfiguration}.

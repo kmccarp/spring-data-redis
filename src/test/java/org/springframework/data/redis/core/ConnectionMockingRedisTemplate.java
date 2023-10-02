@@ -25,7 +25,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
  *
  * @author Christoph Strobl
  */
-public class ConnectionMockingRedisTemplate<K, V> extends RedisTemplate<K, V> {
+public final class ConnectionMockingRedisTemplate<K, V> extends RedisTemplate<K, V> {
 
 	private final RedisConnection connectionMock;
 

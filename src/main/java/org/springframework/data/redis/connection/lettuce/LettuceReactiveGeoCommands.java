@@ -230,7 +230,7 @@ class LettuceReactiveGeoCommands implements ReactiveGeoCommands {
 
 	private Converter<GeoWithin<ByteBuffer>, GeoResult<GeoLocation<ByteBuffer>>> converter(Metric metric) {
 
-		return (source) -> {
+		return source -> {
 
 			Point point = LettuceConverters.geoCoordinatesToPoint(source.getCoordinates());
 

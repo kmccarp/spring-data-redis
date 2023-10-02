@@ -30,7 +30,7 @@ import org.springframework.dao.InvalidDataAccessApiUsageException;
  * @author Thomas Darimont
  * @author Christoph Strobl
  */
-abstract public class AbstractConnectionTransactionIntegrationTests extends AbstractConnectionIntegrationTests {
+public abstract class AbstractConnectionTransactionIntegrationTests extends AbstractConnectionIntegrationTests {
 
 	@Test
 	@Override
@@ -138,7 +138,7 @@ abstract public class AbstractConnectionTransactionIntegrationTests extends Abst
 	public void testScriptKill() {
 		// Impossible to call script kill in a tx because you can't issue the
 		// exec command while Redis is running a script
-		assertThatExceptionOfType(InvalidDataAccessApiUsageException.class).isThrownBy(() -> connection.scriptKill());
+		assertThatExceptionOfType(InvalidDataAccessApiUsageException.class).isThrownBy(connection::scriptKill);
 	}
 
 	@Test // DATAREDIS-417

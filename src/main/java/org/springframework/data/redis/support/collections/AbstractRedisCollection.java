@@ -141,8 +141,9 @@ public abstract class AbstractRedisCollection<E> extends AbstractCollection<E> i
 	@Override
 	public boolean equals(@Nullable Object o) {
 
-		if (o == this)
+		if (o == this) {
 			return true;
+		}
 
 		if (o instanceof RedisStore) {
 			return key.equals(((RedisStore) o).getKey());

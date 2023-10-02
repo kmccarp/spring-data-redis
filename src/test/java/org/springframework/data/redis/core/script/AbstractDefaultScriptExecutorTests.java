@@ -75,7 +75,7 @@ public abstract class AbstractDefaultScriptExecutorTests {
 		DefaultRedisScript<Long> script = new DefaultRedisScript<>();
 		script.setLocation(new ClassPathResource("org/springframework/data/redis/core/script/increment.lua"));
 		script.setResultType(Long.class);
-		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<String>(template);
+		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<>(template);
 		Long result = scriptExecutor.execute(script, Collections.singletonList("mykey"));
 		assertThat(result).isNull();
 		template.boundValueOps("mykey").set("2");
@@ -93,7 +93,7 @@ public abstract class AbstractDefaultScriptExecutorTests {
 		DefaultRedisScript<Boolean> script = new DefaultRedisScript<>();
 		script.setLocation(new ClassPathResource("org/springframework/data/redis/core/script/cas.lua"));
 		script.setResultType(Boolean.class);
-		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<String>(template);
+		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<>(template);
 		template.boundValueOps("counter").set(0L);
 		Boolean valueSet = scriptExecutor.execute(script, Collections.singletonList("counter"), 0, 3);
 		assertThat(valueSet).isTrue();
@@ -110,7 +110,7 @@ public abstract class AbstractDefaultScriptExecutorTests {
 		DefaultRedisScript<List> script = new DefaultRedisScript<>();
 		script.setLocation(new ClassPathResource("org/springframework/data/redis/core/script/bulkpop.lua"));
 		script.setResultType(List.class);
-		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<String>(template);
+		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<>(template);
 		List<String> result = scriptExecutor.execute(script, new GenericToStringSerializer<>(Long.class),
 				template.getValueSerializer(), Collections.singletonList("mylist"), 1L);
 		assertThat(result).isEqualTo(Collections.singletonList("a"));
@@ -125,7 +125,7 @@ public abstract class AbstractDefaultScriptExecutorTests {
 		DefaultRedisScript<List> script = new DefaultRedisScript<>();
 		script.setLocation(new ClassPathResource("org/springframework/data/redis/core/script/popandlength.lua"));
 		script.setResultType(List.class);
-		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<String>(template);
+		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<>(template);
 		List<Object> results = scriptExecutor.execute(script, Collections.singletonList("mylist"));
 		assertThat(results).isEqualTo(Arrays.asList(null, 0L));
 		template.boundListOps("mylist").leftPushAll("a", "b");
@@ -142,7 +142,7 @@ public abstract class AbstractDefaultScriptExecutorTests {
 		script.setScriptText("return redis.call('GET',KEYS[1])");
 		script.setResultType(String.class);
 		template.opsForValue().set("foo", "bar");
-		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<String>(template);
+		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<>(template);
 		assertThat(scriptExecutor.execute(script, Collections.singletonList("foo"))).isEqualTo("bar");
 	}
 
@@ -156,7 +156,7 @@ public abstract class AbstractDefaultScriptExecutorTests {
 		template.afterPropertiesSet();
 		DefaultRedisScript script = new DefaultRedisScript();
 		script.setScriptText("return redis.call('SET',KEYS[1], ARGV[1])");
-		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<String>(template);
+		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<>(template);
 		Object result = scriptExecutor.execute(script, Collections.singletonList("foo"), 3L);
 		assertThat(result).isNull();
 		assertThat(template.opsForValue().get("foo")).isEqualTo(3L);
@@ -174,7 +174,7 @@ public abstract class AbstractDefaultScriptExecutorTests {
 		DefaultRedisScript<String> script = new DefaultRedisScript<>();
 		script.setScriptSource(new StaticScriptSource("redis.call('SET',KEYS[1], ARGV[1])\nreturn 'FOO'"));
 		script.setResultType(String.class);
-		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<String>(template);
+		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<>(template);
 		Person joe = new Person("Joe", "Schmoe", 23);
 		String result = scriptExecutor.execute(script, personSerializer, StringRedisSerializer.UTF_8,
 				Collections.singletonList("bar"), joe);
@@ -233,7 +233,7 @@ public abstract class AbstractDefaultScriptExecutorTests {
 		DefaultRedisScript<String> script = new DefaultRedisScript<>();
 		script.setScriptText("return 'HELLO'");
 		script.setResultType(String.class);
-		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<String>(template);
+		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<>(template);
 		// Execute script twice, second time should be from cache
 		assertThat(scriptExecutor.execute(script, null)).isEqualTo("HELLO");
 		assertThat(scriptExecutor.execute(script, null)).isEqualTo("HELLO");
@@ -250,7 +250,7 @@ public abstract class AbstractDefaultScriptExecutorTests {
 		script.setScriptText("return 'BUBU" + System.currentTimeMillis() + "'");
 		script.setResultType(String.class);
 
-		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<String>(template);
+		ScriptExecutor<String> scriptExecutor = new DefaultScriptExecutor<>(template);
 		assertThat(scriptExecutor.execute(script, null).substring(0, 4)).isEqualTo("BUBU");
 	}
 }
