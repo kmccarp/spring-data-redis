@@ -227,9 +227,7 @@ class LettuceReactiveListCommands implements ReactiveListCommands {
 	@Override
 	public Flux<BooleanResponse<LSetCommand>> lSet(Publisher<LSetCommand> commands) {
 
-		return connection.execute(cmd -> {
-
-			return Flux.from(commands).concatMap(command -> {
+		return connection.execute(cmd -> Flux.from(commands).concatMap(command -> {
 
 				Assert.notNull(command.getKey(), "Key must not be null");
 				Assert.notNull(command.getValue(), "value must not be null");
@@ -237,8 +235,7 @@ class LettuceReactiveListCommands implements ReactiveListCommands {
 
 				return cmd.lset(command.getKey(), command.getIndex(), command.getValue())
 						.map(LettuceConverters::stringToBoolean).map(value -> new BooleanResponse<>(command, value));
-			});
-		});
+			}));
 	}
 
 	@Override

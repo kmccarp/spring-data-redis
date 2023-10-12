@@ -38,8 +38,9 @@ class PropertyEditorsIntegrationTests {
 
 	@AfterEach
 	void tearDown() {
-		if (ctx != null)
-			ctx.close();
+        if (ctx != null) {
+            ctx.close();
+        }
 	}
 
 	@Test

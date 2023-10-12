@@ -37,7 +37,7 @@ public abstract class SerializationUtils {
 	static final byte[] EMPTY_ARRAY = new byte[0];
 
 	static boolean isEmpty(@Nullable byte[] data) {
-		return (data == null || data.length == 0);
+		return data == null || data.length == 0;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -48,8 +48,8 @@ public abstract class SerializationUtils {
 			return (T) CollectionFactory.createCollection(type, 0);
 		}
 
-		Collection<Object> values = (List.class.isAssignableFrom(type) ? new ArrayList<>(rawValues.size())
-				: new LinkedHashSet<>(rawValues.size()));
+		Collection<Object> values = List.class.isAssignableFrom(type) ? new ArrayList<>(rawValues.size())
+				: new LinkedHashSet<>(rawValues.size());
 		for (byte[] bs : rawValues) {
 			values.add(redisSerializer.deserialize(bs));
 		}

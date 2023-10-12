@@ -294,7 +294,8 @@ public class StreamReceiverIntegrationTests {
 
 	static class LoginEvent {
 
-		String firstName, lastName;
+        String firstName;
+        String lastName;
 
 		LoginEvent(String firstName, String lastName) {
 			this.firstName = firstName;

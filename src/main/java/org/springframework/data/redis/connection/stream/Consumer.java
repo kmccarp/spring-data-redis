@@ -26,7 +26,7 @@ import org.springframework.util.ObjectUtils;
  * @author Mark Paluch
  * @see 2.2
  */
-public class Consumer {
+public final class Consumer {
 
 	private final String group;
 	private final String name;
@@ -66,10 +66,12 @@ public class Consumer {
 
 	@Override
 	public boolean equals(@Nullable Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
 		Consumer consumer = (Consumer) o;
 

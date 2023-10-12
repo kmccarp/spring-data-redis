@@ -62,12 +62,12 @@ import org.springframework.util.StringUtils;
  */
 public interface ReactiveStreamCommands {
 
-	/**
-	 * {@code XACK} command parameters.
-	 *
-	 * @see <a href="https://redis.io/commands/xack">Redis Documentation: XACK</a>
-	 */
-	class AcknowledgeCommand extends KeyCommand {
+    /**
+     * {@code XACK} command parameters.
+     *
+     * @see <a href="https://redis.io/commands/xack">Redis Documentation: XACK</a>
+     */
+    final class AcknowledgeCommand extends KeyCommand {
 
 		private final @Nullable String group;
 		private final List<RecordId> recordIds;
@@ -190,12 +190,12 @@ public interface ReactiveStreamCommands {
 	 */
 	Flux<NumericResponse<AcknowledgeCommand, Long>> xAck(Publisher<AcknowledgeCommand> commands);
 
-	/**
-	 * {@code XADD} command parameters.
-	 *
-	 * @see <a href="https://redis.io/commands/xadd">Redis Documentation: XADD</a>
-	 */
-	class AddStreamRecord extends KeyCommand {
+    /**
+     * {@code XADD} command parameters.
+     *
+     * @see <a href="https://redis.io/commands/xadd">Redis Documentation: XADD</a>
+     */
+    final class AddStreamRecord extends KeyCommand {
 
 		private final ByteBufferRecord record;
 		private final boolean nomkstream;
@@ -477,13 +477,13 @@ public interface ReactiveStreamCommands {
 	 */
 	Flux<CommandResponse<XClaimCommand, Flux<ByteBufferRecord>>> xClaim(Publisher<XClaimCommand> commands);
 
-	/**
-	 * {@code XCLAIM} command parameters.
-	 *
-	 * @see <a href="https://redis.io/commands/xclaim">Redis Documentation: XCLAIM</a>
-	 * @since 2.3
-	 */
-	class XClaimCommand extends KeyCommand {
+    /**
+     * {@code XCLAIM} command parameters.
+     *
+     * @see <a href="https://redis.io/commands/xclaim">Redis Documentation: XCLAIM</a>
+     * @since 2.3
+     */
+    final class XClaimCommand extends KeyCommand {
 
 		private final String groupName;
 		private final String newOwner;
@@ -510,12 +510,12 @@ public interface ReactiveStreamCommands {
 		}
 	}
 
-	/**
-	 * {@code XDEL} command parameters.
-	 *
-	 * @see <a href="https://redis.io/commands/xdel">Redis Documentation: XDEL</a>
-	 */
-	class DeleteCommand extends KeyCommand {
+    /**
+     * {@code XDEL} command parameters.
+     *
+     * @see <a href="https://redis.io/commands/xdel">Redis Documentation: XDEL</a>
+     */
+    final class DeleteCommand extends KeyCommand {
 
 		private final List<RecordId> recordIds;
 
@@ -763,13 +763,13 @@ public interface ReactiveStreamCommands {
 	 */
 	Flux<CommandResponse<PendingRecordsCommand, PendingMessages>> xPending(Publisher<PendingRecordsCommand> commands);
 
-	/**
-	 * Value Object holding parameters for obtaining pending messages.
-	 *
-	 * @author Christoph Strobl
-	 * @since 2.3
-	 */
-	class PendingRecordsCommand extends KeyCommand {
+    /**
+     * Value Object holding parameters for obtaining pending messages.
+     *
+     * @author Christoph Strobl
+     * @since 2.3
+     */
+    final class PendingRecordsCommand extends KeyCommand {
 
 		private final String groupName;
 		private final @Nullable String consumerName;
@@ -859,13 +859,13 @@ public interface ReactiveStreamCommands {
 		}
 	}
 
-	/**
-	 * {@code XRANGE}/{@code XREVRANGE} command parameters.
-	 *
-	 * @see <a href="https://redis.io/commands/xrange">Redis Documentation: XRANGE</a>
-	 * @see <a href="https://redis.io/commands/xrevrange">Redis Documentation: XREVRANGE</a>
-	 */
-	class RangeCommand extends KeyCommand {
+    /**
+     * {@code XRANGE}/{@code XREVRANGE} command parameters.
+     *
+     * @see <a href="https://redis.io/commands/xrange">Redis Documentation: XRANGE</a>
+     * @see <a href="https://redis.io/commands/xrevrange">Redis Documentation: XREVRANGE</a>
+     */
+    final class RangeCommand extends KeyCommand {
 
 		private final Range<String> range;
 		private final Limit limit;
@@ -1116,11 +1116,11 @@ public interface ReactiveStreamCommands {
 	 */
 	Flux<CommandResponse<ReadCommand, Flux<ByteBufferRecord>>> read(Publisher<ReadCommand> commands);
 
-	/**
-	 * @author Christoph Strobl
-	 * @since 2.3
-	 */
-	class XInfoCommand extends KeyCommand {
+    /**
+     * @author Christoph Strobl
+     * @since 2.3
+     */
+    final class XInfoCommand extends KeyCommand {
 
 		private final @Nullable String groupName;
 
@@ -1450,12 +1450,12 @@ public interface ReactiveStreamCommands {
 	 */
 	Flux<CommandResponse<RangeCommand, Flux<ByteBufferRecord>>> xRevRange(Publisher<RangeCommand> commands);
 
-	/**
-	 * {@code XTRIM} command parameters.
-	 *
-	 * @see <a href="https://redis.io/commands/xtrim">Redis Documentation: XTRIM</a>
-	 */
-	class TrimCommand extends KeyCommand {
+    /**
+     * {@code XTRIM} command parameters.
+     *
+     * @see <a href="https://redis.io/commands/xtrim">Redis Documentation: XTRIM</a>
+     */
+    final class TrimCommand extends KeyCommand {
 
 		private @Nullable Long count;
 		private boolean approximateTrimming;

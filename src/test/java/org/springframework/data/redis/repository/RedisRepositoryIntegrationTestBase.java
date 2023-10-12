@@ -795,8 +795,8 @@ public abstract class RedisRepositoryIntegrationTestBase {
 		}
 	}
 
-	@RedisHash("Users")
-	static class User {
+    @RedisHash("Users")
+    static final class User {
 
 		@Id private final String name;
 

@@ -48,13 +48,13 @@ import org.springframework.util.Assert;
  */
 public interface ReactiveHashCommands {
 
-	/**
-	 * {@literal HSET} {@link Command}.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/hset">Redis Documentation: HSET</a>
-	 */
-	class HSetCommand extends KeyCommand {
+    /**
+     * {@literal HSET} {@link Command}.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/hset">Redis Documentation: HSET</a>
+     */
+    final class HSetCommand extends KeyCommand {
 
 		private static final ByteBuffer SINGLE_VALUE_KEY = ByteBuffer.allocate(0);
 		private final Map<ByteBuffer, ByteBuffer> fieldValueMap;
@@ -210,13 +210,13 @@ public interface ReactiveHashCommands {
 	 */
 	Flux<BooleanResponse<HSetCommand>> hSet(Publisher<HSetCommand> commands);
 
-	/**
-	 * {@literal HGET} {@link Command}.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/hget">Redis Documentation: HGET</a>
-	 */
-	class HGetCommand extends KeyCommand {
+    /**
+     * {@literal HGET} {@link Command}.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/hget">Redis Documentation: HGET</a>
+     */
+    final class HGetCommand extends KeyCommand {
 
 		private List<ByteBuffer> fields;
 
@@ -314,13 +314,13 @@ public interface ReactiveHashCommands {
 	 */
 	Flux<MultiValueResponse<HGetCommand, ByteBuffer>> hMGet(Publisher<HGetCommand> commands);
 
-	/**
-	 * {@literal HEXISTS} {@link Command}.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/hexists">Redis Documentation: HEXISTS</a>
-	 */
-	class HExistsCommand extends KeyCommand {
+    /**
+     * {@literal HEXISTS} {@link Command}.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/hexists">Redis Documentation: HEXISTS</a>
+     */
+    final class HExistsCommand extends KeyCommand {
 
 		private final ByteBuffer field;
 
@@ -390,11 +390,11 @@ public interface ReactiveHashCommands {
 	 */
 	Flux<BooleanResponse<HExistsCommand>> hExists(Publisher<HExistsCommand> commands);
 
-	/**
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/hdel">Redis Documentation: HDEL</a>
-	 */
-	class HDelCommand extends KeyCommand {
+    /**
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/hdel">Redis Documentation: HDEL</a>
+     */
+    final class HDelCommand extends KeyCommand {
 
 		private final List<ByteBuffer> fields;
 
@@ -515,14 +515,14 @@ public interface ReactiveHashCommands {
 	 */
 	Flux<NumericResponse<KeyCommand, Long>> hLen(Publisher<KeyCommand> commands);
 
-	/**
-	 * {@literal HRANDFIELD} {@link Command}.
-	 *
-	 * @author Mark Paluch
-	 * @since 2.6
-	 * @see <a href="https://redis.io/commands/hrandfield">Redis Documentation: HRANDFIELD</a>
-	 */
-	class HRandFieldCommand extends KeyCommand {
+    /**
+     * {@literal HRANDFIELD} {@link Command}.
+     *
+     * @author Mark Paluch
+     * @since 2.6
+     * @see <a href="https://redis.io/commands/hrandfield">Redis Documentation: HRANDFIELD</a>
+     */
+    final class HRandFieldCommand extends KeyCommand {
 
 		private long count;
 
@@ -765,12 +765,12 @@ public interface ReactiveHashCommands {
 	 */
 	Flux<CommandResponse<KeyCommand, Flux<Map.Entry<ByteBuffer, ByteBuffer>>>> hScan(Publisher<KeyScanCommand> commands);
 
-	/**
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/hstrlen">Redis Documentation: HSTRLEN</a>
-	 * @since 2.1
-	 */
-	class HStrLenCommand extends KeyCommand {
+    /**
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/hstrlen">Redis Documentation: HSTRLEN</a>
+     * @since 2.1
+     */
+    final class HStrLenCommand extends KeyCommand {
 
 		private ByteBuffer field;
 

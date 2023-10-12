@@ -224,7 +224,7 @@ class IndexWriter {
 			connection.sAdd(ByteUtils.concatAll(toBytes(indexedData.getKeyspace() + ":"), key, toBytes(":idx")), indexKey);
 		} else if (indexedData instanceof GeoIndexedPropertyValue) {
 
-			GeoIndexedPropertyValue geoIndexedData = ((GeoIndexedPropertyValue) indexedData);
+			GeoIndexedPropertyValue geoIndexedData = (GeoIndexedPropertyValue) indexedData;
 
 			Object value = geoIndexedData.getValue();
 			if (value == null) {
@@ -262,11 +262,11 @@ class IndexWriter {
 				source.getClass()));
 	}
 
-	/**
-	 * @author Christoph Strobl
-	 * @since 1.8
-	 */
-	private static enum IndexWriteMode {
+    /**
+     * @author Christoph Strobl
+     * @since 1.8
+     */
+    private enum IndexWriteMode {
 
 		CREATE, UPDATE, PARTIAL_UPDATE
 	}

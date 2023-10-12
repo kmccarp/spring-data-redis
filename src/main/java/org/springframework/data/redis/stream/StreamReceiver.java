@@ -186,14 +186,14 @@ public interface StreamReceiver<K, V extends Record<K, ?>> {
 	 */
 	Flux<V> receive(Consumer consumer, StreamOffset<K> streamOffset);
 
-	/**
-	 * Options for {@link StreamReceiver}.
-	 *
-	 * @param <K> Stream key and Stream field type.
-	 * @param <V> Stream value type.
-	 * @see StreamReceiverOptionsBuilder
-	 */
-	class StreamReceiverOptions<K, V extends Record<K, ?>> {
+    /**
+     * Options for {@link StreamReceiver}.
+     *
+     * @param <K> Stream key and Stream field type.
+     * @param <V> Stream value type.
+     * @see StreamReceiverOptionsBuilder
+     */
+    final class StreamReceiverOptions<K, V extends Record<K, ?>> {
 
 		private final Duration pollTimeout;
 		private final @Nullable Integer batchSize;
@@ -305,12 +305,12 @@ public interface StreamReceiver<K, V extends Record<K, ?>> {
 
 	}
 
-	/**
-	 * Builder for {@link StreamReceiverOptions}.
-	 *
-	 * @param <K> Stream key and Stream field type.
-	 */
-	class StreamReceiverOptionsBuilder<K, V extends Record<K, ?>> {
+    /**
+     * Builder for {@link StreamReceiverOptions}.
+     *
+     * @param <K> Stream key and Stream field type.
+     */
+    final class StreamReceiverOptionsBuilder<K, V extends Record<K, ?>> {
 
 		private Duration pollTimeout = Duration.ofSeconds(2);
 		private @Nullable Integer batchSize;

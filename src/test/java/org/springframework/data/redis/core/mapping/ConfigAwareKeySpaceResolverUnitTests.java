@@ -31,7 +31,7 @@ import org.springframework.data.redis.core.mapping.RedisMappingContext.ConfigAwa
  */
 class ConfigAwareKeySpaceResolverUnitTests {
 
-	private KeyspaceConfiguration config = new KeyspaceConfiguration();
+    private final KeyspaceConfiguration config = new KeyspaceConfiguration();
 	private ConfigAwareKeySpaceResolver resolver;
 
 	@BeforeEach

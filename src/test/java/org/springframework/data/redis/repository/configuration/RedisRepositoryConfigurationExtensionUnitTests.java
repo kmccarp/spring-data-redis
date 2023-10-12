@@ -47,13 +47,13 @@ import org.springframework.data.repository.config.RepositoryConfigurationSource;
 class RedisRepositoryConfigurationExtensionUnitTests {
 
 	private StandardAnnotationMetadata metadata = new StandardAnnotationMetadata(Config.class, true);
-	private ResourceLoader loader = new PathMatchingResourcePatternResolver();
-	private Environment environment = new StandardEnvironment();
-	private BeanDefinitionRegistry registry = new DefaultListableBeanFactory();
-	private RepositoryConfigurationSource configurationSource = new AnnotationRepositoryConfigurationSource(metadata,
-			EnableRedisRepositories.class, loader, environment, registry);
+    private final ResourceLoader loader = new PathMatchingResourcePatternResolver();
+    private final Environment environment = new StandardEnvironment();
+    private final BeanDefinitionRegistry registry = new DefaultListableBeanFactory();
+    private final RepositoryConfigurationSource configurationSource = new AnnotationRepositoryConfigurationSource(metadata,
+            EnableRedisRepositories.class, loader, environment, registry);
 
-	private RedisRepositoryConfigurationExtension extension = new RedisRepositoryConfigurationExtension();
+    private final RedisRepositoryConfigurationExtension extension = new RedisRepositoryConfigurationExtension();
 
 	@Test // DATAREDIS-425
 	void isStrictMatchIfDomainTypeIsAnnotatedWithDocument() {

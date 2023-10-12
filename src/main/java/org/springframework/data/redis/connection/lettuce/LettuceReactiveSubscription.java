@@ -184,7 +184,7 @@ class LettuceReactiveSubscription implements ReactiveSubscription {
 		 */
 		Mono<Void> subscribe(ByteBuffer[] targets, Function<ByteBuffer[], Mono<Void>> subscribeFunction) {
 
-			return subscribeFunction.apply(targets).doOnSuccess((discard) -> {
+			return subscribeFunction.apply(targets).doOnSuccess(discard -> {
 
 				for (ByteBuffer target : targets) {
 					this.targets.add(getWrapper(target));
@@ -202,15 +202,12 @@ class LettuceReactiveSubscription implements ReactiveSubscription {
 		 */
 		Mono<Void> unsubscribe(ByteBuffer[] targets, Function<ByteBuffer[], Mono<Void>> unsubscribeFunction) {
 
-			return Mono.defer(() -> {
-
-				return unsubscribeFunction.apply(targets).doOnSuccess((discard) -> {
+			return Mono.defer(() -> unsubscribeFunction.apply(targets).doOnSuccess(discard -> {
 
 					for (ByteBuffer byteBuffer : targets) {
 						this.targets.remove(getWrapper(byteBuffer));
 					}
-				}).onErrorMap(exceptionTranslator);
-			});
+				}).onErrorMap(exceptionTranslator));
 		}
 
 		Set<ByteBuffer> getTargets() {

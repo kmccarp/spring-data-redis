@@ -55,13 +55,13 @@ import org.springframework.util.Assert;
  */
 public interface ReactiveGeoCommands {
 
-	/**
-	 * {@code GEOADD} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/geoadd">Redis Documentation: GEOADD</a>
-	 */
-	class GeoAddCommand extends KeyCommand {
+    /**
+     * {@code GEOADD} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/geoadd">Redis Documentation: GEOADD</a>
+     */
+    final class GeoAddCommand extends KeyCommand {
 
 		private final List<GeoLocation<ByteBuffer>> geoLocations;
 
@@ -175,13 +175,13 @@ public interface ReactiveGeoCommands {
 	 */
 	Flux<NumericResponse<GeoAddCommand, Long>> geoAdd(Publisher<GeoAddCommand> commands);
 
-	/**
-	 * {@code GEODIST} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/geodist">Redis Documentation: GEODIST</a>
-	 */
-	class GeoDistCommand extends KeyCommand {
+    /**
+     * {@code GEODIST} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/geodist">Redis Documentation: GEODIST</a>
+     */
+    final class GeoDistCommand extends KeyCommand {
 
 		private final ByteBuffer from;
 		private final ByteBuffer to;
@@ -345,13 +345,13 @@ public interface ReactiveGeoCommands {
 	 */
 	Flux<CommandResponse<GeoDistCommand, Distance>> geoDist(Publisher<GeoDistCommand> commands);
 
-	/**
-	 * {@code GEOHASH} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/geohash">Redis Documentation: GEOHASH</a>
-	 */
-	class GeoHashCommand extends KeyCommand {
+    /**
+     * {@code GEOHASH} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/geohash">Redis Documentation: GEOHASH</a>
+     */
+    final class GeoHashCommand extends KeyCommand {
 
 		private final List<ByteBuffer> members;
 
@@ -452,13 +452,13 @@ public interface ReactiveGeoCommands {
 	 */
 	Flux<MultiValueResponse<GeoHashCommand, String>> geoHash(Publisher<GeoHashCommand> commands);
 
-	/**
-	 * {@code GEOPOS} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/geopos">Redis Documentation: GEOPOS</a>
-	 */
-	class GeoPosCommand extends KeyCommand {
+    /**
+     * {@code GEOPOS} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/geopos">Redis Documentation: GEOPOS</a>
+     */
+    final class GeoPosCommand extends KeyCommand {
 
 		private final List<ByteBuffer> members;
 
@@ -557,13 +557,13 @@ public interface ReactiveGeoCommands {
 	 */
 	Flux<MultiValueResponse<GeoPosCommand, Point>> geoPos(Publisher<GeoPosCommand> commands);
 
-	/**
-	 * {@code GEORADIUS} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/georadius">Redis Documentation: GEORADIUS</a>
-	 */
-	class GeoRadiusCommand extends KeyCommand {
+    /**
+     * {@code GEORADIUS} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/georadius">Redis Documentation: GEORADIUS</a>
+     */
+    final class GeoRadiusCommand extends KeyCommand {
 
 		private final Distance distance;
 		private final @Nullable Point point;
@@ -906,13 +906,13 @@ public interface ReactiveGeoCommands {
 	Flux<CommandResponse<GeoRadiusCommand, Flux<GeoResult<GeoLocation<ByteBuffer>>>>> geoRadius(
 			Publisher<GeoRadiusCommand> commands);
 
-	/**
-	 * {@code GEORADIUSBYMEMBER} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/georadiusbymember">Redis Documentation: GEORADIUSBYMEMBER</a>
-	 */
-	class GeoRadiusByMemberCommand extends KeyCommand {
+    /**
+     * {@code GEORADIUSBYMEMBER} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/georadiusbymember">Redis Documentation: GEORADIUSBYMEMBER</a>
+     */
+    final class GeoRadiusByMemberCommand extends KeyCommand {
 
 		private final Distance distance;
 		private final @Nullable ByteBuffer member;
@@ -1242,14 +1242,14 @@ public interface ReactiveGeoCommands {
 	Flux<CommandResponse<GeoRadiusByMemberCommand, Flux<GeoResult<GeoLocation<ByteBuffer>>>>> geoRadiusByMember(
 			Publisher<GeoRadiusByMemberCommand> commands);
 
-	/**
-	 * {@code GEOSEARCH} command parameters.
-	 *
-	 * @author Mark Paluch
-	 * @since 2.6
-	 * @see <a href="https://redis.io/commands/geosearch">Redis Documentation: GEOSEARCH</a>
-	 */
-	class GeoSearchCommand extends KeyCommand {
+    /**
+     * {@code GEOSEARCH} command parameters.
+     *
+     * @author Mark Paluch
+     * @since 2.6
+     * @see <a href="https://redis.io/commands/geosearch">Redis Documentation: GEOSEARCH</a>
+     */
+    final class GeoSearchCommand extends KeyCommand {
 
 		private final @Nullable GeoReference<ByteBuffer> reference;
 		private final @Nullable GeoShape shape;
@@ -1330,14 +1330,14 @@ public interface ReactiveGeoCommands {
 		}
 	}
 
-	/**
-	 * {@code GEOSEARCHSTORE} command parameters.
-	 *
-	 * @author Mark Paluch
-	 * @since 2.6
-	 * @see <a href="https://redis.io/commands/geosearchstore">Redis Documentation: GEOSEARCHSTORE</a>
-	 */
-	class GeoSearchStoreCommand extends KeyCommand {
+    /**
+     * {@code GEOSEARCHSTORE} command parameters.
+     *
+     * @author Mark Paluch
+     * @since 2.6
+     * @see <a href="https://redis.io/commands/geosearchstore">Redis Documentation: GEOSEARCHSTORE</a>
+     */
+    final class GeoSearchStoreCommand extends KeyCommand {
 
 		private final @Nullable ByteBuffer destKey;
 		private final @Nullable GeoReference<ByteBuffer> reference;

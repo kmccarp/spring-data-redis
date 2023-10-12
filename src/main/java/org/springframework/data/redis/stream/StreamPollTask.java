@@ -54,7 +54,7 @@ class StreamPollTask<K, V extends Record<K, ?>> implements Task {
 	private final PollState pollState;
 	private final TypeDescriptor targetType;
 
-	private volatile boolean isInEventLoop = false;
+	private volatile boolean isInEventLoop;
 
 	StreamPollTask(StreamReadRequest<K> streamRequest, StreamListener<K, V> listener, ErrorHandler errorHandler,
 			TypeDescriptor targetType, Function<ReadOffset, List<ByteRecord>> readFunction,
@@ -184,10 +184,10 @@ class StreamPollTask<K, V extends Record<K, ?>> implements Task {
 		return State.RUNNING.equals(getState()) || isInEventLoop;
 	}
 
-	/**
-	 * Object representing the current polling state for a particular stream subscription.
-	 */
-	static class PollState {
+    /**
+     * Object representing the current polling state for a particular stream subscription.
+     */
+    static final class PollState {
 
 		private final ReadOffsetStrategy readOffsetStrategy;
 		private final Optional<Consumer> consumer;

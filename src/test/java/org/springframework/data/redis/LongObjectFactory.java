@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class LongObjectFactory implements ObjectFactory<Long> {
 
-	private AtomicLong counter = new AtomicLong();
+    private final AtomicLong counter = new AtomicLong();
 
 	public Long instance() {
 		return counter.getAndIncrement();

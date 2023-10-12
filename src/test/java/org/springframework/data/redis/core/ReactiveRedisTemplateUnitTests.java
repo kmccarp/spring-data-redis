@@ -39,8 +39,8 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
  */
 class ReactiveRedisTemplateUnitTests {
 
-	private ReactiveRedisConnectionFactory connectionFactoryMock = mock(ReactiveRedisConnectionFactory.class);
-	private ReactiveRedisConnection connectionMock = mock(ReactiveRedisConnection.class);
+    private final ReactiveRedisConnectionFactory connectionFactoryMock = mock(ReactiveRedisConnectionFactory.class);
+    private final ReactiveRedisConnection connectionMock = mock(ReactiveRedisConnection.class);
 
 	@Test // DATAREDIS-999
 	void closeShouldUseAsyncRelease() {

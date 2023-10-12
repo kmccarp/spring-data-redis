@@ -312,14 +312,14 @@ public class Bucket {
 		return null;
 	}
 
-	/**
-	 * Value object representing a path within a {@link Bucket}. Paths can be either top-level (if the {@code prefix} is
-	 * {@literal null} or empty) or nested with a given {@code prefix}.
-	 *
-	 * @author Mark Paluch
-	 * @since 2.1
-	 */
-	public static class BucketPropertyPath {
+    /**
+     * Value object representing a path within a {@link Bucket}. Paths can be either top-level (if the {@code prefix} is
+     * {@literal null} or empty) or nested with a given {@code prefix}.
+     *
+     * @author Mark Paluch
+     * @since 2.1
+     */
+    public static final class BucketPropertyPath {
 
 		private final Bucket bucket;
 		private final @Nullable String prefix;

@@ -518,16 +518,11 @@ public class ReactiveRedisMessageListenerContainer implements DisposableBean {
 			if (value <= 0) {
 				return false;
 			}
-
-			if (SUBSCRIBERS.compareAndSet(this, value, value - 1) && value == 1) {
-				return true;
-			}
-
-			return false;
+            return SUBSCRIBERS.compareAndSet(this, value, value - 1) && value == 1;
 		}
 	}
 
-	static class SubscriptionReadyListener extends AtomicBoolean implements SubscriptionListener {
+    static final class SubscriptionReadyListener extends AtomicBoolean implements SubscriptionListener {
 
 		private final Set<ByteArrayWrapper> toSubscribe;
 		private final Sinks.Empty<Void> sink = Sinks.empty();

@@ -33,7 +33,7 @@ import org.springframework.data.redis.TooManyClusterRedirectionsException;
  */
 class JedisExceptionConverterUnitTests {
 
-	private JedisExceptionConverter converter = new JedisExceptionConverter();
+    private final JedisExceptionConverter converter = new JedisExceptionConverter();
 
 	@Test // DATAREDIS-315
 	void shouldConvertMovedDataException() {

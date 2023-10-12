@@ -161,8 +161,9 @@ public class RedisProperties extends Properties implements RedisMap<Object, Obje
 	@Override
 	public synchronized boolean equals(Object o) {
 
-		if (o == this)
-			return true;
+        if (o == this) {
+            return true;
+        }
 
 		if (o instanceof RedisProperties) {
 			return o.hashCode() == hashCode();
@@ -272,7 +273,7 @@ public class RedisProperties extends Properties implements RedisMap<Object, Obje
 
 	@Override
 	public Object putIfAbsent(Object key, Object value) {
-		return (hashOps.putIfAbsent((String) key, (String) value) ? null : get(key));
+		return hashOps.putIfAbsent((String) key, (String) value) ? null : get(key);
 	}
 
 	@Override

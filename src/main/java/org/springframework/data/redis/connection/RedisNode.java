@@ -137,7 +137,7 @@ public class RedisNode implements NamedNode {
 		if (closeBracketIndex + 1 == hostPortString.length()) {
 			return new String[] { host, "" };
 		} else {
-			if (!(hostPortString.charAt(closeBracketIndex + 1) == ':')) {
+			if (hostPortString.charAt(closeBracketIndex + 1) != ':') {
 				throw new IllegalArgumentException(
 						String.format("Only a colon may follow a close bracket: %s", hostPortString));
 			}
@@ -288,11 +288,7 @@ public class RedisNode implements NamedNode {
 			return false;
 		}
 
-		if (!ObjectUtils.nullSafeEquals(this.name, other.name)) {
-			return false;
-		}
-
-		return true;
+        return ObjectUtils.nullSafeEquals(this.name, other.name);
 	}
 
 	/**

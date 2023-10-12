@@ -29,7 +29,7 @@ import org.springframework.util.ObjectUtils;
  * @author Kaizhou Zhang
  * @see 2.2
  */
-public class StreamReadOptions {
+public final class StreamReadOptions {
 
 	private static final StreamReadOptions EMPTY = new StreamReadOptions(null, null, false);
 
@@ -132,15 +132,18 @@ public class StreamReadOptions {
 
 	@Override
 	public boolean equals(@Nullable Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
 		StreamReadOptions that = (StreamReadOptions) o;
 
-		if (noack != that.noack)
-			return false;
+        if (noack != that.noack) {
+            return false;
+        }
 		if (!ObjectUtils.nullSafeEquals(block, that.block)) {
 			return false;
 		}

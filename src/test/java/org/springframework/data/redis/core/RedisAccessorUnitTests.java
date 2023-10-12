@@ -61,7 +61,7 @@ class RedisAccessorUnitTests {
 	void getRequiredConnectionFactoryWhenNull() {
 
 		assertThatIllegalStateException()
-			.isThrownBy(() -> new TestRedisAccessor().getRequiredConnectionFactory())
+			.isThrownBy(new TestRedisAccessor()::getRequiredConnectionFactory)
 			.withMessage("RedisConnectionFactory is required")
 			.withNoCause();
 	}

@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class DoubleAsStringObjectFactory implements ObjectFactory<String> {
 
-	private AtomicLong counter = new AtomicLong();
+    private final AtomicLong counter = new AtomicLong();
 
 	public String instance() {
 		return String.valueOf(Double.valueOf(counter.getAndIncrement()));

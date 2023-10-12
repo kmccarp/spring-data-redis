@@ -44,7 +44,7 @@ public class RedisStandaloneConfiguration
 	private RedisPassword password = RedisPassword.none();
 
 	private String hostName = DEFAULT_HOST;
-	private @Nullable String username = null;
+	private @Nullable String username;
 
 	/**
 	 * Create a new default {@link RedisStandaloneConfiguration}.

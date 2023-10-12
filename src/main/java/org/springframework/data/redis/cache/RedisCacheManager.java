@@ -388,16 +388,16 @@ public class RedisCacheManager extends AbstractTransactionSupportingCacheManager
 		return cacheConfiguration != null ? cacheConfiguration : getDefaultCacheConfiguration();
 	}
 
-	/**
-	 * {@literal Builder} for creating a {@link RedisCacheManager}.
-	 *
-	 * @author Christoph Strobl
-	 * @author Mark Paluch
-	 * @author Kezhu Wang
-	 * @author John Blum
-	 * @since 2.0
-	 */
-	public static class RedisCacheManagerBuilder {
+    /**
+     * {@literal Builder} for creating a {@link RedisCacheManager}.
+     *
+     * @author Christoph Strobl
+     * @author Mark Paluch
+     * @author Kezhu Wang
+     * @author John Blum
+     * @since 2.0
+     */
+    public static final class RedisCacheManagerBuilder {
 
 		/**
 		 * Factory method returning a new {@literal Builder} used to create and configure a {@link RedisCacheManager}

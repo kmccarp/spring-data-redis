@@ -51,13 +51,13 @@ import org.springframework.util.Assert;
  */
 public interface ReactiveStringCommands {
 
-	/**
-	 * {@code SET} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/set">Redis Documentation: SET</a>
-	 */
-	class SetCommand extends KeyCommand {
+    /**
+     * {@code SET} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/set">Redis Documentation: SET</a>
+     */
+    final class SetCommand extends KeyCommand {
 
 		private @Nullable ByteBuffer value;
 		private Expiration expiration;
@@ -245,13 +245,13 @@ public interface ReactiveStringCommands {
 	 */
 	Flux<ByteBufferResponse<KeyCommand>> getDel(Publisher<KeyCommand> commands);
 
-	/**
-	 * {@link Command} for {@code GETEX}.
-	 *
-	 * @author Mark Paluch
-	 * @since 2.6
-	 */
-	class GetExCommand extends KeyCommand {
+    /**
+     * {@link Command} for {@code GETEX}.
+     *
+     * @author Mark Paluch
+     * @since 2.6
+     */
+    final class GetExCommand extends KeyCommand {
 
 		private final Expiration expiration;
 
@@ -454,13 +454,13 @@ public interface ReactiveStringCommands {
 	 */
 	Flux<BooleanResponse<SetCommand>> pSetEX(Publisher<SetCommand> commands);
 
-	/**
-	 * {@code MSET} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/mset">Redis Documentation: MSET</a>
-	 */
-	class MSetCommand implements Command {
+    /**
+     * {@code MSET} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/mset">Redis Documentation: MSET</a>
+     */
+    final class MSetCommand implements Command {
 
 		private Map<ByteBuffer, ByteBuffer> keyValuePairs;
 
@@ -543,13 +543,13 @@ public interface ReactiveStringCommands {
 	 */
 	Flux<BooleanResponse<MSetCommand>> mSetNX(Publisher<MSetCommand> source);
 
-	/**
-	 * {@code APPEND} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/append">Redis Documentation: APPEND</a>
-	 */
-	class AppendCommand extends KeyCommand {
+    /**
+     * {@code APPEND} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/append">Redis Documentation: APPEND</a>
+     */
+    final class AppendCommand extends KeyCommand {
 
 		private @Nullable ByteBuffer value;
 
@@ -647,13 +647,13 @@ public interface ReactiveStringCommands {
 	 */
 	Flux<ByteBufferResponse<RangeCommand>> getRange(Publisher<RangeCommand> commands);
 
-	/**
-	 * {@code SETRANGE} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/setrange">Redis Documentation: SETRANGE</a>
-	 */
-	class SetRangeCommand extends KeyCommand {
+    /**
+     * {@code SETRANGE} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/setrange">Redis Documentation: SETRANGE</a>
+     */
+    final class SetRangeCommand extends KeyCommand {
 
 		private @Nullable ByteBuffer value;
 		private @Nullable Long offset;
@@ -746,13 +746,13 @@ public interface ReactiveStringCommands {
 	 */
 	Flux<NumericResponse<SetRangeCommand, Long>> setRange(Publisher<SetRangeCommand> commands);
 
-	/**
-	 * {@code GETBIT} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/getbit">Redis Documentation: GETBIT</a>
-	 */
-	class GetBitCommand extends KeyCommand {
+    /**
+     * {@code GETBIT} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/getbit">Redis Documentation: GETBIT</a>
+     */
+    final class GetBitCommand extends KeyCommand {
 
 		private @Nullable Long offset;
 
@@ -819,13 +819,13 @@ public interface ReactiveStringCommands {
 	 */
 	Flux<BooleanResponse<GetBitCommand>> getBit(Publisher<GetBitCommand> commands);
 
-	/**
-	 * {@code SETBIT} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/setbit">Redis Documentation: SETBIT</a>
-	 */
-	class SetBitCommand extends KeyCommand {
+    /**
+     * {@code SETBIT} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/setbit">Redis Documentation: SETBIT</a>
+     */
+    final class SetBitCommand extends KeyCommand {
 
 		private @Nullable Long offset;
 		private boolean value;
@@ -911,13 +911,13 @@ public interface ReactiveStringCommands {
 	 */
 	Flux<BooleanResponse<SetBitCommand>> setBit(Publisher<SetBitCommand> commands);
 
-	/**
-	 * {@code BITCOUNT} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/bitcount">Redis Documentation: BITCOUNT</a>
-	 */
-	class BitCountCommand extends KeyCommand {
+    /**
+     * {@code BITCOUNT} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/bitcount">Redis Documentation: BITCOUNT</a>
+     */
+    final class BitCountCommand extends KeyCommand {
 
 		private Range<Long> range;
 
@@ -1005,14 +1005,14 @@ public interface ReactiveStringCommands {
 	 */
 	Flux<NumericResponse<BitCountCommand, Long>> bitCount(Publisher<BitCountCommand> commands);
 
-	/**
-	 * {@code BITFIELD} command parameters.
-	 *
-	 * @author Mark Paluch
-	 * @see <a href="https://redis.io/commands/bitfield">Redis Documentation: BITFIELD</a>
-	 * @since 2.1
-	 */
-	class BitFieldCommand extends KeyCommand {
+    /**
+     * {@code BITFIELD} command parameters.
+     *
+     * @author Mark Paluch
+     * @see <a href="https://redis.io/commands/bitfield">Redis Documentation: BITFIELD</a>
+     * @since 2.1
+     */
+    final class BitFieldCommand extends KeyCommand {
 
 		private @Nullable BitFieldSubCommands subcommands;
 
@@ -1085,13 +1085,13 @@ public interface ReactiveStringCommands {
 	 */
 	Flux<MultiValueResponse<BitFieldCommand, Long>> bitField(Publisher<BitFieldCommand> commands);
 
-	/**
-	 * {@code BITOP} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/bitop">Redis Documentation: BITOP</a>
-	 */
-	class BitOpCommand {
+    /**
+     * {@code BITOP} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/bitop">Redis Documentation: BITOP</a>
+     */
+    final class BitOpCommand {
 
 		private List<ByteBuffer> keys;
 		private BitOperation bitOp;
@@ -1197,11 +1197,11 @@ public interface ReactiveStringCommands {
 	 */
 	Flux<NumericResponse<BitOpCommand, Long>> bitOp(Publisher<BitOpCommand> commands);
 
-	/**
-	 * @author Christoph Strobl
-	 * @since 2.1
-	 */
-	class BitPosCommand extends KeyCommand {
+    /**
+     * @author Christoph Strobl
+     * @since 2.1
+     */
+    final class BitPosCommand extends KeyCommand {
 
 		private boolean bit;
 		private Range<Long> range;

@@ -46,8 +46,8 @@ import org.springframework.data.redis.repository.query.RedisOperationChain.PathA
  */
 public class ExampleQueryMapperUnitTests {
 
-	private RedisMappingContext mappingContext = new RedisMappingContext();
-	private ExampleQueryMapper mapper = new ExampleQueryMapper(mappingContext, new PathIndexResolver(mappingContext));
+    private final RedisMappingContext mappingContext = new RedisMappingContext();
+    private final ExampleQueryMapper mapper = new ExampleQueryMapper(mappingContext, new PathIndexResolver(mappingContext));
 
 	@Test // DATAREDIS-605
 	void shouldRejectCaseInsensitiveMatching() {

@@ -303,13 +303,13 @@ public interface ReactiveKeyCommands {
 	 */
 	Mono<ByteBuffer> randomKey();
 
-	/**
-	 * {@code RENAME} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/rename">Redis Documentation: RENAME</a>
-	 */
-	class RenameCommand extends KeyCommand {
+    /**
+     * {@code RENAME} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/rename">Redis Documentation: RENAME</a>
+     */
+    final class RenameCommand extends KeyCommand {
 
 		private @Nullable ByteBuffer newKey;
 
@@ -504,14 +504,14 @@ public interface ReactiveKeyCommands {
 	 */
 	Flux<NumericResponse<List<ByteBuffer>, Long>> mUnlink(Publisher<List<ByteBuffer>> keys);
 
-	/**
-	 * {@code EXPIRE}/{@code PEXPIRE} command parameters.
-	 *
-	 * @author Mark Paluch
-	 * @see <a href="https://redis.io/commands/expire">Redis Documentation: EXPIRE</a>
-	 * @see <a href="https://redis.io/commands/pexpire">Redis Documentation: PEXPIRE</a>
-	 */
-	class ExpireCommand extends KeyCommand {
+    /**
+     * {@code EXPIRE}/{@code PEXPIRE} command parameters.
+     *
+     * @author Mark Paluch
+     * @see <a href="https://redis.io/commands/expire">Redis Documentation: EXPIRE</a>
+     * @see <a href="https://redis.io/commands/pexpire">Redis Documentation: PEXPIRE</a>
+     */
+    final class ExpireCommand extends KeyCommand {
 
 		private @Nullable Duration timeout;
 
@@ -609,14 +609,14 @@ public interface ReactiveKeyCommands {
 	 */
 	Flux<BooleanResponse<ExpireCommand>> pExpire(Publisher<ExpireCommand> commands);
 
-	/**
-	 * {@code EXPIREAT}/{@code PEXPIREAT} command parameters.
-	 *
-	 * @author Mark Paluch
-	 * @see <a href="https://redis.io/commands/expire">Redis Documentation: EXPIREAT</a>
-	 * @see <a href="https://redis.io/commands/pexpire">Redis Documentation: PEXPIREAT</a>
-	 */
-	class ExpireAtCommand extends KeyCommand {
+    /**
+     * {@code EXPIREAT}/{@code PEXPIREAT} command parameters.
+     *
+     * @author Mark Paluch
+     * @see <a href="https://redis.io/commands/expire">Redis Documentation: EXPIREAT</a>
+     * @see <a href="https://redis.io/commands/pexpire">Redis Documentation: PEXPIREAT</a>
+     */
+    final class ExpireAtCommand extends KeyCommand {
 
 		private @Nullable Instant expireAt;
 
@@ -783,13 +783,13 @@ public interface ReactiveKeyCommands {
 	 */
 	Flux<NumericResponse<KeyCommand, Long>> pTtl(Publisher<KeyCommand> commands);
 
-	/**
-	 * {@code MOVE} command parameters.
-	 *
-	 * @author Mark Paluch
-	 * @see <a href="https://redis.io/commands/move">Redis Documentation: MOVE</a>
-	 */
-	class MoveCommand extends KeyCommand {
+    /**
+     * {@code MOVE} command parameters.
+     *
+     * @author Mark Paluch
+     * @see <a href="https://redis.io/commands/move">Redis Documentation: MOVE</a>
+     */
+    final class MoveCommand extends KeyCommand {
 
 		private @Nullable Integer database;
 

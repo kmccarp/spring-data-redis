@@ -40,13 +40,13 @@ import org.springframework.util.Assert;
  */
 public interface ReactiveHyperLogLogCommands {
 
-	/**
-	 * {@code PFADD} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/pfadd">Redis Documentation: PFADD</a>
-	 */
-	class PfAddCommand extends KeyCommand {
+    /**
+     * {@code PFADD} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/pfadd">Redis Documentation: PFADD</a>
+     */
+    final class PfAddCommand extends KeyCommand {
 
 		private final List<ByteBuffer> values;
 
@@ -143,13 +143,13 @@ public interface ReactiveHyperLogLogCommands {
 	 */
 	Flux<NumericResponse<PfAddCommand, Long>> pfAdd(Publisher<PfAddCommand> commands);
 
-	/**
-	 * {@code PFCOUNT} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/pfcount">Redis Documentation: PFCOUNT</a>
-	 */
-	class PfCountCommand implements Command {
+    /**
+     * {@code PFCOUNT} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/pfcount">Redis Documentation: PFCOUNT</a>
+     */
+    final class PfCountCommand implements Command {
 
 		private final List<ByteBuffer> keys;
 
@@ -235,13 +235,13 @@ public interface ReactiveHyperLogLogCommands {
 	 */
 	Flux<NumericResponse<PfCountCommand, Long>> pfCount(Publisher<PfCountCommand> commands);
 
-	/**
-	 * {@code PFMERGE} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/pfmerge">Redis Documentation: PFMERGE</a>
-	 */
-	class PfMergeCommand extends KeyCommand {
+    /**
+     * {@code PFMERGE} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/pfmerge">Redis Documentation: PFMERGE</a>
+     */
+    final class PfMergeCommand extends KeyCommand {
 
 		private final List<ByteBuffer> sourceKeys;
 

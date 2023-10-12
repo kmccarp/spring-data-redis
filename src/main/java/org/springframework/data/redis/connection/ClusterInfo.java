@@ -30,7 +30,7 @@ import org.springframework.util.Assert;
  */
 public class ClusterInfo {
 
-	public static enum Info {
+    public enum Info {
 		STATE("cluster_state"), SLOTS_ASSIGNED("cluster_slots_assigned"), SLOTS_OK("cluster_slots_ok"), SLOTS_PFAIL(
 				"cluster_slots_pfail"), SLOTS_FAIL("cluster_slots_fail"), KNOWN_NODES("cluster_known_nodes"), SIZE(
 						"cluster_size"), CURRENT_EPOCH("cluster_current_epoch"), MY_EPOCH("cluster_my_epoch"), MESSAGES_SENT(

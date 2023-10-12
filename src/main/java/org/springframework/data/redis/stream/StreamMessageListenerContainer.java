@@ -253,13 +253,13 @@ public interface StreamMessageListenerContainer<K, V extends Record<K, ?>> exten
 	 */
 	void remove(Subscription subscription);
 
-	/**
-	 * Request to read a Redis Stream.
-	 *
-	 * @param <K> Stream key and Stream field type.
-	 * @see StreamReadRequestBuilder
-	 */
-	class StreamReadRequest<K> {
+    /**
+     * Request to read a Redis Stream.
+     *
+     * @param <K> Stream key and Stream field type.
+     * @see StreamReadRequestBuilder
+     */
+    final class StreamReadRequest<K> {
 
 		private final StreamOffset<K> streamOffset;
 		private final @Nullable ErrorHandler errorHandler;
@@ -294,13 +294,13 @@ public interface StreamMessageListenerContainer<K, V extends Record<K, ?>> exten
 		}
 	}
 
-	/**
-	 * Request to read a Redis Stream with a {@link Consumer}.
-	 *
-	 * @param <K> Stream key and Stream field type.
-	 * @see StreamReadRequestBuilder
-	 */
-	class ConsumerStreamReadRequest<K> extends StreamReadRequest<K> {
+    /**
+     * Request to read a Redis Stream with a {@link Consumer}.
+     *
+     * @param <K> Stream key and Stream field type.
+     * @see StreamReadRequestBuilder
+     */
+    final class ConsumerStreamReadRequest<K> extends StreamReadRequest<K> {
 
 		private final Consumer consumer;
 		private final boolean autoAck;
@@ -476,14 +476,14 @@ public interface StreamMessageListenerContainer<K, V extends Record<K, ?>> exten
 		}
 	}
 
-	/**
-	 * Options for {@link StreamMessageListenerContainer}.
-	 *
-	 * @param <K> Stream key and Stream field type.
-	 * @param <V> Stream value type.
-	 * @see StreamMessageListenerContainerOptionsBuilder
-	 */
-	class StreamMessageListenerContainerOptions<K, V extends Record<K, ?>> {
+    /**
+     * Options for {@link StreamMessageListenerContainer}.
+     *
+     * @param <K> Stream key and Stream field type.
+     * @param <V> Stream value type.
+     * @see StreamMessageListenerContainerOptionsBuilder
+     */
+    final class StreamMessageListenerContainerOptions<K, V extends Record<K, ?>> {
 
 		private final Duration pollTimeout;
 		private final @Nullable Integer batchSize;
@@ -591,14 +591,14 @@ public interface StreamMessageListenerContainer<K, V extends Record<K, ?>> exten
 
 	}
 
-	/**
-	 * Builder for {@link StreamMessageListenerContainerOptions}.
-	 *
-	 * @param <K> Stream key and Stream field type
-	 * @param <V> Stream value type
-	 */
-	@SuppressWarnings("unchecked")
-	class StreamMessageListenerContainerOptionsBuilder<K, V extends Record<K, ?>> {
+    /**
+     * Builder for {@link StreamMessageListenerContainerOptions}.
+     *
+     * @param <K> Stream key and Stream field type
+     * @param <V> Stream value type
+     */
+    @SuppressWarnings("unchecked")
+    final class StreamMessageListenerContainerOptionsBuilder<K, V extends Record<K, ?>> {
 
 		private Duration pollTimeout = Duration.ofSeconds(2);
 		private @Nullable Integer batchSize;

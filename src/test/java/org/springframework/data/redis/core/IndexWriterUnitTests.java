@@ -91,7 +91,7 @@ class IndexWriterUnitTests {
 
 		writer.removeKeyFromExistingIndexes(KEY_BIN, new StubIndxedData());
 
-		verify(connectionMock).keys(eq(("persons:address.city:*").getBytes(CHARSET)));
+		verify(connectionMock).keys(eq("persons:address.city:*".getBytes(CHARSET)));
 		verifyNoMoreInteractions(connectionMock);
 	}
 

@@ -36,7 +36,7 @@ import org.springframework.data.util.Version;
  *
  * @author Mark Paluch
  */
-class RedisConditions {
+final class RedisConditions {
 
 	private final Map<String, Integer> commands;
 	private final Version version;

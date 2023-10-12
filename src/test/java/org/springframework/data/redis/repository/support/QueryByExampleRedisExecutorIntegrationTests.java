@@ -60,10 +60,12 @@ import org.springframework.data.repository.query.FluentQuery;
 public class QueryByExampleRedisExecutorIntegrationTests {
 
 	private static JedisConnectionFactory connectionFactory;
-	private RedisMappingContext mappingContext = new RedisMappingContext();
+    private final RedisMappingContext mappingContext = new RedisMappingContext();
 	private RedisKeyValueTemplate kvTemplate;
 
-	private Person walt, hank, gus;
+    private Person walt;
+    private Person hank;
+    private Person gus;
 
 	@BeforeAll
 	static void beforeAll() {

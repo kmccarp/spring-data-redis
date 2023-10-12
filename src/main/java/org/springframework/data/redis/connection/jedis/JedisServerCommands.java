@@ -116,7 +116,7 @@ class JedisServerCommands implements RedisServerCommands {
 			return;
 		}
 
-		SaveMode saveMode = (option == ShutdownOption.NOSAVE) ? SaveMode.NOSAVE : SaveMode.SAVE;
+		SaveMode saveMode = option == ShutdownOption.NOSAVE ? SaveMode.NOSAVE : SaveMode.SAVE;
 
 		connection.getJedis().shutdown(saveMode);
 	}

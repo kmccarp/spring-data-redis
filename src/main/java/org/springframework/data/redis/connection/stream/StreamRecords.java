@@ -32,7 +32,7 @@ import org.springframework.util.ObjectUtils;
  * @author Christoph Strobl
  * @since 2.2
  */
-public class StreamRecords {
+public final class StreamRecords {
 
 	/**
 	 * Create a new {@link ByteRecord} for the given raw field/value pairs.
@@ -431,10 +431,12 @@ public class StreamRecords {
 
 		@Override
 		public boolean equals(@Nullable Object o) {
-			if (this == o)
-				return true;
-			if (o == null || getClass() != o.getClass())
-				return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
 
 			ObjectBackedRecord<?, ?> that = (ObjectBackedRecord<?, ?>) o;
 

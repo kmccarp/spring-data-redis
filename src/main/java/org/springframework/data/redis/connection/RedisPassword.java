@@ -36,7 +36,7 @@ import org.springframework.util.StringUtils;
  * @author Christoph Strobl
  * @since 2.0
  */
-public class RedisPassword {
+public final class RedisPassword {
 
 	private static final RedisPassword NONE = new RedisPassword(new char[] {});
 
@@ -146,10 +146,12 @@ public class RedisPassword {
 	@Override
 	public boolean equals(@Nullable Object o) {
 
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
 		RedisPassword password = (RedisPassword) o;
 

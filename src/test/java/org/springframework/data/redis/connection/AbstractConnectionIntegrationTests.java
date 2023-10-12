@@ -121,7 +121,7 @@ public abstract class AbstractConnectionIntegrationTests {
 
 	protected StringRedisConnection connection;
 	protected RedisSerializer<Object> serializer = RedisSerializer.java();
-	private RedisSerializer<String> stringSerializer = RedisSerializer.string();
+    private final RedisSerializer<String> stringSerializer = RedisSerializer.string();
 
 	private static final byte[] EMPTY_ARRAY = new byte[0];
 
@@ -785,9 +785,7 @@ public abstract class AbstractConnectionIntegrationTests {
 
 	@Test
 	public void testExecWithoutMulti() {
-		assertThatExceptionOfType(RedisSystemException.class).isThrownBy(() -> {
-			connection.exec();
-		});
+		assertThatExceptionOfType(RedisSystemException.class).isThrownBy(connection::exec);
 	}
 
 	@Test
@@ -4182,7 +4180,7 @@ public abstract class AbstractConnectionIntegrationTests {
 		}
 
 		public boolean passes() {
-			return (!connection.exists(key));
+			return !connection.exists(key);
 		}
 	}
 

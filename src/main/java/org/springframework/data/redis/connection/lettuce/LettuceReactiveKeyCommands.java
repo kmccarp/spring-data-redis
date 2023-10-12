@@ -63,7 +63,7 @@ class LettuceReactiveKeyCommands implements ReactiveKeyCommands {
 	@Override
 	public Flux<BooleanResponse<CopyCommand>> copy(Publisher<CopyCommand> commands) {
 
-		return connection.execute(cmd -> Flux.from(commands).concatMap((command) -> {
+		return connection.execute(cmd -> Flux.from(commands).concatMap(command -> {
 
 			Assert.notNull(command.getKey(), "Key must not be null");
 
@@ -73,19 +73,19 @@ class LettuceReactiveKeyCommands implements ReactiveKeyCommands {
 			}
 
 			return cmd.copy(command.getKey(), command.getTarget(), copyArgs)
-					.map((value) -> new BooleanResponse<>(command, value));
+					.map(value -> new BooleanResponse<>(command, value));
 		}));
 	}
 
 	@Override
 	public Flux<BooleanResponse<KeyCommand>> exists(Publisher<KeyCommand> commands) {
 
-		return connection.execute(cmd -> Flux.from(commands).concatMap((command) -> {
+		return connection.execute(cmd -> Flux.from(commands).concatMap(command -> {
 
 			Assert.notNull(command.getKey(), "Key must not be null");
 
 			return cmd.exists(command.getKey()).map(LettuceConverters.longToBooleanConverter()::convert)
-					.map((value) -> new BooleanResponse<>(command, value));
+					.map(value -> new BooleanResponse<>(command, value));
 		}));
 	}
 
@@ -104,11 +104,11 @@ class LettuceReactiveKeyCommands implements ReactiveKeyCommands {
 	@Override
 	public Flux<NumericResponse<Collection<ByteBuffer>, Long>> touch(Publisher<Collection<ByteBuffer>> keysCollection) {
 
-		return connection.execute(cmd -> Flux.from(keysCollection).concatMap((keys) -> {
+		return connection.execute(cmd -> Flux.from(keysCollection).concatMap(keys -> {
 
 			Assert.notEmpty(keys, "Keys must not be null");
 
-			return cmd.touch(keys.toArray(new ByteBuffer[keys.size()])).map((value) -> new NumericResponse<>(keys, value));
+			return cmd.touch(keys.toArray(new ByteBuffer[keys.size()])).map(value -> new NumericResponse<>(keys, value));
 		}));
 	}
 
@@ -164,44 +164,44 @@ class LettuceReactiveKeyCommands implements ReactiveKeyCommands {
 	@Override
 	public Flux<NumericResponse<KeyCommand, Long>> del(Publisher<KeyCommand> commands) {
 
-		return connection.execute(cmd -> Flux.from(commands).concatMap((command) -> {
+		return connection.execute(cmd -> Flux.from(commands).concatMap(command -> {
 
 			Assert.notNull(command.getKey(), "Key must not be null");
 
-			return cmd.del(command.getKey()).map((value) -> new NumericResponse<>(command, value));
+			return cmd.del(command.getKey()).map(value -> new NumericResponse<>(command, value));
 		}));
 	}
 
 	@Override
 	public Flux<NumericResponse<List<ByteBuffer>, Long>> mDel(Publisher<List<ByteBuffer>> keysCollection) {
 
-		return connection.execute(cmd -> Flux.from(keysCollection).concatMap((keys) -> {
+		return connection.execute(cmd -> Flux.from(keysCollection).concatMap(keys -> {
 
 			Assert.notEmpty(keys, "Keys must not be null");
 
-			return cmd.del(keys.toArray(new ByteBuffer[keys.size()])).map((value) -> new NumericResponse<>(keys, value));
+			return cmd.del(keys.toArray(new ByteBuffer[keys.size()])).map(value -> new NumericResponse<>(keys, value));
 		}));
 	}
 
 	@Override
 	public Flux<NumericResponse<KeyCommand, Long>> unlink(Publisher<KeyCommand> commands) {
 
-		return connection.execute(cmd -> Flux.from(commands).concatMap((command) -> {
+		return connection.execute(cmd -> Flux.from(commands).concatMap(command -> {
 
 			Assert.notNull(command.getKey(), "Key must not be null");
 
-			return cmd.unlink(command.getKey()).map((value) -> new NumericResponse<>(command, value));
+			return cmd.unlink(command.getKey()).map(value -> new NumericResponse<>(command, value));
 		}));
 	}
 
 	@Override
 	public Flux<NumericResponse<List<ByteBuffer>, Long>> mUnlink(Publisher<List<ByteBuffer>> keysCollection) {
 
-		return connection.execute(cmd -> Flux.from(keysCollection).concatMap((keys) -> {
+		return connection.execute(cmd -> Flux.from(keysCollection).concatMap(keys -> {
 
 			Assert.notEmpty(keys, "Keys must not be null");
 
-			return cmd.unlink(keys.toArray(new ByteBuffer[keys.size()])).map((value) -> new NumericResponse<>(keys, value));
+			return cmd.unlink(keys.toArray(new ByteBuffer[keys.size()])).map(value -> new NumericResponse<>(keys, value));
 		}));
 	}
 

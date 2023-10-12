@@ -75,14 +75,14 @@ public interface ReactiveListCommands {
 		}
 	}
 
-	/**
-	 * {@code LPUSH}/{@literal RPUSH} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/lpush">Redis Documentation: LPUSH</a>
-	 * @see <a href="https://redis.io/commands/rpush">Redis Documentation: RPUSH</a>
-	 */
-	class PushCommand extends KeyCommand {
+    /**
+     * {@code LPUSH}/{@literal RPUSH} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/lpush">Redis Documentation: LPUSH</a>
+     * @see <a href="https://redis.io/commands/rpush">Redis Documentation: RPUSH</a>
+     */
+    final class PushCommand extends KeyCommand {
 
 		private List<ByteBuffer> values;
 		private boolean upsert;
@@ -334,14 +334,14 @@ public interface ReactiveListCommands {
 	 */
 	Flux<BooleanResponse<RangeCommand>> lTrim(Publisher<RangeCommand> commands);
 
-	/**
-	 * {@code LPOS} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @since 2.4
-	 * @see <a href="https://redis.io/commands/lpos">Redis Documentation: LPOS</a>
-	 */
-	class LPosCommand extends KeyCommand {
+    /**
+     * {@code LPOS} command parameters.
+     *
+     * @author Christoph Strobl
+     * @since 2.4
+     * @see <a href="https://redis.io/commands/lpos">Redis Documentation: LPOS</a>
+     */
+    final class LPosCommand extends KeyCommand {
 
 		private final ByteBuffer element;
 		private final @Nullable Integer count;
@@ -453,13 +453,13 @@ public interface ReactiveListCommands {
 	 */
 	Flux<NumericResponse<LPosCommand, Long>> lPos(Publisher<LPosCommand> commands);
 
-	/**
-	 * {@code LINDEX} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/lindex">Redis Documentation: LINDEX</a>
-	 */
-	class LIndexCommand extends KeyCommand {
+    /**
+     * {@code LINDEX} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/lindex">Redis Documentation: LINDEX</a>
+     */
+    final class LIndexCommand extends KeyCommand {
 
 		private final Long index;
 
@@ -524,13 +524,13 @@ public interface ReactiveListCommands {
 	 */
 	Flux<ByteBufferResponse<LIndexCommand>> lIndex(Publisher<LIndexCommand> commands);
 
-	/**
-	 * {@code LINSERT} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/linsert">Redis Documentation: LINSERT</a>
-	 */
-	class LInsertCommand extends KeyCommand {
+    /**
+     * {@code LINSERT} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/linsert">Redis Documentation: LINSERT</a>
+     */
+    final class LInsertCommand extends KeyCommand {
 
 		private final @Nullable Position position;
 		private final @Nullable ByteBuffer pivot;
@@ -739,14 +739,14 @@ public interface ReactiveListCommands {
 		}
 	}
 
-	/**
-	 * {@code BLMOVE} command parameters.
-	 *
-	 * @author Mark Paluch
-	 * @since 2.6
-	 * @see <a href="https://redis.io/commands/blmove">Redis Documentation: BLMOVE</a>
-	 */
-	class BLMoveCommand extends LMoveCommand {
+    /**
+     * {@code BLMOVE} command parameters.
+     *
+     * @author Mark Paluch
+     * @since 2.6
+     * @see <a href="https://redis.io/commands/blmove">Redis Documentation: BLMOVE</a>
+     */
+    final class BLMoveCommand extends LMoveCommand {
 
 		private final @Nullable Duration timeout;
 
@@ -840,13 +840,13 @@ public interface ReactiveListCommands {
 	 */
 	Flux<ByteBufferResponse<BLMoveCommand>> bLMove(Publisher<BLMoveCommand> commands);
 
-	/**
-	 * {@code LSET} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/lset">Redis Documentation: LSET</a>
-	 */
-	class LSetCommand extends KeyCommand {
+    /**
+     * {@code LSET} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/lset">Redis Documentation: LSET</a>
+     */
+    final class LSetCommand extends KeyCommand {
 
 		private final Long index;
 		private final @Nullable ByteBuffer value;
@@ -936,13 +936,13 @@ public interface ReactiveListCommands {
 	 */
 	Flux<BooleanResponse<LSetCommand>> lSet(Publisher<LSetCommand> commands);
 
-	/**
-	 * {@code LREM} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/lrem">Redis Documentation: LREM</a>
-	 */
-	class LRemCommand extends KeyCommand {
+    /**
+     * {@code LREM} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/lrem">Redis Documentation: LREM</a>
+     */
+    final class LRemCommand extends KeyCommand {
 
 		private final Long count;
 		private final @Nullable ByteBuffer value;
@@ -1071,14 +1071,14 @@ public interface ReactiveListCommands {
 	 */
 	Flux<NumericResponse<LRemCommand, Long>> lRem(Publisher<LRemCommand> commands);
 
-	/**
-	 * {@code LPOP}/{@literal RPOP} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/lpop">Redis Documentation: LPOP</a>
-	 * @see <a href="https://redis.io/commands/rpop">Redis Documentation: RPOP</a>
-	 */
-	class PopCommand extends KeyCommand {
+    /**
+     * {@code LPOP}/{@literal RPOP} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/lpop">Redis Documentation: LPOP</a>
+     * @see <a href="https://redis.io/commands/rpop">Redis Documentation: RPOP</a>
+     */
+    final class PopCommand extends KeyCommand {
 
 		private final long count;
 
@@ -1225,12 +1225,12 @@ public interface ReactiveListCommands {
 	 */
 	Flux<CommandResponse<PopCommand, Flux<ByteBuffer>>> popList(Publisher<PopCommand> commands);
 
-	/**
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/blpop">Redis Documentation: BLPOP</a>
-	 * @see <a href="https://redis.io/commands/brpop">Redis Documentation: BRPOP</a>
-	 */
-	class BPopCommand implements Command {
+    /**
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/blpop">Redis Documentation: BLPOP</a>
+     * @see <a href="https://redis.io/commands/brpop">Redis Documentation: BRPOP</a>
+     */
+    final class BPopCommand implements Command {
 
 		private final List<ByteBuffer> keys;
 		private final Duration timeout;
@@ -1397,13 +1397,13 @@ public interface ReactiveListCommands {
 	 */
 	Flux<PopResponse> bPop(Publisher<BPopCommand> commands);
 
-	/**
-	 * {@code RPOPLPUSH} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/rpoplpush">Redis Documentation: RPOPLPUSH</a>
-	 */
-	class RPopLPushCommand extends KeyCommand {
+    /**
+     * {@code RPOPLPUSH} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/rpoplpush">Redis Documentation: RPOPLPUSH</a>
+     */
+    final class RPopLPushCommand extends KeyCommand {
 
 		private final @Nullable ByteBuffer destination;
 
@@ -1477,13 +1477,13 @@ public interface ReactiveListCommands {
 	 */
 	Flux<ByteBufferResponse<RPopLPushCommand>> rPopLPush(Publisher<RPopLPushCommand> commands);
 
-	/**
-	 * {@code BRPOPLPUSH} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/brpoplpush">Redis Documentation: BRPOPLPUSH</a>
-	 */
-	class BRPopLPushCommand extends KeyCommand {
+    /**
+     * {@code BRPOPLPUSH} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/brpoplpush">Redis Documentation: BRPOPLPUSH</a>
+     */
+    final class BRPopLPushCommand extends KeyCommand {
 
 		private final @Nullable ByteBuffer destination;
 		private final Duration timeout;

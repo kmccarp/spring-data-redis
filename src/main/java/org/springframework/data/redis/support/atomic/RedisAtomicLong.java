@@ -240,7 +240,8 @@ public class RedisAtomicLong extends Number implements Serializable, BoundKeyOpe
 
 		Assert.notNull(updateFunction, "Update function must not be null");
 
-		long previousValue, newValue;
+        long previousValue;
+        long newValue;
 
 		do {
 			previousValue = get();
@@ -264,7 +265,8 @@ public class RedisAtomicLong extends Number implements Serializable, BoundKeyOpe
 
 		Assert.notNull(accumulatorFunction, "Accumulator function must not be null");
 
-		long previousValue, newValue;
+        long previousValue;
+        long newValue;
 
 		do {
 			previousValue = get();
@@ -314,7 +316,8 @@ public class RedisAtomicLong extends Number implements Serializable, BoundKeyOpe
 
 		Assert.notNull(updateFunction, "Update function must not be null");
 
-		long previousValue, newValue;
+        long previousValue;
+        long newValue;
 
 		do {
 			previousValue = get();
@@ -338,7 +341,8 @@ public class RedisAtomicLong extends Number implements Serializable, BoundKeyOpe
 
 		Assert.notNull(accumulatorFunction, "Accumulator function must not be null");
 
-		long previousValue, newValue;
+        long previousValue;
+        long newValue;
 
 		do {
 			previousValue = get();

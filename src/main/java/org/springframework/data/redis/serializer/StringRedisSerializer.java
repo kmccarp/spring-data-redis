@@ -82,12 +82,12 @@ public class StringRedisSerializer implements RedisSerializer<String> {
 
 	@Override
 	public byte[] serialize(@Nullable String value) {
-		return (value == null ? null : value.getBytes(charset));
+		return value == null ? null : value.getBytes(charset);
 	}
 
 	@Override
 	public String deserialize(@Nullable byte[] bytes) {
-		return (bytes == null ? null : new String(bytes, charset));
+		return bytes == null ? null : new String(bytes, charset);
 	}
 
 	@Override

@@ -31,7 +31,7 @@ import org.springframework.data.redis.connection.stream.ReadOffset;
  */
 class ReadOffsetStrategyUnitTests {
 
-	private static Optional<Consumer> consumer = Optional.of(Consumer.from("foo", "bar"));
+    private static final Optional<Consumer> consumer = Optional.of(Consumer.from("foo", "bar"));
 
 	@Test // DATAREDIS-864
 	void nextMessageStandaloneShouldReturnLastSeenMessageId() {

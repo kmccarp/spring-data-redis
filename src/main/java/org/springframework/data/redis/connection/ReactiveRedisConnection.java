@@ -210,15 +210,15 @@ public interface ReactiveRedisConnection extends Closeable {
 		}
 	}
 
-	/**
-	 * {@link Command} for key-bound scan operations like {@code SCAN}, {@code HSCAN}, {@code SSCAN} and {@code
-	 * ZSCAN}.
-	 *
-	 * @author Mark Paluch
-	 * @author Christoph Strobl
-	 * @since 2.1
-	 */
-	class KeyScanCommand extends KeyCommand {
+    /**
+     * {@link Command} for key-bound scan operations like {@code SCAN}, {@code HSCAN}, {@code SSCAN} and {@code
+     * ZSCAN}.
+     *
+     * @author Mark Paluch
+     * @author Christoph Strobl
+     * @since 2.1
+     */
+    final class KeyScanCommand extends KeyCommand {
 
 		private final ScanOptions options;
 
@@ -260,10 +260,10 @@ public interface ReactiveRedisConnection extends Closeable {
 		}
 	}
 
-	/**
-	 * @author Christoph Strobl
-	 */
-	class RangeCommand extends KeyCommand {
+    /**
+     * @author Christoph Strobl
+     */
+    final class RangeCommand extends KeyCommand {
 
 		Range<Long> range;
 
@@ -367,10 +367,12 @@ public interface ReactiveRedisConnection extends Closeable {
 
 		@Override
 		public boolean equals(@Nullable Object o) {
-			if (this == o)
-				return true;
-			if (o == null || getClass() != o.getClass())
-				return false;
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
 
 			CommandResponse<?, ?> that = (CommandResponse<?, ?>) o;
 

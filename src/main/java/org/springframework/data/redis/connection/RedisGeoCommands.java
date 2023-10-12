@@ -320,14 +320,14 @@ public interface RedisGeoCommands {
 		}
 	}
 
-	/**
-	 * Additional arguments (like count/sort/...) to be used with {@link RedisGeoCommands}.
-	 *
-	 * @author Mark Paluch
-	 * @author Christoph Strobl
-	 * @since 2.6
-	 */
-	class GeoSearchCommandArgs implements GeoCommandArgs, Cloneable {
+    /**
+     * Additional arguments (like count/sort/...) to be used with {@link RedisGeoCommands}.
+     *
+     * @author Mark Paluch
+     * @author Christoph Strobl
+     * @since 2.6
+     */
+    final class GeoSearchCommandArgs implements GeoCommandArgs, Cloneable {
 
 		protected final Set<GeoCommandFlag> flags = new LinkedHashSet<>(2, 1);
 
@@ -464,13 +464,13 @@ public interface RedisGeoCommands {
 		}
 	}
 
-	/**
-	 * Additional arguments (like count/sort/...) to be used with {@link RedisGeoCommands}.
-	 *
-	 * @author Mark Paluch
-	 * @since 2.6
-	 */
-	class GeoSearchStoreCommandArgs implements GeoCommandArgs, Cloneable {
+    /**
+     * Additional arguments (like count/sort/...) to be used with {@link RedisGeoCommands}.
+     *
+     * @author Mark Paluch
+     * @since 2.6
+     */
+    final class GeoSearchStoreCommandArgs implements GeoCommandArgs, Cloneable {
 
 		private final Set<GeoCommandFlag> flags = new LinkedHashSet<>(2, 1);
 
@@ -600,14 +600,14 @@ public interface RedisGeoCommands {
 		}
 	}
 
-	/**
-	 * Additional arguments (like count/sort/...) to be used with {@link RedisGeoCommands}.
-	 *
-	 * @author Ninad Divadkar
-	 * @author Christoph Strobl
-	 * @since 1.8
-	 */
-	class GeoRadiusCommandArgs extends GeoSearchCommandArgs implements Cloneable {
+    /**
+     * Additional arguments (like count/sort/...) to be used with {@link RedisGeoCommands}.
+     *
+     * @author Ninad Divadkar
+     * @author Christoph Strobl
+     * @since 1.8
+     */
+    final class GeoRadiusCommandArgs extends GeoSearchCommandArgs implements Cloneable {
 
 		private GeoRadiusCommandArgs() {}
 
@@ -683,7 +683,7 @@ public interface RedisGeoCommands {
 		}
 
 		public Set<Flag> getFlags() {
-			return flags.stream().map(it -> (Flag) it).collect(Collectors.toSet());
+			return flags.stream().map(RedisGeoCommands.GeoRadiusCommandArgs.Flag.class::cast).collect(Collectors.toSet());
 		}
 
 		public enum Flag implements GeoCommandFlag {

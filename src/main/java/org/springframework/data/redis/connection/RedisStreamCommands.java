@@ -110,15 +110,15 @@ public interface RedisStreamCommands {
 	@Nullable
 	RecordId xAdd(MapRecord<byte[], byte[], byte[]> record, XAddOptions options);
 
-	/**
-	 * Additional options applicable for {@literal XADD} command.
-	 *
-	 * @author Christoph Strobl
-	 * @author Mark John Moreno
-	 * @author Liming Deng
-	 * @since 2.3
-	 */
-	class XAddOptions {
+    /**
+     * Additional options applicable for {@literal XADD} command.
+     *
+     * @author Christoph Strobl
+     * @author Mark John Moreno
+     * @author Liming Deng
+     * @since 2.3
+     */
+    final class XAddOptions {
 
 		private static final XAddOptions NONE = new XAddOptions(null, false, false, null);
 
@@ -319,11 +319,11 @@ public interface RedisStreamCommands {
 	@Nullable
 	List<ByteRecord> xClaim(byte[] key, String group, String newOwner, XClaimOptions options);
 
-	/**
-	 * @author Christoph Strobl
-	 * @since 2.3
-	 */
-	class XClaimOptions {
+    /**
+     * @author Christoph Strobl
+     * @since 2.3
+     */
+    final class XClaimOptions {
 
 		private final List<RecordId> ids;
 		private final Duration minIdleTime;
@@ -758,13 +758,13 @@ public interface RedisStreamCommands {
 	@Nullable
 	PendingMessages xPending(byte[] key, String groupName, XPendingOptions options);
 
-	/**
-	 * Value Object holding parameters for obtaining pending messages.
-	 *
-	 * @author Christoph Strobl
-	 * @since 2.3
-	 */
-	class XPendingOptions {
+    /**
+     * Value Object holding parameters for obtaining pending messages.
+     *
+     * @author Christoph Strobl
+     * @since 2.3
+     */
+    final class XPendingOptions {
 
 		private final @Nullable String consumerName;
 		private final Range<?> range;

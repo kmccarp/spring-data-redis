@@ -80,12 +80,15 @@ public class DefaultStringTuple extends DefaultTuple implements StringTuple {
 
 	@Override
 	public boolean equals(@Nullable Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		if (!super.equals(o))
-			return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
 
 		DefaultStringTuple that = (DefaultStringTuple) o;
 

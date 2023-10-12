@@ -31,7 +31,7 @@ import org.springframework.core.convert.converter.Converter;
  */
 public class ListConverter<S, T> implements Converter<List<S>, List<T>> {
 
-	private Converter<S, T> itemConverter;
+    private final Converter<S, T> itemConverter;
 
 	/**
 	 * @param itemConverter The {@link Converter} to use for converting individual List items

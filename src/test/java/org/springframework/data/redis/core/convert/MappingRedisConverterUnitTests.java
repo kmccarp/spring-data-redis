@@ -835,7 +835,7 @@ class MappingRedisConverterUnitTests {
 
 		Person target = converter.read(Person.class, new RedisData(
 			Bucket.newBucketFromStringMap(
-				Collections.singletonMap("birthdate", Long.valueOf(date.getTime()).toString()))));
+				Collections.singletonMap("birthdate", Long.toString(date.getTime())))));
 
 		assertThat(target.birthdate).isEqualTo(date);
 	}

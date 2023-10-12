@@ -47,7 +47,7 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 @ExtendWith(MockitoExtension.class)
 class DefaultReactiveScriptExecutorUnitTests {
 
-	private final DefaultRedisScript<String> SCRIPT = new DefaultRedisScript<>("return KEYS[0]", String.class);
+	private static final DefaultRedisScript<String> SCRIPT = new DefaultRedisScript<>("return KEYS[0]", String.class);
 
 	@Mock ReactiveRedisConnectionFactory connectionFactoryMock;
 	@Mock ReactiveRedisConnection connectionMock;

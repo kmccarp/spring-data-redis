@@ -487,19 +487,16 @@ public class DefaultZSetOperationsIntegrationTests<K, V> {
 	@ParameterizedRedisTest // DATAREDIS-306
 	void testZScanShouldReadEntireValueRange() throws IOException {
 
-		K key = keyFactory.instance();
+        K key = keyFactory.instance();
 
-		final TypedTuple<V> tuple1 = new DefaultTypedTuple<>(valueFactory.instance(), 1.7);
-		final TypedTuple<V> tuple2 = new DefaultTypedTuple<>(valueFactory.instance(), 3.2);
-		final TypedTuple<V> tuple3 = new DefaultTypedTuple<>(valueFactory.instance(), 0.8);
+        final TypedTuple<V> tuple1 = new DefaultTypedTuple<>(valueFactory.instance(), 1.7);
+        final TypedTuple<V> tuple2 = new DefaultTypedTuple<>(valueFactory.instance(), 3.2);
+        final TypedTuple<V> tuple3 = new DefaultTypedTuple<>(valueFactory.instance(), 0.8);
 
-		Set<TypedTuple<V>> values = new HashSet<TypedTuple<V>>() {
-			{
-				add(tuple1);
-				add(tuple2);
-				add(tuple3);
-			}
-		};
+        Set<TypedTuple<V>> values = new HashSet<>();
+        values.add(tuple1);
+        values.add(tuple2);
+        values.add(tuple3);
 
 		zSetOps.add(key, values);
 
@@ -512,7 +509,7 @@ public class DefaultZSetOperationsIntegrationTests<K, V> {
 		}
 
 		assertThat(count).isEqualTo(3);
-	}
+    }
 
 	@ParameterizedRedisTest // GH-2042
 	@EnabledOnCommand("ZDIFF")

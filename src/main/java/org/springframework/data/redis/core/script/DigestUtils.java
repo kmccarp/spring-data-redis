@@ -24,7 +24,7 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author Jennifer Hickey
  */
-abstract public class DigestUtils {
+public abstract class DigestUtils {
 
 	private static final char[] HEX_CHARS = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e',
 			'f' };

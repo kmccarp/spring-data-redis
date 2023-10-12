@@ -47,13 +47,13 @@ import org.springframework.util.Assert;
  */
 public interface ReactiveSetCommands {
 
-	/**
-	 * {@code SADD} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/sadd">Redis Documentation: SADD</a>
-	 */
-	class SAddCommand extends KeyCommand {
+    /**
+     * {@code SADD} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/sadd">Redis Documentation: SADD</a>
+     */
+    final class SAddCommand extends KeyCommand {
 
 		private List<ByteBuffer> values;
 
@@ -151,13 +151,13 @@ public interface ReactiveSetCommands {
 	 */
 	Flux<NumericResponse<SAddCommand, Long>> sAdd(Publisher<SAddCommand> commands);
 
-	/**
-	 * {@code SREM} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/srem">Redis Documentation: SREM</a>
-	 */
-	class SRemCommand extends KeyCommand {
+    /**
+     * {@code SREM} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/srem">Redis Documentation: SREM</a>
+     */
+    final class SRemCommand extends KeyCommand {
 
 		private final List<ByteBuffer> values;
 
@@ -255,13 +255,13 @@ public interface ReactiveSetCommands {
 	 */
 	Flux<NumericResponse<SRemCommand, Long>> sRem(Publisher<SRemCommand> commands);
 
-	/**
-	 * {@code SPOP} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/spop">Redis Documentation: SPOP</a>
-	 */
-	class SPopCommand extends KeyCommand {
+    /**
+     * {@code SPOP} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/spop">Redis Documentation: SPOP</a>
+     */
+    final class SPopCommand extends KeyCommand {
 
 		private final long count;
 
@@ -354,13 +354,13 @@ public interface ReactiveSetCommands {
 	 */
 	Flux<ByteBufferResponse<KeyCommand>> sPop(Publisher<KeyCommand> commands);
 
-	/**
-	 * {@code SMOVE} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/smove">Redis Documentation: SMOVE</a>
-	 */
-	class SMoveCommand extends KeyCommand {
+    /**
+     * {@code SMOVE} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/smove">Redis Documentation: SMOVE</a>
+     */
+    final class SMoveCommand extends KeyCommand {
 
 		private final @Nullable ByteBuffer destination;
 		private final ByteBuffer value;
@@ -479,13 +479,13 @@ public interface ReactiveSetCommands {
 	 */
 	Flux<NumericResponse<KeyCommand, Long>> sCard(Publisher<KeyCommand> commands);
 
-	/**
-	 * {@code SISMEMBER} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/sismember">Redis Documentation: SISMEMBER</a>
-	 */
-	class SIsMemberCommand extends KeyCommand {
+    /**
+     * {@code SISMEMBER} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/sismember">Redis Documentation: SISMEMBER</a>
+     */
+    final class SIsMemberCommand extends KeyCommand {
 
 		private final ByteBuffer value;
 
@@ -555,14 +555,14 @@ public interface ReactiveSetCommands {
 	 */
 	Flux<BooleanResponse<SIsMemberCommand>> sIsMember(Publisher<SIsMemberCommand> commands);
 
-	/**
-	 * {@code SMISMEMBER} command parameters.
-	 *
-	 * @author Mark Paluch
-	 * @since 2.6
-	 * @see <a href="https://redis.io/commands/smismember">Redis Documentation: SMISMEMBER</a>
-	 */
-	class SMIsMemberCommand extends KeyCommand {
+    /**
+     * {@code SMISMEMBER} command parameters.
+     *
+     * @author Mark Paluch
+     * @since 2.6
+     * @see <a href="https://redis.io/commands/smismember">Redis Documentation: SMISMEMBER</a>
+     */
+    final class SMIsMemberCommand extends KeyCommand {
 
 		private final List<ByteBuffer> values;
 
@@ -635,13 +635,13 @@ public interface ReactiveSetCommands {
 	 */
 	Flux<MultiValueResponse<SMIsMemberCommand, Boolean>> sMIsMember(Publisher<SMIsMemberCommand> commands);
 
-	/**
-	 * {@code SINTER} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/sinter">Redis Documentation: SINTER</a>
-	 */
-	class SInterCommand implements Command {
+    /**
+     * {@code SINTER} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/sinter">Redis Documentation: SINTER</a>
+     */
+    final class SInterCommand implements Command {
 
 		private final List<ByteBuffer> keys;
 
@@ -699,13 +699,13 @@ public interface ReactiveSetCommands {
 	 */
 	Flux<CommandResponse<SInterCommand, Flux<ByteBuffer>>> sInter(Publisher<SInterCommand> commands);
 
-	/**
-	 * {@code SINTERSTORE} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/sinterstore">Redis Documentation: SINTERSTORE</a>
-	 */
-	class SInterStoreCommand extends KeyCommand {
+    /**
+     * {@code SINTERSTORE} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/sinterstore">Redis Documentation: SINTERSTORE</a>
+     */
+    final class SInterStoreCommand extends KeyCommand {
 
 		private final List<ByteBuffer> keys;
 
@@ -777,13 +777,13 @@ public interface ReactiveSetCommands {
 	 */
 	Flux<NumericResponse<SInterStoreCommand, Long>> sInterStore(Publisher<SInterStoreCommand> commands);
 
-	/**
-	 * {@code SUNION} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/sunion">Redis Documentation: SUNION</a>
-	 */
-	class SUnionCommand implements Command {
+    /**
+     * {@code SUNION} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/sunion">Redis Documentation: SUNION</a>
+     */
+    final class SUnionCommand implements Command {
 
 		private final List<ByteBuffer> keys;
 
@@ -841,13 +841,13 @@ public interface ReactiveSetCommands {
 	 */
 	Flux<CommandResponse<SUnionCommand, Flux<ByteBuffer>>> sUnion(Publisher<SUnionCommand> commands);
 
-	/**
-	 * {@code SUNIONSTORE} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/sunionstore">Redis Documentation: SUNIONSTORE</a>
-	 */
-	class SUnionStoreCommand extends KeyCommand {
+    /**
+     * {@code SUNIONSTORE} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/sunionstore">Redis Documentation: SUNIONSTORE</a>
+     */
+    final class SUnionStoreCommand extends KeyCommand {
 
 		private final List<ByteBuffer> keys;
 
@@ -919,13 +919,13 @@ public interface ReactiveSetCommands {
 	 */
 	Flux<NumericResponse<SUnionStoreCommand, Long>> sUnionStore(Publisher<SUnionStoreCommand> commands);
 
-	/**
-	 * {@code SDIFF} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/sdiff">Redis Documentation: SDIFF</a>
-	 */
-	class SDiffCommand implements Command {
+    /**
+     * {@code SDIFF} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/sdiff">Redis Documentation: SDIFF</a>
+     */
+    final class SDiffCommand implements Command {
 
 		private final List<ByteBuffer> keys;
 
@@ -983,13 +983,13 @@ public interface ReactiveSetCommands {
 	 */
 	Flux<CommandResponse<SDiffCommand, Flux<ByteBuffer>>> sDiff(Publisher<SDiffCommand> commands);
 
-	/**
-	 * {@code SDIFFSTORE} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/sdiffstore">Redis Documentation: SDIFFSTORE</a>
-	 */
-	class SDiffStoreCommand extends KeyCommand {
+    /**
+     * {@code SDIFFSTORE} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/sdiffstore">Redis Documentation: SDIFFSTORE</a>
+     */
+    final class SDiffStoreCommand extends KeyCommand {
 
 		private final List<ByteBuffer> keys;
 
@@ -1126,13 +1126,13 @@ public interface ReactiveSetCommands {
 	 */
 	Flux<CommandResponse<KeyCommand, Flux<ByteBuffer>>> sScan(Publisher<KeyScanCommand> commands);
 
-	/**
-	 * {@code SRANDMEMBER} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/srandmember">Redis Documentation: SRANDMEMBER</a>
-	 */
-	class SRandMembersCommand extends KeyCommand {
+    /**
+     * {@code SRANDMEMBER} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/srandmember">Redis Documentation: SRANDMEMBER</a>
+     */
+    final class SRandMembersCommand extends KeyCommand {
 
 		private final @Nullable Long count;
 

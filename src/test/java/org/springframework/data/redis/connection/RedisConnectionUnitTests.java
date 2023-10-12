@@ -54,7 +54,7 @@ import org.springframework.util.ObjectUtils;
  */
 class RedisConnectionUnitTests {
 
-	private final RedisNode SENTINEL_1 = new RedisNodeBuilder().listeningAt("localhost", 23679).build();
+	private static final RedisNode SENTINEL_1 = new RedisNodeBuilder().listeningAt("localhost", 23679).build();
 	private AbstractDelegatingRedisConnectionStub connection;
 	private RedisSentinelConnection sentinelConnectionMock;
 

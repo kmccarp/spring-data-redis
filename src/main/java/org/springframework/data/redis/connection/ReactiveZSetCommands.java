@@ -52,13 +52,13 @@ import org.springframework.util.Assert;
  */
 public interface ReactiveZSetCommands {
 
-	/**
-	 * {@code ZADD} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/zadd">Redis Documentation: ZADD</a>
-	 */
-	class ZAddCommand extends KeyCommand {
+    /**
+     * {@code ZADD} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/zadd">Redis Documentation: ZADD</a>
+     */
+    final class ZAddCommand extends KeyCommand {
 
 		private final List<Tuple> tuples;
 		private final boolean upsert;
@@ -269,13 +269,13 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<NumericResponse<ZAddCommand, Number>> zAdd(Publisher<ZAddCommand> commands);
 
-	/**
-	 * {@code ZREM} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/zrem">Redis Documentation: ZREM</a>
-	 */
-	class ZRemCommand extends KeyCommand {
+    /**
+     * {@code ZREM} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/zrem">Redis Documentation: ZREM</a>
+     */
+    final class ZRemCommand extends KeyCommand {
 
 		private final List<ByteBuffer> values;
 
@@ -373,13 +373,13 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<NumericResponse<ZRemCommand, Long>> zRem(Publisher<ZRemCommand> commands);
 
-	/**
-	 * {@code ZINCRBY} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/zincrby">Redis Documentation: ZINCRBY</a>
-	 */
-	class ZIncrByCommand extends KeyCommand {
+    /**
+     * {@code ZINCRBY} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/zincrby">Redis Documentation: ZINCRBY</a>
+     */
+    final class ZIncrByCommand extends KeyCommand {
 
 		private final ByteBuffer value;
 		private final @Nullable Number increment;
@@ -477,14 +477,14 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<NumericResponse<ZIncrByCommand, Double>> zIncrBy(Publisher<ZIncrByCommand> commands);
 
-	/**
-	 * {@code ZRANDMEMBER} command parameters.
-	 *
-	 * @author Mark Paluch
-	 * @since 2.6
-	 * @see <a href="https://redis.io/commands/srandmember">Redis Documentation: ZRANDMEMBER</a>
-	 */
-	class ZRandMemberCommand extends KeyCommand {
+    /**
+     * {@code ZRANDMEMBER} command parameters.
+     *
+     * @author Mark Paluch
+     * @since 2.6
+     * @see <a href="https://redis.io/commands/srandmember">Redis Documentation: ZRANDMEMBER</a>
+     */
+    final class ZRandMemberCommand extends KeyCommand {
 
 		private final long count;
 
@@ -613,14 +613,14 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<CommandResponse<ZRandMemberCommand, Flux<Tuple>>> zRandMemberWithScore(Publisher<ZRandMemberCommand> commands);
 
-	/**
-	 * {@code ZRANK}/{@literal ZREVRANK} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/zrank">Redis Documentation: ZRANK</a>
-	 * @see <a href="https://redis.io/commands/zrevrank">Redis Documentation: ZREVRANK</a>
-	 */
-	class ZRankCommand extends KeyCommand {
+    /**
+     * {@code ZRANK}/{@literal ZREVRANK} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/zrank">Redis Documentation: ZRANK</a>
+     * @see <a href="https://redis.io/commands/zrevrank">Redis Documentation: ZREVRANK</a>
+     */
+    final class ZRankCommand extends KeyCommand {
 
 		private final ByteBuffer value;
 		private final Direction direction;
@@ -732,14 +732,14 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<NumericResponse<ZRankCommand, Long>> zRank(Publisher<ZRankCommand> commands);
 
-	/**
-	 * {@code ZRANGE}/{@literal ZREVRANGE} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/zrange">Redis Documentation: ZRANGE</a>
-	 * @see <a href="https://redis.io/commands/zrevrange">Redis Documentation: ZREVRANGE</a>
-	 */
-	class ZRangeCommand extends KeyCommand {
+    /**
+     * {@code ZRANGE}/{@literal ZREVRANGE} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/zrange">Redis Documentation: ZRANGE</a>
+     * @see <a href="https://redis.io/commands/zrevrange">Redis Documentation: ZREVRANGE</a>
+     */
+    final class ZRangeCommand extends KeyCommand {
 
 		private final Range<Long> range;
 		private final boolean withScores;
@@ -902,14 +902,14 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<CommandResponse<ZRangeCommand, Flux<Tuple>>> zRange(Publisher<ZRangeCommand> commands);
 
-	/**
-	 * {@code ZRANGESTORE} command parameters.
-	 *
-	 * @author Mark Paluch
-	 * @since 3.0
-	 * @see <a href="https://redis.io/commands/zrangestore">Redis Documentation: ZRANGESTORE</a>
-	 */
-	class ZRangeStoreCommand extends KeyCommand {
+    /**
+     * {@code ZRANGESTORE} command parameters.
+     *
+     * @author Mark Paluch
+     * @since 3.0
+     * @see <a href="https://redis.io/commands/zrangestore">Redis Documentation: ZRANGESTORE</a>
+     */
+    final class ZRangeStoreCommand extends KeyCommand {
 
 		private final ByteBuffer destKey;
 		private final RangeMode rangeMode;
@@ -1146,14 +1146,14 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<CommandResponse<ZRangeStoreCommand, Mono<Long>>> zRangeStore(Publisher<ZRangeStoreCommand> commands);
 
-	/**
-	 * {@literal ZRANGEBYSCORE}/{@literal ZREVRANGEBYSCORE}.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/zrangebyscore">Redis Documentation: ZRANGEBYSCORE</a>
-	 * @see <a href="https://redis.io/commands/zrevrangebyscore">Redis Documentation: ZREVRANGEBYSCORE</a>
-	 */
-	class ZRangeByScoreCommand extends KeyCommand {
+    /**
+     * {@literal ZRANGEBYSCORE}/{@literal ZREVRANGEBYSCORE}.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/zrangebyscore">Redis Documentation: ZRANGEBYSCORE</a>
+     * @see <a href="https://redis.io/commands/zrevrangebyscore">Redis Documentation: ZREVRANGEBYSCORE</a>
+     */
+    final class ZRangeByScoreCommand extends KeyCommand {
 
 		private final Range<Double> range;
 		private final boolean withScores;
@@ -1463,13 +1463,13 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<CommandResponse<KeyCommand, Flux<Tuple>>> zScan(Publisher<KeyScanCommand> commands);
 
-	/**
-	 * {@code ZCOUNT} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/zcount">Redis Documentation: ZCOUNT</a>
-	 */
-	class ZCountCommand extends KeyCommand {
+    /**
+     * {@code ZCOUNT} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/zcount">Redis Documentation: ZCOUNT</a>
+     */
+    final class ZCountCommand extends KeyCommand {
 
 		private final Range<Double> range;
 
@@ -1542,14 +1542,14 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<NumericResponse<ZCountCommand, Long>> zCount(Publisher<ZCountCommand> commands);
 
-	/**
-	 * {@code ZLEXCOUNT} command parameters.
-	 *
-	 * @author Andrey Shlykov
-	 * @since 2.4
-	 * @see <a href="https://redis.io/commands/zlexcount">Redis Documentation: ZLEXCOUNT</a>
-	 */
-	class ZLexCountCommand extends KeyCommand {
+    /**
+     * {@code ZLEXCOUNT} command parameters.
+     *
+     * @author Andrey Shlykov
+     * @since 2.4
+     * @see <a href="https://redis.io/commands/zlexcount">Redis Documentation: ZLEXCOUNT</a>
+     */
+    final class ZLexCountCommand extends KeyCommand {
 
 		private final Range<String> range;
 
@@ -1625,15 +1625,15 @@ public interface ReactiveZSetCommands {
 		MIN, MAX
 	}
 
-	/**
-	 * {@code ZPOPMIN}/{@literal ZPOPMAX} command parameters.
-	 *
-	 * @author Mark Paluch
-	 * @since 2.6
-	 * @see <a href="https://redis.io/commands/zpopmin">Redis Documentation: ZPOPMIN</a>
-	 * @see <a href="https://redis.io/commands/zpopmax">Redis Documentation: ZPOPMAX</a>
-	 */
-	class ZPopCommand extends KeyCommand {
+    /**
+     * {@code ZPOPMIN}/{@literal ZPOPMAX} command parameters.
+     *
+     * @author Mark Paluch
+     * @since 2.6
+     * @see <a href="https://redis.io/commands/zpopmin">Redis Documentation: ZPOPMIN</a>
+     * @see <a href="https://redis.io/commands/zpopmax">Redis Documentation: ZPOPMAX</a>
+     */
+    final class ZPopCommand extends KeyCommand {
 
 		private final PopDirection direction;
 
@@ -1699,15 +1699,15 @@ public interface ReactiveZSetCommands {
 		}
 	}
 
-	/**
-	 * {@code BZPOPMIN}/{@literal BZPOPMAX} command parameters.
-	 *
-	 * @author Mark Paluch
-	 * @since 2.6
-	 * @see <a href="https://redis.io/commands/bzpopmin">Redis Documentation: BZPOPMIN</a>
-	 * @see <a href="https://redis.io/commands/bzpopmax">Redis Documentation: BZPOPMAX</a>
-	 */
-	class BZPopCommand extends KeyCommand {
+    /**
+     * {@code BZPOPMIN}/{@literal BZPOPMAX} command parameters.
+     *
+     * @author Mark Paluch
+     * @since 2.6
+     * @see <a href="https://redis.io/commands/bzpopmin">Redis Documentation: BZPOPMIN</a>
+     * @see <a href="https://redis.io/commands/bzpopmax">Redis Documentation: BZPOPMAX</a>
+     */
+    final class BZPopCommand extends KeyCommand {
 
 		private final PopDirection direction;
 
@@ -1951,13 +1951,13 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<NumericResponse<KeyCommand, Long>> zCard(Publisher<KeyCommand> commands);
 
-	/**
-	 * {@code ZSCORE} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/zscore">Redis Documentation: ZSCORE</a>
-	 */
-	class ZScoreCommand extends KeyCommand {
+    /**
+     * {@code ZSCORE} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/zscore">Redis Documentation: ZSCORE</a>
+     */
+    final class ZScoreCommand extends KeyCommand {
 
 		private final ByteBuffer value;
 
@@ -2027,14 +2027,14 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<NumericResponse<ZScoreCommand, Double>> zScore(Publisher<ZScoreCommand> commands);
 
-	/**
-	 * {@code ZMSCORE} command parameters.
-	 *
-	 * @author Mark Paluch
-	 * @since 2.6
-	 * @see <a href="https://redis.io/commands/zmscore">Redis Documentation: ZMSCORE</a>
-	 */
-	class ZMScoreCommand extends KeyCommand {
+    /**
+     * {@code ZMSCORE} command parameters.
+     *
+     * @author Mark Paluch
+     * @since 2.6
+     * @see <a href="https://redis.io/commands/zmscore">Redis Documentation: ZMSCORE</a>
+     */
+    final class ZMScoreCommand extends KeyCommand {
 
 		private final Collection<ByteBuffer> values;
 
@@ -2120,13 +2120,13 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<MultiValueResponse<ZMScoreCommand, Double>> zMScore(Publisher<ZMScoreCommand> commands);
 
-	/**
-	 * {@code ZREMRANGEBYRANK} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/zremrangebyrank">Redis Documentation: ZREMRANGEBYRANK</a>
-	 */
-	class ZRemRangeByRankCommand extends KeyCommand {
+    /**
+     * {@code ZREMRANGEBYRANK} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/zremrangebyrank">Redis Documentation: ZREMRANGEBYRANK</a>
+     */
+    final class ZRemRangeByRankCommand extends KeyCommand {
 
 		private final Range<Long> range;
 
@@ -2195,13 +2195,13 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<NumericResponse<ZRemRangeByRankCommand, Long>> zRemRangeByRank(Publisher<ZRemRangeByRankCommand> commands);
 
-	/**
-	 * {@code ZREMRANGEBYSCORE} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/zremrangebyscore">Redis Documentation: ZREMRANGEBYSCORE</a>
-	 */
-	class ZRemRangeByScoreCommand extends KeyCommand {
+    /**
+     * {@code ZREMRANGEBYSCORE} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/zremrangebyscore">Redis Documentation: ZREMRANGEBYSCORE</a>
+     */
+    final class ZRemRangeByScoreCommand extends KeyCommand {
 
 		private final Range<Double> range;
 
@@ -2268,14 +2268,14 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<NumericResponse<ZRemRangeByScoreCommand, Long>> zRemRangeByScore(Publisher<ZRemRangeByScoreCommand> commands);
 
-	/**
-	 * {@code ZREMRANGEBYLEX} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @since 2.5
-	 * @see <a href="https://redis.io/commands/zremrangebylex">Redis Documentation: ZREMRANGEBYLEX</a>
-	 */
-	class ZRemRangeByLexCommand extends KeyCommand {
+    /**
+     * {@code ZREMRANGEBYLEX} command parameters.
+     *
+     * @author Christoph Strobl
+     * @since 2.5
+     * @see <a href="https://redis.io/commands/zremrangebylex">Redis Documentation: ZREMRANGEBYLEX</a>
+     */
+    final class ZRemRangeByLexCommand extends KeyCommand {
 
 		private final Range<String> range;
 
@@ -2344,14 +2344,14 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<NumericResponse<ZRemRangeByLexCommand, Long>> zRemRangeByLex(Publisher<ZRemRangeByLexCommand> commands);
 
-	/**
-	 * {@code ZDIFF} command parameters.
-	 *
-	 * @author Mark Paluch
-	 * @since 2.6
-	 * @see <a href="https://redis.io/commands/zdiff">Redis Documentation: ZDIFF</a>
-	 */
-	class ZDiffCommand implements Command {
+    /**
+     * {@code ZDIFF} command parameters.
+     *
+     * @author Mark Paluch
+     * @since 2.6
+     * @see <a href="https://redis.io/commands/zdiff">Redis Documentation: ZDIFF</a>
+     */
+    final class ZDiffCommand implements Command {
 
 		private final List<ByteBuffer> keys;
 
@@ -2430,14 +2430,14 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<CommandResponse<ZDiffCommand, Flux<Tuple>>> zDiffWithScores(Publisher<? extends ZDiffCommand> commands);
 
-	/**
-	 * {@code ZDIFFSTORE} command parameters.
-	 *
-	 * @author Mark Paluch
-	 * @since 2.6
-	 * @see <a href="https://redis.io/commands/zdiffstore">Redis Documentation: ZDIFFSTORE</a>
-	 */
-	class ZDiffStoreCommand extends KeyCommand {
+    /**
+     * {@code ZDIFFSTORE} command parameters.
+     *
+     * @author Mark Paluch
+     * @since 2.6
+     * @see <a href="https://redis.io/commands/zdiffstore">Redis Documentation: ZDIFFSTORE</a>
+     */
+    final class ZDiffStoreCommand extends KeyCommand {
 
 		private final List<ByteBuffer> sourceKeys;
 
@@ -2511,16 +2511,16 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<NumericResponse<ZDiffStoreCommand, Long>> zDiffStore(Publisher<ZDiffStoreCommand> commands);
 
-	/**
-	 * {@code ZINTER}/{@code ZUNION} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @author Mark Paluch
-	 * @since 2.6
-	 * @see <a href="https://redis.io/commands/zinter">Redis Documentation: ZINTER</a>
-	 * @see <a href="https://redis.io/commands/zunion">Redis Documentation: ZUNION</a>
-	 */
-	class ZAggregateCommand implements Command {
+    /**
+     * {@code ZINTER}/{@code ZUNION} command parameters.
+     *
+     * @author Christoph Strobl
+     * @author Mark Paluch
+     * @since 2.6
+     * @see <a href="https://redis.io/commands/zinter">Redis Documentation: ZINTER</a>
+     * @see <a href="https://redis.io/commands/zunion">Redis Documentation: ZUNION</a>
+     */
+    final class ZAggregateCommand implements Command {
 
 		private final List<ByteBuffer> sourceKeys;
 		private final List<Double> weights;
@@ -2607,16 +2607,16 @@ public interface ReactiveZSetCommands {
 		}
 	}
 
-	/**
-	 * {@code ZINTERSTORE}/{@code ZUNIONSTORE} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @author Mark Paluch
-	 * @since 2.6
-	 * @see <a href="https://redis.io/commands/zinterstore">Redis Documentation: ZINTERSTORE</a>
-	 * @see <a href="https://redis.io/commands/zunionstore">Redis Documentation: ZUNIONSTORE</a>
-	 */
-	class ZAggregateStoreCommand extends KeyCommand {
+    /**
+     * {@code ZINTERSTORE}/{@code ZUNIONSTORE} command parameters.
+     *
+     * @author Christoph Strobl
+     * @author Mark Paluch
+     * @since 2.6
+     * @see <a href="https://redis.io/commands/zinterstore">Redis Documentation: ZINTERSTORE</a>
+     * @see <a href="https://redis.io/commands/zunionstore">Redis Documentation: ZUNIONSTORE</a>
+     */
+    final class ZAggregateStoreCommand extends KeyCommand {
 
 		private final List<ByteBuffer> sourceKeys;
 		private final List<Double> weights;
@@ -2826,13 +2826,13 @@ public interface ReactiveZSetCommands {
 	Flux<CommandResponse<ZAggregateCommand, Flux<Tuple>>> zInterWithScores(
 			Publisher<? extends ZAggregateCommand> commands);
 
-	/**
-	 * {@code ZINTERSTORE} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/zinterstore">Redis Documentation: ZINTERSTORE</a>
-	 */
-	class ZInterStoreCommand extends ZAggregateStoreCommand {
+    /**
+     * {@code ZINTERSTORE} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/zinterstore">Redis Documentation: ZINTERSTORE</a>
+     */
+    final class ZInterStoreCommand extends ZAggregateStoreCommand {
 
 		private ZInterStoreCommand(ByteBuffer key, List<ByteBuffer> sourceKeys, List<Double> weights,
 				@Nullable Aggregate aggregate) {
@@ -3111,13 +3111,13 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<CommandResponse<ZAggregateCommand, Flux<ByteBuffer>>> zUnion(Publisher<? extends ZAggregateCommand> commands);
 
-	/**
-	 * {@code ZUNIONSTORE} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/zunionstore">Redis Documentation: ZUNIONSTORE</a>
-	 */
-	class ZUnionStoreCommand extends ZAggregateStoreCommand {
+    /**
+     * {@code ZUNIONSTORE} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/zunionstore">Redis Documentation: ZUNIONSTORE</a>
+     */
+    final class ZUnionStoreCommand extends ZAggregateStoreCommand {
 
 		private ZUnionStoreCommand(@Nullable ByteBuffer key, List<ByteBuffer> sourceKeys, List<Double> weights,
 				@Nullable Aggregate aggregate) {
@@ -3282,14 +3282,14 @@ public interface ReactiveZSetCommands {
 	 */
 	Flux<NumericResponse<ZAggregateStoreCommand, Long>> zUnionStore(Publisher<? extends ZAggregateStoreCommand> commands);
 
-	/**
-	 * {@code ZRANGEBYLEX}/{@literal ZREVRANGEBYLEX} command parameters.
-	 *
-	 * @author Christoph Strobl
-	 * @see <a href="https://redis.io/commands/zrangebylex">Redis Documentation: ZRANGEBYLEX</a>
-	 * @see <a href="https://redis.io/commands/zrevrangebylex">Redis Documentation: ZREVRANGEBYLEX</a>
-	 */
-	class ZRangeByLexCommand extends KeyCommand {
+    /**
+     * {@code ZRANGEBYLEX}/{@literal ZREVRANGEBYLEX} command parameters.
+     *
+     * @author Christoph Strobl
+     * @see <a href="https://redis.io/commands/zrangebylex">Redis Documentation: ZRANGEBYLEX</a>
+     * @see <a href="https://redis.io/commands/zrevrangebylex">Redis Documentation: ZREVRANGEBYLEX</a>
+     */
+    final class ZRangeByLexCommand extends KeyCommand {
 
 		private final Range<String> range;
 		private final Direction direction;

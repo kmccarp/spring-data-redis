@@ -24,7 +24,7 @@ import org.springframework.lang.Nullable;
  */
 public abstract class KeyBoundCursor<T> extends ScanCursor<T> {
 
-	private byte[] key;
+    private final byte[] key;
 
 	/**
 	 * Crates new {@link ScanCursor}

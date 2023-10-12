@@ -56,12 +56,15 @@ public class SpelIndexDefinition extends RedisIndexDefinition {
 
 	@Override
 	public boolean equals(@Nullable Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		if (!super.equals(o))
-			return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
 
 		SpelIndexDefinition that = (SpelIndexDefinition) o;
 

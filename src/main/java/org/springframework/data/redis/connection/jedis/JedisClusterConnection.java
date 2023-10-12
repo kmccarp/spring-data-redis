@@ -352,7 +352,7 @@ public class JedisClusterConnection implements RedisClusterConnection {
 
 	@Override
 	public boolean isSubscribed() {
-		return (this.subscription != null && this.subscription.isAlive());
+		return this.subscription != null && this.subscription.isAlive();
 	}
 
 	@Override
@@ -805,7 +805,7 @@ public class JedisClusterConnection implements RedisClusterConnection {
 	 */
 	public static class JedisClusterTopologyProvider implements ClusterTopologyProvider {
 
-		private long time = 0;
+		private long time;
 
 		private final long cacheTimeMs;
 
@@ -872,7 +872,7 @@ public class JedisClusterConnection implements RedisClusterConnection {
 			StringBuilder stringBuilder = new StringBuilder();
 
 			for (Entry<String, Exception> entry : errors.entrySet()) {
-				stringBuilder.append(String.format("\r\n\t- %s failed: %s", entry.getKey(), entry.getValue().getMessage()));
+				stringBuilder.append(String.format("\r%n\t- %s failed: %s", entry.getKey(), entry.getValue().getMessage()));
 			}
 
 			throw new ClusterStateFailureException(

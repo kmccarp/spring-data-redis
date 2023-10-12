@@ -234,7 +234,8 @@ class DefaultStreamReceiver<K, V extends Record<K, ?>> implements StreamReceiver
 
 				if (pollState.isSubscriptionActive()) {
 
-					long r, u;
+                    long r;
+                    long u;
 					for (;;) {
 						r = pollState.getRequested();
 						if (r == Long.MAX_VALUE) {
@@ -336,7 +337,7 @@ class DefaultStreamReceiver<K, V extends Record<K, ?>> implements StreamReceiver
 
 		private CoreSubscriber<V> getSubscriber() {
 
-			return new CoreSubscriber<V>() {
+			return new CoreSubscriber<>() {
 
 				@Override
 				public void onSubscribe(Subscription s) {
@@ -471,10 +472,10 @@ class DefaultStreamReceiver<K, V extends Record<K, ?>> implements StreamReceiver
 		}
 	}
 
-	/**
-	 * Object representing the current polling state for a particular stream subscription.
-	 */
-	static class PollState {
+    /**
+     * Object representing the current polling state for a particular stream subscription.
+     */
+    static final class PollState {
 
 		private final AtomicLong requestsPending = new AtomicLong();
 		private final AtomicBoolean active = new AtomicBoolean(true);

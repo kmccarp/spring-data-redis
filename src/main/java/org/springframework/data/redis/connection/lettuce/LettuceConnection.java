@@ -124,9 +124,9 @@ public class LettuceConnection extends AbstractRedisConnection {
 
 	// refers only to main connection as pubsub happens on a different one
 	private boolean convertPipelineAndTxResults = true;
-	private boolean isClosed = false;
-	private boolean isMulti = false;
-	private boolean isPipelined = false;
+	private boolean isClosed;
+	private boolean isMulti;
+	private boolean isPipelined;
 
 	private int dbIndex;
 	private final int defaultDbIndex;
@@ -150,7 +150,7 @@ public class LettuceConnection extends AbstractRedisConnection {
 
 	private @Nullable List<LettuceResult<?, ?>> ppline;
 
-	private final Log LOGGER = LogFactory.getLog(getClass());
+	private static final Log LOGGER = LogFactory.getLog(getClass());
 
 	private PipeliningFlushPolicy pipeliningFlushPolicy = PipeliningFlushPolicy.flushEachCommand();
 
@@ -451,7 +451,7 @@ public class LettuceConnection extends AbstractRedisConnection {
 
 	<T, R> LettuceResult<T, R> newLettuceResult(Future<T> resultHolder, Converter<T, R> converter) {
 
-		return LettuceResultBuilder.<T, R>forResponse(resultHolder)
+		return LettuceResultBuilder.forResponse(resultHolder)
 				.mappedWith(converter)
 				.convertPipelineAndTxResults(this.convertPipelineAndTxResults)
 				.build();
@@ -460,7 +460,7 @@ public class LettuceConnection extends AbstractRedisConnection {
 	<T, R> LettuceResult<T, R> newLettuceResult(Future<T> resultHolder, Converter<T, R> converter,
 			Supplier<R> defaultValue) {
 
-		return LettuceResultBuilder.<T, R>forResponse(resultHolder)
+		return LettuceResultBuilder.forResponse(resultHolder)
 				.mappedWith(converter)
 				.convertPipelineAndTxResults(this.convertPipelineAndTxResults)
 				.defaultNullTo(defaultValue)
@@ -969,7 +969,7 @@ public class LettuceConnection extends AbstractRedisConnection {
 
 		try {
 			connection = getConnection(node);
-			return connection.sync().ping().equalsIgnoreCase("pong");
+			return "pong".equalsIgnoreCase(connection.sync().ping());
 		} catch (Exception cause) {
 			return false;
 		} finally {

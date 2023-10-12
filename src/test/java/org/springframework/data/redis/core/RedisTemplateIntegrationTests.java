@@ -173,7 +173,7 @@ public class RedisTemplateIntegrationTests<K, V> {
 		V setValue = valueFactory.instance();
 		K zsetKey = keyFactory.instance();
 		V zsetValue = valueFactory.instance();
-		List<Object> results = redisTemplate.execute(new SessionCallback<List<Object>>() {
+		List<Object> results = redisTemplate.execute(new SessionCallback<>() {
 			@SuppressWarnings({ "rawtypes", "unchecked" })
 			public List<Object> execute(RedisOperations operations) throws DataAccessException {
 				operations.multi();
@@ -203,7 +203,7 @@ public class RedisTemplateIntegrationTests<K, V> {
 		V value1 = valueFactory.instance();
 		V value2 = valueFactory.instance();
 		redisTemplate.opsForValue().set(key1, value1);
-		redisTemplate.execute(new SessionCallback<List<Object>>() {
+		redisTemplate.execute(new SessionCallback<>() {
 			@SuppressWarnings({ "rawtypes", "unchecked" })
 			public List<Object> execute(RedisOperations operations) throws DataAccessException {
 				operations.multi();
@@ -218,7 +218,7 @@ public class RedisTemplateIntegrationTests<K, V> {
 	@ParameterizedRedisTest
 	void testExecCustomSerializer() {
 		assumeThat(redisTemplate instanceof StringRedisTemplate).isTrue();
-		List<Object> results = redisTemplate.execute(new SessionCallback<List<Object>>() {
+		List<Object> results = redisTemplate.execute(new SessionCallback<>() {
 			@SuppressWarnings({ "rawtypes", "unchecked" })
 			public List<Object> execute(RedisOperations operations) throws DataAccessException {
 				operations.multi();
@@ -260,7 +260,7 @@ public class RedisTemplateIntegrationTests<K, V> {
 
 		StringRedisTemplate template = new StringRedisTemplate(factory2);
 		template.afterPropertiesSet();
-		List<Object> results = template.execute(new SessionCallback<List<Object>>() {
+		List<Object> results = template.execute(new SessionCallback<>() {
 			@SuppressWarnings({ "rawtypes", "unchecked" })
 			public List<Object> execute(RedisOperations operations) throws DataAccessException {
 				operations.multi();
@@ -586,7 +586,7 @@ public class RedisTemplateIntegrationTests<K, V> {
 	public void testGetExpireMillisUsingTransactions() {
 
 		K key = keyFactory.instance();
-		List<Object> result = redisTemplate.execute(new SessionCallback<List<Object>>() {
+		List<Object> result = redisTemplate.execute(new SessionCallback<>() {
 
 			@Override
 			public List<Object> execute(RedisOperations operations) throws DataAccessException {
@@ -710,7 +710,7 @@ public class RedisTemplateIntegrationTests<K, V> {
 
 		Thread th = new Thread(() -> redisTemplate.opsForValue().set(key1, value2));
 
-		List<Object> results = redisTemplate.execute(new SessionCallback<List<Object>>() {
+		List<Object> results = redisTemplate.execute(new SessionCallback<>() {
 			@SuppressWarnings({ "unchecked", "rawtypes" })
 			public List<Object> execute(RedisOperations operations) throws DataAccessException {
 
@@ -742,7 +742,7 @@ public class RedisTemplateIntegrationTests<K, V> {
 		redisTemplate.opsForValue().set(key1, value1);
 		Thread th = new Thread(() -> redisTemplate.opsForValue().set(key1, value2));
 
-		List<Object> results = redisTemplate.execute(new SessionCallback<List<Object>>() {
+		List<Object> results = redisTemplate.execute(new SessionCallback<>() {
 			@SuppressWarnings({ "unchecked", "rawtypes" })
 			public List<Object> execute(RedisOperations operations) throws DataAccessException {
 
@@ -776,7 +776,7 @@ public class RedisTemplateIntegrationTests<K, V> {
 
 		Thread th = new Thread(() -> redisTemplate.opsForValue().set(key1, value2));
 
-		List<Object> results = redisTemplate.execute(new SessionCallback<List<Object>>() {
+		List<Object> results = redisTemplate.execute(new SessionCallback<>() {
 			@SuppressWarnings({ "unchecked", "rawtypes" })
 			public List<Object> execute(RedisOperations operations) throws DataAccessException {
 

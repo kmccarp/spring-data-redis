@@ -748,7 +748,7 @@ public class MappingRedisConverter implements RedisConverter, InitializingBean {
 				break;
 			}
 
-			String currentPath = path + (path.equals("") ? "" : ".") + "[" + i + "]";
+			String currentPath = path + ("".equals(path) ? "" : ".") + "[" + i + "]";
 
 			if (!ClassUtils.isAssignable(typeHint.getType(), value.getClass())) {
 				throw new MappingException(
@@ -1187,15 +1187,15 @@ public class MappingRedisConverter implements RedisConverter, InitializingBean {
 		}
 	}
 
-	/**
-	 * Value object representing a Redis Hash/Object identifier composed from keyspace and object id in the form of
-	 * {@literal keyspace:id}.
-	 *
-	 * @author Mark Paluch
-	 * @author Stefan Berger
-	 * @since 1.8.10
-	 */
-	public static class KeyspaceIdentifier {
+    /**
+     * Value object representing a Redis Hash/Object identifier composed from keyspace and object id in the form of
+     * {@literal keyspace:id}.
+     *
+     * @author Mark Paluch
+     * @author Stefan Berger
+     * @since 1.8.10
+     */
+    public static final class KeyspaceIdentifier {
 
 		public static final String PHANTOM = "phantom";
 		public static final String DELIMITER = ":";
@@ -1267,15 +1267,15 @@ public class MappingRedisConverter implements RedisConverter, InitializingBean {
 		}
 	}
 
-	/**
-	 * Value object representing a binary Redis Hash/Object identifier composed from keyspace and object id in the form of
-	 * {@literal keyspace:id}.
-	 *
-	 * @author Mark Paluch
-	 * @author Stefan Berger
-	 * @since 1.8.10
-	 */
-	public static class BinaryKeyspaceIdentifier {
+    /**
+     * Value object representing a binary Redis Hash/Object identifier composed from keyspace and object id in the form of
+     * {@literal keyspace:id}.
+     *
+     * @author Mark Paluch
+     * @author Stefan Berger
+     * @since 1.8.10
+     */
+    public static final class BinaryKeyspaceIdentifier {
 
 		public static final byte[] PHANTOM = KeyspaceIdentifier.PHANTOM.getBytes();
 		public static final byte DELIMITER = ':';
