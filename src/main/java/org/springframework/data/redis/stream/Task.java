@@ -58,6 +58,6 @@ public interface Task extends SchedulingAwareRunnable, Cancelable {
 	 * @since 2.2
 	 */
 	enum State {
-		CREATED, STARTING, RUNNING, CANCELLED;
+		CREATED, STARTING, RUNNING, CANCELLED
 	}
 }

@@ -41,7 +41,8 @@ import org.springframework.util.ClassUtils;
 @MockitoSettings(strictness = Strictness.LENIENT)
 class ConnectionSplittingInterceptorUnitTests {
 
-	private static final Method WRITE_METHOD, READONLY_METHOD;
+	private static final Method WRITE_METHOD;
+	private static final Method READONLY_METHOD;
 
 	private ConnectionSplittingInterceptor interceptor;
 

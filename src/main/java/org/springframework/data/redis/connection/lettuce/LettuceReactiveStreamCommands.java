@@ -217,9 +217,7 @@ class LettuceReactiveStreamCommands implements ReactiveStreamCommands {
 		return connection.execute(cmd -> Flux.from(commands).concatMap(command -> {
 
 			Assert.notNull(command.getKey(), "Key must not be null");
-			return cmd.xpending(command.getKey(), ByteUtils.getByteBuffer(command.getGroupName())).map(it -> {
-				return StreamConverters.toPendingMessagesInfo(command.getGroupName(), it);
-			}).map(value -> new CommandResponse<>(command, value));
+			return cmd.xpending(command.getKey(), ByteUtils.getByteBuffer(command.getGroupName())).map(it -> StreamConverters.toPendingMessagesInfo(command.getGroupName(), it)).map(value -> new CommandResponse<>(command, value));
 		}));
 	}
 
@@ -239,10 +237,7 @@ class LettuceReactiveStreamCommands implements ReactiveStreamCommands {
 					io.lettuce.core.Consumer.from(groupName, ByteUtils.getByteBuffer(command.getConsumerName())), range, limit)
 					: cmd.xpending(command.getKey(), groupName, range, limit);
 
-			return publisher.collectList().map(it -> {
-
-				return StreamConverters.toPendingMessages(command.getGroupName(), command.getRange(), it);
-			}).map(value -> new CommandResponse<>(command, value));
+			return publisher.collectList().map(it -> StreamConverters.toPendingMessages(command.getGroupName(), command.getRange(), it)).map(value -> new CommandResponse<>(command, value));
 		}));
 	}
 

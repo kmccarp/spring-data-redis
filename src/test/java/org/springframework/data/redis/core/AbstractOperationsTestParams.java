@@ -47,7 +47,7 @@ import org.springframework.data.redis.test.extension.RedisStanalone;
  * @author Christoph Strobl
  * @author Mark Paluch
  */
-abstract public class AbstractOperationsTestParams {
+public abstract class AbstractOperationsTestParams {
 
 	// DATAREDIS-241
 	public static Collection<Object[]> testParams() {

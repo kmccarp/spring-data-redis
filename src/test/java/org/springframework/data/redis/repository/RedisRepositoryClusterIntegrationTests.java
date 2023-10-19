@@ -67,8 +67,7 @@ class RedisRepositoryClusterIntegrationTests extends RedisRepositoryIntegrationT
 		@Bean
 		RedisConnectionFactory connectionFactory() {
 			RedisClusterConfiguration clusterConfig = new RedisClusterConfiguration(CLUSTER_NODES);
-			JedisConnectionFactory connectionFactory = new JedisConnectionFactory(clusterConfig);
-			return connectionFactory;
+			return new JedisConnectionFactory(clusterConfig);
 		}
 	}
 }

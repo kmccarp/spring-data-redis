@@ -36,7 +36,7 @@ import org.springframework.util.ObjectUtils;
  * @author Christoph Strobl
  * @since 2.1
  */
-public class Weights {
+public final class Weights {
 
 	private final List<Double> weights;
 

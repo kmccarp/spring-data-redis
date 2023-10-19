@@ -107,7 +107,7 @@ public class GenericToStringSerializer<T> implements RedisSerializer<T>, BeanFac
 		// no-op
 	}
 
-	private final static class Converter {
+	private static final class Converter {
 
 		private final @Nullable ConversionService conversionService;
 		private final @Nullable TypeConverter typeConverter;

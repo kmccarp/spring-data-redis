@@ -172,7 +172,7 @@ public class RedisCollectionFactoryBeanTests {
 		fb.setTemplate(template);
 		fb.setType(CollectionType.SET);
 
-		assertThatExceptionOfType(IllegalStateException.class).isThrownBy(() -> fb.getObject());
+		assertThatExceptionOfType(IllegalStateException.class).isThrownBy(fb::getObject);
 	}
 
 	@Test // Gh-2633

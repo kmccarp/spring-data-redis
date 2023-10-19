@@ -82,7 +82,7 @@ public interface ReactiveListCommands {
 	 * @see <a href="https://redis.io/commands/lpush">Redis Documentation: LPUSH</a>
 	 * @see <a href="https://redis.io/commands/rpush">Redis Documentation: RPUSH</a>
 	 */
-	class PushCommand extends KeyCommand {
+	final class PushCommand extends KeyCommand {
 
 		private List<ByteBuffer> values;
 		private boolean upsert;
@@ -341,7 +341,7 @@ public interface ReactiveListCommands {
 	 * @since 2.4
 	 * @see <a href="https://redis.io/commands/lpos">Redis Documentation: LPOS</a>
 	 */
-	class LPosCommand extends KeyCommand {
+	final class LPosCommand extends KeyCommand {
 
 		private final ByteBuffer element;
 		private final @Nullable Integer count;
@@ -459,7 +459,7 @@ public interface ReactiveListCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/lindex">Redis Documentation: LINDEX</a>
 	 */
-	class LIndexCommand extends KeyCommand {
+	final class LIndexCommand extends KeyCommand {
 
 		private final Long index;
 
@@ -530,7 +530,7 @@ public interface ReactiveListCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/linsert">Redis Documentation: LINSERT</a>
 	 */
-	class LInsertCommand extends KeyCommand {
+	final class LInsertCommand extends KeyCommand {
 
 		private final @Nullable Position position;
 		private final @Nullable ByteBuffer pivot;
@@ -746,7 +746,7 @@ public interface ReactiveListCommands {
 	 * @since 2.6
 	 * @see <a href="https://redis.io/commands/blmove">Redis Documentation: BLMOVE</a>
 	 */
-	class BLMoveCommand extends LMoveCommand {
+	final class BLMoveCommand extends LMoveCommand {
 
 		private final @Nullable Duration timeout;
 
@@ -846,7 +846,7 @@ public interface ReactiveListCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/lset">Redis Documentation: LSET</a>
 	 */
-	class LSetCommand extends KeyCommand {
+	final class LSetCommand extends KeyCommand {
 
 		private final Long index;
 		private final @Nullable ByteBuffer value;
@@ -942,7 +942,7 @@ public interface ReactiveListCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/lrem">Redis Documentation: LREM</a>
 	 */
-	class LRemCommand extends KeyCommand {
+	final class LRemCommand extends KeyCommand {
 
 		private final Long count;
 		private final @Nullable ByteBuffer value;
@@ -1078,7 +1078,7 @@ public interface ReactiveListCommands {
 	 * @see <a href="https://redis.io/commands/lpop">Redis Documentation: LPOP</a>
 	 * @see <a href="https://redis.io/commands/rpop">Redis Documentation: RPOP</a>
 	 */
-	class PopCommand extends KeyCommand {
+	final class PopCommand extends KeyCommand {
 
 		private final long count;
 
@@ -1230,7 +1230,7 @@ public interface ReactiveListCommands {
 	 * @see <a href="https://redis.io/commands/blpop">Redis Documentation: BLPOP</a>
 	 * @see <a href="https://redis.io/commands/brpop">Redis Documentation: BRPOP</a>
 	 */
-	class BPopCommand implements Command {
+	final class BPopCommand implements Command {
 
 		private final List<ByteBuffer> keys;
 		private final Duration timeout;
@@ -1403,7 +1403,7 @@ public interface ReactiveListCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/rpoplpush">Redis Documentation: RPOPLPUSH</a>
 	 */
-	class RPopLPushCommand extends KeyCommand {
+	final class RPopLPushCommand extends KeyCommand {
 
 		private final @Nullable ByteBuffer destination;
 
@@ -1483,7 +1483,7 @@ public interface ReactiveListCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/brpoplpush">Redis Documentation: BRPOPLPUSH</a>
 	 */
-	class BRPopLPushCommand extends KeyCommand {
+	final class BRPopLPushCommand extends KeyCommand {
 
 		private final @Nullable ByteBuffer destination;
 		private final Duration timeout;

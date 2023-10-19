@@ -308,10 +308,8 @@ public class MicrometerTracingAdapter implements Tracing {
 		@Override
 		public Mono<TraceContext> getTraceContextLater() {
 
-			return Mono.deferContextual(Mono::justOrEmpty).filter((it) -> {
-				return it.hasKey(TraceContext.class) || it.hasKey(Observation.class)
-						|| it.hasKey(ObservationThreadLocalAccessor.KEY);
-			}).map((it) -> {
+			return Mono.deferContextual(Mono::justOrEmpty).filter(it -> it.hasKey(TraceContext.class) || it.hasKey(Observation.class)
+						|| it.hasKey(ObservationThreadLocalAccessor.KEY)).map(it -> {
 
 				if (it.hasKey(Observation.class)) {
 					return new MicrometerTraceContext(it.get(Observation.class));

@@ -244,7 +244,7 @@ public class Expiration {
 	 * @author Christoph Strobl
 	 * @since 2.4
 	 */
-	private static class KeepTtl extends Expiration {
+	private static final class KeepTtl extends Expiration {
 
 		static KeepTtl INSTANCE = new KeepTtl();
 
@@ -262,7 +262,7 @@ public class Expiration {
 	 * @author Christoph Strobl
 	 * @since 2.6
 	 */
-	private static class ExpireAt extends Expiration {
+	private static final class ExpireAt extends Expiration {
 
 		private ExpireAt(long expirationTime, @Nullable TimeUnit timeUnit) {
 			super(expirationTime, timeUnit);

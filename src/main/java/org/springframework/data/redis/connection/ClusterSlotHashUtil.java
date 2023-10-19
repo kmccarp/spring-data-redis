@@ -182,7 +182,7 @@ public abstract class ClusterSlotHashUtil {
 		int crc = 0x0000;
 
 		for (byte b : bytes) {
-			crc = ((crc << 8) ^ LOOKUP_TABLE[((crc >>> 8) ^ (b & 0xFF)) & 0xFF]);
+			crc = (crc << 8) ^ LOOKUP_TABLE[((crc >>> 8) ^ (b & 0xFF)) & 0xFF];
 		}
 
 		return crc & 0xFFFF;

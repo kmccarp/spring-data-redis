@@ -251,7 +251,7 @@ abstract class JedisConverters extends Converters {
 
 	public static ListPosition toListPosition(Position source) {
 		Assert.notNull(source, "list positions are mandatory");
-		return (Position.AFTER.equals(source) ? ListPosition.AFTER : ListPosition.BEFORE);
+		return Position.AFTER.equals(source) ? ListPosition.AFTER : ListPosition.BEFORE;
 	}
 
 	public static byte[][] toByteArrays(Map<byte[], byte[]> source) {
@@ -545,7 +545,7 @@ abstract class JedisConverters extends Converters {
 	/**
 	 * @since 1.8
 	 */
-	public static ListConverter<redis.clients.jedis.GeoCoordinate, Point> geoCoordinateToPointConverter() {
+	public static ListConverter<GeoCoordinate, Point> geoCoordinateToPointConverter() {
 		return new ListConverter<>(JedisConverters::toPoint);
 	}
 
@@ -553,7 +553,7 @@ abstract class JedisConverters extends Converters {
 	 * @since 2.5
 	 */
 	@Nullable
-	static Point toPoint(@Nullable redis.clients.jedis.GeoCoordinate geoCoordinate) {
+	static Point toPoint(@Nullable GeoCoordinate geoCoordinate) {
 		return geoCoordinate == null ? null : new Point(geoCoordinate.getLongitude(), geoCoordinate.getLatitude());
 	}
 
@@ -563,7 +563,7 @@ abstract class JedisConverters extends Converters {
 	 * @since 1.8
 	 */
 	public static GeoCoordinate toGeoCoordinate(Point source) {
-		return new redis.clients.jedis.GeoCoordinate(source.getX(), source.getY());
+		return new GeoCoordinate(source.getX(), source.getY());
 	}
 
 	/**
@@ -636,17 +636,19 @@ abstract class JedisConverters extends Converters {
 
 		if (source.hasFlags()) {
 			for (Flag flag : source.getFlags()) {
-				switch (flag) {
-					case WITHCOORD -> param.withCoord();
-					case WITHDIST -> param.withDist();
+				if (flag == org.springframework.data.redis.connection.RedisGeoCommands$GeoRadiusCommandArgs$Flag.WITHCOORD) {
+					param.withCoord();
+				} else if (flag == org.springframework.data.redis.connection.RedisGeoCommands$GeoRadiusCommandArgs$Flag.WITHDIST) {
+					param.withDist();
 				}
 			}
 		}
 
 		if (source.hasSortDirection()) {
-			switch (source.getSortDirection()) {
-				case ASC -> param.sortAscending();
-				case DESC -> param.sortDescending();
+			if (source.getSortDirection() == org.springframework.data.domain.Sort$Direction.ASC) {
+				param.sortAscending();
+			} else if (source.getSortDirection() == org.springframework.data.domain.Sort$Direction.DESC) {
+				param.sortDescending();
 			}
 		}
 

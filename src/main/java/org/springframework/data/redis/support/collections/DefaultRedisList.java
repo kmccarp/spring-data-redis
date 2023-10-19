@@ -44,9 +44,9 @@ import org.springframework.util.Assert;
  */
 public class DefaultRedisList<E> extends AbstractRedisCollection<E> implements RedisList<E> {
 
-	private volatile boolean capped = false;
+	private volatile boolean capped;
 
-	private volatile int maxSize = 0;
+	private volatile int maxSize;
 
 	private final BoundListOperations<String, E> listOps;
 
@@ -103,7 +103,7 @@ public class DefaultRedisList<E> extends AbstractRedisCollection<E> implements R
 	public void setMaxSize(int maxSize) {
 
 		this.maxSize = maxSize;
-		capped = (maxSize > 0);
+		capped = maxSize > 0;
 	}
 
 	@Override
@@ -491,7 +491,7 @@ public class DefaultRedisList<E> extends AbstractRedisCollection<E> implements R
 			throw new IllegalArgumentException("Cannot drain a queue to itself");
 		}
 
-		int loop = (Math.min(size(), maxElements));
+		int loop = Math.min(size(), maxElements);
 
 		for (int index = 0; index < loop; index++) {
 			collection.add(poll());
@@ -612,7 +612,7 @@ public class DefaultRedisList<E> extends AbstractRedisCollection<E> implements R
 		/**
 		 * Index of the {@link E element} in this iteration to be returned by subsequent call to {@link #next()}.
 		 */
-		int cursor = 0;
+		int cursor;
 
 		/**
 		 * Index of the {@link E element} in this iteration last returned by a call to {@link #next()}.

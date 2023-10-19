@@ -98,7 +98,7 @@ class DefaultListOperations<K, V> extends AbstractOperations<K, V> implements Li
 			@Override
 			protected byte[] inRedis(byte[] rawKey, RedisConnection connection) {
 				List<byte[]> lPop = connection.bLPop(tm, rawKey);
-				return (CollectionUtils.isEmpty(lPop) ? null : lPop.get(1));
+				return CollectionUtils.isEmpty(lPop) ? null : lPop.get(1);
 			}
 		});
 	}
@@ -195,7 +195,7 @@ class DefaultListOperations<K, V> extends AbstractOperations<K, V> implements Li
 			@Override
 			protected byte[] inRedis(byte[] rawKey, RedisConnection connection) {
 				List<byte[]> bRPop = connection.bRPop(tm, rawKey);
-				return (CollectionUtils.isEmpty(bRPop) ? null : bRPop.get(1));
+				return CollectionUtils.isEmpty(bRPop) ? null : bRPop.get(1);
 			}
 		});
 	}

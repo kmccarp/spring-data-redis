@@ -28,7 +28,7 @@ import org.springframework.util.StringUtils;
  */
 public class RedisServer extends RedisNode {
 
-	public static enum INFO {
+	public enum INFO {
 
 		NAME("name"), //
 		HOST("ip"), //
@@ -130,7 +130,7 @@ public class RedisServer extends RedisNode {
 		if (!StringUtils.hasText(role)) {
 			return false;
 		}
-		return role.equalsIgnoreCase("master");
+		return "master".equalsIgnoreCase(role);
 	}
 
 	public Long getPendingCommands() {

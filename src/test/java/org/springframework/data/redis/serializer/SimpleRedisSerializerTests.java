@@ -86,11 +86,11 @@ class SimpleRedisSerializerTests {
 		}
 	}
 
-	private RedisSerializer serializer = new JdkSerializationRedisSerializer();
+	private final RedisSerializer serializer = new JdkSerializationRedisSerializer();
 
 	@Test
 	void testBasicSerializationRoundtrip() throws Exception {
-		verifySerializedObjects(new Integer(300), new Double(200), new B());
+		verifySerializedObjects(Integer.valueOf(300), Double.valueOf(200), new B());
 	}
 
 	private void verifySerializedObjects(Object... objects) {

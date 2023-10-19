@@ -67,7 +67,7 @@ public interface ReactiveStreamCommands {
 	 *
 	 * @see <a href="https://redis.io/commands/xack">Redis Documentation: XACK</a>
 	 */
-	class AcknowledgeCommand extends KeyCommand {
+	final class AcknowledgeCommand extends KeyCommand {
 
 		private final @Nullable String group;
 		private final List<RecordId> recordIds;
@@ -195,7 +195,7 @@ public interface ReactiveStreamCommands {
 	 *
 	 * @see <a href="https://redis.io/commands/xadd">Redis Documentation: XADD</a>
 	 */
-	class AddStreamRecord extends KeyCommand {
+	final class AddStreamRecord extends KeyCommand {
 
 		private final ByteBufferRecord record;
 		private final boolean nomkstream;
@@ -483,7 +483,7 @@ public interface ReactiveStreamCommands {
 	 * @see <a href="https://redis.io/commands/xclaim">Redis Documentation: XCLAIM</a>
 	 * @since 2.3
 	 */
-	class XClaimCommand extends KeyCommand {
+	final class XClaimCommand extends KeyCommand {
 
 		private final String groupName;
 		private final String newOwner;
@@ -515,7 +515,7 @@ public interface ReactiveStreamCommands {
 	 *
 	 * @see <a href="https://redis.io/commands/xdel">Redis Documentation: XDEL</a>
 	 */
-	class DeleteCommand extends KeyCommand {
+	final class DeleteCommand extends KeyCommand {
 
 		private final List<RecordId> recordIds;
 
@@ -769,7 +769,7 @@ public interface ReactiveStreamCommands {
 	 * @author Christoph Strobl
 	 * @since 2.3
 	 */
-	class PendingRecordsCommand extends KeyCommand {
+	final class PendingRecordsCommand extends KeyCommand {
 
 		private final String groupName;
 		private final @Nullable String consumerName;
@@ -865,7 +865,7 @@ public interface ReactiveStreamCommands {
 	 * @see <a href="https://redis.io/commands/xrange">Redis Documentation: XRANGE</a>
 	 * @see <a href="https://redis.io/commands/xrevrange">Redis Documentation: XREVRANGE</a>
 	 */
-	class RangeCommand extends KeyCommand {
+	final class RangeCommand extends KeyCommand {
 
 		private final Range<String> range;
 		private final Limit limit;
@@ -1120,7 +1120,7 @@ public interface ReactiveStreamCommands {
 	 * @author Christoph Strobl
 	 * @since 2.3
 	 */
-	class XInfoCommand extends KeyCommand {
+	final class XInfoCommand extends KeyCommand {
 
 		private final @Nullable String groupName;
 
@@ -1455,7 +1455,7 @@ public interface ReactiveStreamCommands {
 	 *
 	 * @see <a href="https://redis.io/commands/xtrim">Redis Documentation: XTRIM</a>
 	 */
-	class TrimCommand extends KeyCommand {
+	final class TrimCommand extends KeyCommand {
 
 		private @Nullable Long count;
 		private boolean approximateTrimming;

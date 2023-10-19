@@ -47,7 +47,7 @@ class CloseSuppressingInvocationHandler implements InvocationHandler {
 
 		if (method.getName().equals(EQUALS)) {
 			// Only consider equal when proxies are identical.
-			return (proxy == args[0]);
+			return proxy == args[0];
 		} else if (method.getName().equals(HASH_CODE)) {
 			// Use hashCode of PersistenceManager proxy.
 			return System.identityHashCode(proxy);
@@ -58,8 +58,7 @@ class CloseSuppressingInvocationHandler implements InvocationHandler {
 
 		// Invoke method on target RedisConnection.
 		try {
-			Object retVal = method.invoke(this.target, args);
-			return retVal;
+			return method.invoke(this.target, args);
 		} catch (InvocationTargetException ex) {
 			throw ex.getTargetException();
 		}

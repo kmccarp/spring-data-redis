@@ -93,7 +93,7 @@ public class RedisKeyValueTemplate extends KeyValueTemplate {
 
 		Assert.notNull(callback, "Callback must not be null");
 
-		return execute(new RedisKeyValueCallback<List<T>>() {
+		return execute(new RedisKeyValueCallback<>() {
 
 			@Override
 			public List<T> doInRedis(RedisKeyValueAdapter adapter) {
@@ -168,7 +168,7 @@ public class RedisKeyValueTemplate extends KeyValueTemplate {
 
 	protected void doPartialUpdate(final PartialUpdate<?> update) {
 
-		execute(new RedisKeyValueCallback<Void>() {
+		execute(new RedisKeyValueCallback<>() {
 
 			@Override
 			public Void doInRedis(RedisKeyValueAdapter adapter) {
@@ -186,7 +186,7 @@ public class RedisKeyValueTemplate extends KeyValueTemplate {
 	 * @param <T>
 	 * @since 1.7
 	 */
-	public static abstract class RedisKeyValueCallback<T> implements KeyValueCallback<T> {
+	public abstract static class RedisKeyValueCallback<T> implements KeyValueCallback<T> {
 
 		@Override
 		public T doInKeyValue(KeyValueAdapter adapter) {

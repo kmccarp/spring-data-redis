@@ -71,9 +71,8 @@ class LettuceConnectionPipelineTxIntegrationTests extends LettuceConnectionTrans
 		List<Object> pipelined = connection.closePipeline();
 		// We expect only the results of exec to be in the closed pipeline
 		assertThat(pipelined.size()).isEqualTo(1);
-		List<Object> txResults = (List<Object>) pipelined.get(0);
 		// Return exec results and this test should behave exactly like its superclass
-		return txResults;
+		return (List<Object>) pipelined.get(0);
 	}
 
 }

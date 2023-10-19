@@ -71,7 +71,7 @@ import org.springframework.data.util.Lazy;
  */
 public class JedisExtension implements ParameterResolver {
 
-	private final ExtensionContext.Namespace NAMESPACE = ExtensionContext.Namespace.create(JedisExtension.class);
+	private static final ExtensionContext.Namespace NAMESPACE = ExtensionContext.Namespace.create(JedisExtension.class);
 
 	private static final Set<Class<?>> SUPPORTED_INJECTABLE_TYPES = new HashSet<>(
 			Arrays.asList(Jedis.class, JedisCluster.class));

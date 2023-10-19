@@ -96,7 +96,7 @@ class RedisMessageListenerContainerFailureIntegrationTests {
 		}).when(executorMock).execute(any(Runnable.class));
 
 		container.addMessageListener(adapter, new ChannelTopic("a"));
-		assertThatThrownBy(() -> container.start()).isInstanceOf(CompletionException.class)
+		assertThatThrownBy(container::start).isInstanceOf(CompletionException.class)
 				.hasRootCauseInstanceOf(InterruptedException.class);
 
 		// reset the interrupted flag to not destroy the teardown
@@ -117,7 +117,7 @@ class RedisMessageListenerContainerFailureIntegrationTests {
 
 		container.setRecoveryBackoff(new FixedBackOff(1, 5));
 		container.addMessageListener(adapter, new ChannelTopic("a"));
-		assertThatThrownBy(() -> container.start()).isInstanceOf(CompletionException.class)
+		assertThatThrownBy(container::start).isInstanceOf(CompletionException.class)
 				.hasRootCauseInstanceOf(RedisConnectionFailureException.class);
 
 		assertThat(container.isRunning()).isTrue();

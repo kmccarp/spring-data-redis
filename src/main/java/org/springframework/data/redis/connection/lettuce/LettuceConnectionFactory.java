@@ -134,11 +134,11 @@ public class LettuceConnectionFactory implements RedisConnectionFactory, Reactiv
 			LettuceExceptionConverter.INSTANCE);
 
 	private boolean convertPipelineAndTxResults = true;
-	private boolean eagerInitialization = false;
+	private boolean eagerInitialization;
 	private boolean shareNativeConnection = true;
-	private boolean validateConnection = false;
+	private boolean validateConnection;
 
-	private int phase = 0; // in between min and max values
+	private int phase; // in between min and max values
 
 	private @Nullable AbstractRedisClient client;
 
@@ -170,7 +170,7 @@ public class LettuceConnectionFactory implements RedisConnectionFactory, Reactiv
 	 * Lifecycle state of this factory.
 	 */
 	enum State {
-		CREATED, STARTING, STARTED, STOPPING, STOPPED, DESTROYED;
+		CREATED, STARTING, STARTED, STOPPING, STOPPED, DESTROYED
 	}
 
 	/**

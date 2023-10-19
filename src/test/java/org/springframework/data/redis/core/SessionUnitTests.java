@@ -39,7 +39,7 @@ class SessionUnitTests {
 		when(factory.getConnection()).thenReturn(conn);
 		doReturn(stringConn).when(template).preProcessConnection(eq(conn), anyBoolean());
 
-		template.execute(new SessionCallback<Object>() {
+		template.execute(new SessionCallback<>() {
 			@SuppressWarnings("rawtypes")
 			public Object execute(RedisOperations operations) {
 				checkConnection(template, stringConn);

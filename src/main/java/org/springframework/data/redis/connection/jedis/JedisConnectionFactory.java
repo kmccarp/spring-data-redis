@@ -105,7 +105,7 @@ public class JedisConnectionFactory
 
 	private boolean convertPipelineAndTxResults = true;
 
-	private int phase = 0; // in between min and max values
+	private int phase; // in between min and max values
 
 	private final AtomicReference<State> state = new AtomicReference<>(State.CREATED);
 
@@ -132,7 +132,7 @@ public class JedisConnectionFactory
 	 * Lifecycle state of this factory.
 	 */
 	enum State {
-		CREATED, STARTING, STARTED, STOPPING, STOPPED, DESTROYED;
+		CREATED, STARTING, STARTED, STOPPING, STOPPED, DESTROYED
 	}
 
 	/**
@@ -947,7 +947,7 @@ public class JedisConnectionFactory
 			try {
 
 				jedis = new Jedis(new HostAndPort(node.getHost(), node.getPort()), clientConfig);
-				if (jedis.ping().equalsIgnoreCase("pong")) {
+				if ("pong".equalsIgnoreCase(jedis.ping())) {
 					success = true;
 					return jedis;
 				}

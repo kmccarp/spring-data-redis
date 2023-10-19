@@ -46,7 +46,7 @@ public interface ReactiveHyperLogLogCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/pfadd">Redis Documentation: PFADD</a>
 	 */
-	class PfAddCommand extends KeyCommand {
+	final class PfAddCommand extends KeyCommand {
 
 		private final List<ByteBuffer> values;
 
@@ -149,7 +149,7 @@ public interface ReactiveHyperLogLogCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/pfcount">Redis Documentation: PFCOUNT</a>
 	 */
-	class PfCountCommand implements Command {
+	final class PfCountCommand implements Command {
 
 		private final List<ByteBuffer> keys;
 
@@ -241,7 +241,7 @@ public interface ReactiveHyperLogLogCommands {
 	 * @author Christoph Strobl
 	 * @see <a href="https://redis.io/commands/pfmerge">Redis Documentation: PFMERGE</a>
 	 */
-	class PfMergeCommand extends KeyCommand {
+	final class PfMergeCommand extends KeyCommand {
 
 		private final List<ByteBuffer> sourceKeys;
 

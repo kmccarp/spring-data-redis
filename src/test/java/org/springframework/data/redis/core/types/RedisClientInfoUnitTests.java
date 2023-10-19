@@ -27,9 +27,9 @@ import org.springframework.data.redis.core.types.RedisClientInfo.RedisClientInfo
  */
 class RedisClientInfoUnitTests {
 
-	private final String SOURCE_WITH_PLACEHOLDER = "addr=127.0.0.1:57013#fd=6#name=client-1#age=16#idle=0#flags=N#db=0#sub=0#psub=0#multi=-1#qbuf=0#qbuf-free=32768#obl=0#oll=0#omem=0#events=r#cmd=client";
-	private final String SINGLE_LINE = SOURCE_WITH_PLACEHOLDER.replace('#', ' ');
-	private final String[] VALUES = SOURCE_WITH_PLACEHOLDER.split("#");
+	private static final String SOURCE_WITH_PLACEHOLDER = "addr=127.0.0.1:57013#fd=6#name=client-1#age=16#idle=0#flags=N#db=0#sub=0#psub=0#multi=-1#qbuf=0#qbuf-free=32768#obl=0#oll=0#omem=0#events=r#cmd=client";
+	private static final String SINGLE_LINE = SOURCE_WITH_PLACEHOLDER.replace('#', ' ');
+	private static final String[] VALUES = SOURCE_WITH_PLACEHOLDER.split("#");
 
 	private RedisClientInfo info;
 

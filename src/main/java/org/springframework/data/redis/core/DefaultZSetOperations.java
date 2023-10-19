@@ -336,7 +336,7 @@ class DefaultZSetOperations<K, V> extends AbstractOperations<K, V> implements ZS
 
 		return execute(connection -> {
 			Long zRank = connection.zRank(rawKey, rawValue);
-			return (zRank != null && zRank.longValue() >= 0 ? zRank : null);
+			return zRank != null && zRank.longValue() >= 0 ? zRank : null;
 		});
 	}
 
@@ -348,7 +348,7 @@ class DefaultZSetOperations<K, V> extends AbstractOperations<K, V> implements ZS
 
 		return execute(connection -> {
 			Long zRank = connection.zRevRank(rawKey, rawValue);
-			return (zRank != null && zRank.longValue() >= 0 ? zRank : null);
+			return zRank != null && zRank.longValue() >= 0 ? zRank : null;
 		});
 	}
 

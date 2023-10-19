@@ -89,10 +89,8 @@ class LettucePoolingConnectionProvider implements LettuceConnectionProvider, Red
 	@Override
 	public <T extends StatefulConnection<?, ?>> T getConnection(Class<T> connectionType) {
 
-		GenericObjectPool<StatefulConnection<?, ?>> pool = pools.computeIfAbsent(connectionType, poolType -> {
-			return ConnectionPoolSupport.createGenericObjectPool(() -> connectionProvider.getConnection(connectionType),
-					poolConfig, false);
-		});
+		GenericObjectPool<StatefulConnection<?, ?>> pool = pools.computeIfAbsent(connectionType, poolType -> ConnectionPoolSupport.createGenericObjectPool(() -> connectionProvider.getConnection(connectionType),
+					poolConfig, false));
 
 		try {
 
@@ -108,12 +106,9 @@ class LettucePoolingConnectionProvider implements LettuceConnectionProvider, Red
 	@Override
 	public <T extends StatefulConnection<?, ?>> CompletionStage<T> getConnectionAsync(Class<T> connectionType) {
 
-		AsyncPool<StatefulConnection<?, ?>> pool = asyncPools.computeIfAbsent(connectionType, poolType -> {
-
-			return AsyncConnectionPoolSupport.createBoundedObjectPool(
+		AsyncPool<StatefulConnection<?, ?>> pool = asyncPools.computeIfAbsent(connectionType, poolType -> AsyncConnectionPoolSupport.createBoundedObjectPool(
 					() -> connectionProvider.getConnectionAsync(connectionType).thenApply(connectionType::cast), asyncPoolConfig,
-					false);
-		});
+					false));
 
 		CompletableFuture<StatefulConnection<?, ?>> acquire = pool.acquire();
 

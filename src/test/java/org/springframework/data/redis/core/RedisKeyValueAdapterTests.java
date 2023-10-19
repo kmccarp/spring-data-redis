@@ -202,7 +202,7 @@ public class RedisKeyValueAdapterTests {
 	@Test // DATAREDIS-744
 	void getShouldReadSimpleObjectWithColonInIdCorrectly() {
 
-		Map<String, String> map = new LinkedHashMap<String, String>();
+		Map<String, String> map = new LinkedHashMap<>();
 		map.put("_class", Person.class.getName());
 		map.put("age", "24");
 		template.opsForHash().putAll("persons:load-1:a", map);
@@ -349,7 +349,7 @@ public class RedisKeyValueAdapterTests {
 	@EnabledIfLongRunningTest
 	void keyExpiredEventShouldRemoveHelperStructuresForObjectsWithColonInId() throws Exception {
 
-		Map<String, String> map = new LinkedHashMap<String, String>();
+		Map<String, String> map = new LinkedHashMap<>();
 		map.put("_class", Person.class.getName());
 		map.put("firstname", "rand");
 		map.put("address.country", "Andor");
@@ -847,7 +847,7 @@ public class RedisKeyValueAdapterTests {
 		@Id String id;
 	}
 
-	static enum Gender {
+	enum Gender {
 		MALE, FEMALE
 	}
 

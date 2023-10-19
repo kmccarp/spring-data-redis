@@ -118,20 +118,20 @@ public class DefaultHyperLogLogOperationsIntegrationTests<K, V> {
 	@SuppressWarnings("unchecked")
 	void unionShouldMergeValuesOfMultipleKeysCorrectly() throws InterruptedException {
 
-		K sourceKey_1 = keyFactory.instance();
+		K sourceKey1 = keyFactory.instance();
 		V v1 = valueFactory.instance();
 		V v2 = valueFactory.instance();
 		V v3 = valueFactory.instance();
 
-		K sourceKey_2 = keyFactory.instance();
+		K sourceKey2 = keyFactory.instance();
 		V v4 = valueFactory.instance();
 		V v5 = valueFactory.instance();
 
 		K desinationKey = keyFactory.instance();
 
-		hyperLogLogOps.add(sourceKey_1, v1, v2, v3);
-		hyperLogLogOps.add(sourceKey_2, v4, v5);
-		hyperLogLogOps.union(desinationKey, sourceKey_1, sourceKey_2);
+		hyperLogLogOps.add(sourceKey1, v1, v2, v3);
+		hyperLogLogOps.add(sourceKey2, v4, v5);
+		hyperLogLogOps.union(desinationKey, sourceKey1, sourceKey2);
 
 		assertThat(hyperLogLogOps.size(desinationKey)).isGreaterThan(3L);
 	}
